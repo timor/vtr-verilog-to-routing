@@ -44,7 +44,7 @@ queue_t* create_queue()
 	q->remove     = ___queue_remove; 
 	q->remove_all = ___queue_remove_all; 
 	q->is_empty   = ___queue_is_empty; 
-	q->destroy    = ___queue_destroy; 
+	q->destroy    = ___queue_destroy;
 
 	return q;
 }

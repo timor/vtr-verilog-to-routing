@@ -1377,8 +1377,8 @@ void initialize_pin(npin_t *pin)
 		initialize_pin(pin->net->driver_pin);
 
 	// If initialising the driver initialised this pin, we're OK to return.
-	if (pin->cycle || pin->values)
-		return;
+	/*if (pin->cycle || pin->values)
+		return;*/
 
 	if (pin->net)
 	{
@@ -1410,6 +1410,48 @@ void initialize_pin(npin_t *pin)
 		if(pin->node && pin->node->has_initial_value)
 			pin->values[i] = pin->node->initial_value;
 		else 
+			pin->values[i] = global_args.sim_initial_value;
+	}
+
+	set_pin_cycle(pin, -1);
+}
+
+void reinitialize_pin(npin_t *pin)
+{
+	// Initialise the driver pin if this pin is not the driver.
+	if (pin->net && pin->net->driver_pin && pin->net->driver_pin != pin)
+		initialize_pin(pin->net->driver_pin);
+
+	if (pin->net)
+	{
+		pin->values = pin->net->values;
+		pin->cycle  = &(pin->net->cycle);
+
+		int i;
+		for (i = 0; i < pin->net->num_fanout_pins; i++)
+		{
+			npin_t *fanout_pin = pin->net->fanout_pins[i];
+			if (fanout_pin)
+			{
+				fanout_pin->values = pin->net->values;
+				fanout_pin->cycle  = &(pin->net->cycle);
+			}
+		}
+	}
+	else
+	{
+		pin->values = (signed char *)malloc(SIM_WAVE_LENGTH * sizeof(signed char));
+		pin->cycle  = (int *)malloc(sizeof(int));
+	}
+
+	int i;
+	for (i = 0; i < SIM_WAVE_LENGTH; i++){
+		/* If the pin's node has an initial value, then use it.
+		   Otherwise use the global initial value
+		   Need to make sure pin->node isn't NULL (e.g. for a dummy node) */
+		if(pin->node && pin->node->has_initial_value)
+			pin->values[i] = pin->node->initial_value;
+		else
 			pin->values[i] = global_args.sim_initial_value;
 	}
 
@@ -3697,4 +3739,79 @@ double wall_time()
 char *get_circuit_filename()
 {
 	return global_args.verilog_file?global_args.verilog_file:global_args.blif_file;
+}
+
+int _visited_reinitialize_simulation1;
+int _visited_reinitialize_simulation2;
+#define VISITED_REINITIALIZE_SIMULATION1 ((void*)&_visited_reinitialize_simulation1)
+#define VISITED_REINITIALIZE_SIMULATION2 ((void*)&_visited_reinitialize_simulation2)
+/*
+ * Reinitialize simulation
+ */
+void reinitialize_simulation(netlist_t *netlist){
+	void* mark;
+	if(netlist->gnd_node->node_data == VISITED_REINITIALIZE_SIMULATION1){
+		mark = VISITED_REINITIALIZE_SIMULATION2;
+	} else {
+		mark = VISITED_REINITIALIZE_SIMULATION1;
+	}
+
+	int i;
+	traverse_reinitialize_simulation(netlist->gnd_node, mark);
+	traverse_reinitialize_simulation(netlist->vcc_node, mark);
+	traverse_reinitialize_simulation(netlist->pad_node, mark);
+	for(i = 0; i < netlist->num_top_input_nodes; i++){
+		traverse_reinitialize_simulation(netlist->top_input_nodes[i], mark);
+	}
+}
+
+void traverse_reinitialize_simulation(nnode_t *node, void *mark){
+	if(node == NULL) return; // Shouldn't happen, but check just in case
+	if(node->node_data == mark) return;
+
+	/* Mark this node as visited */
+	node->node_data = mark;
+
+	/*
+	 * Init simulation data
+	 */
+	int i, j;
+	for(i = 0; i < node->num_output_pins; i++){
+		if(node->output_pins[i]){
+			//initialize_pin(node->output_pins[i]);
+			if(node->output_pins[i]->cycle){
+				//set_pin_cycle(node->output_pins[i], -1);
+			}
+			reinitialize_pin(node->output_pins[i]);
+			//printf("%d ", get_pin_cycle(node->output_pins[i]));
+		}
+	}
+
+	for(i = 0; i < node->num_input_pins; i++){
+		if(node->input_pins[i]){
+			//initialize_pin(node->output_pins[i]);
+			if(node->input_pins[i]->cycle){
+				//set_pin_cycle(node->input_pins[i], -1);
+			}
+			reinitialize_pin(node->input_pins[i]);
+			//printf("%d ", get_pin_cycle(node->input_pins[i]));
+		}
+	}
+
+	/* Iterate through every fanout node */
+	for(i = 0; i < node->num_output_pins; i++){
+		if(node->output_pins[i] && node->output_pins[i]->net){
+			for(j = 0; j < node->output_pins[i]->net->num_fanout_pins; j++){
+				if(node->output_pins[i]->net->fanout_pins[j]){
+					nnode_t *child = node->output_pins[i]->net->fanout_pins[j]->node;
+					if(child){
+						/* If this child hasn't already been visited, visit it now */
+						if(child->node_data != mark){
+							traverse_reinitialize_simulation(child, mark);
+						}
+					}
+				}
+			}
+		}
+	}
 }

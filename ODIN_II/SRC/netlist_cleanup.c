@@ -32,10 +32,11 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 /* Used in the nnode_t.node_data field to mark if the node was already visited
  * during a forward or backward sweep traversal or the removal phase */
-int _visited_forward, _visited_backward, _visited_removal;
+int _visited_forward, _visited_backward, _visited_removal, _visited_reset;
 #define VISITED_FORWARD ((void*)&_visited_forward)
 #define VISITED_BACKWARD ((void*)&_visited_backward)
 #define VISITED_REMOVAL ((void*)&_visited_removal)
+#define VISITED_RESET ((void*)&_visited_reset)
 
 
 /* Simple linked list of nodes structure */
@@ -216,10 +217,185 @@ void calculate_addsub_statistics(node_list_t *addsub){
 	geomean_addsub_length = exp(sum_of_addsub_logs / total_addsub_chain_count);
 }
 
+/*
+ * *********************
+ * Panos Reset Elision *
+ * *********************
+ */
+
+int simulate_for_reset(netlist_t *netlist, nnode_t* potential_rst, int cycle, signed char rst_value)
+{
+	//printf("******* Simulating for potential reset %s, value=%d, cycle=%d:\n", potential_rst->name, rst_value, cycle);
+	int reset_candidate = -1;
+
+	queue_t *queue = create_queue();
+	int i;
+
+	for (i = 0; i < netlist->num_top_input_nodes; i++){
+		enqueue_node_if_ready(queue,netlist->top_input_nodes[i],cycle);
+		update_pin_value(netlist->top_input_nodes[i]->output_pins[0], -1, cycle);
+	}
+
+	update_pin_value(potential_rst->output_pins[0], rst_value, cycle);
+
+	// Enqueue constant nodes.
+	nnode_t *constant_nodes[] = {netlist->gnd_node, netlist->vcc_node, netlist->pad_node};
+	int num_constant_nodes = 3;
+	for (i = 0; i < num_constant_nodes; i++)
+		enqueue_node_if_ready(queue,constant_nodes[i],cycle);
+
+	nnode_t *node;
+	while ((node = (nnode_t *)queue->remove(queue)))
+	{
+		compute_and_store_value(node, cycle);
+		//printf("***** %s (%d) %d\n", node->name, node->type, get_pin_value(node->output_pins[0], cycle));
+
+		if(node->type==FF_NODE){
+			//printf("***** %s (%d) %d\n", node->name, node->type, get_pin_value(node->output_pins[0], cycle));
+
+			signed char latch_value = get_pin_value(node->output_pins[0], cycle);
+
+
+			if(cycle == 0 && reset_candidate != 0){
+				if (latch_value != -1){
+					reset_candidate = 0;
+				} else {
+					//printf("***** %s (%d) %d\n", node->name, node->type, get_pin_value(node->output_pins[0], cycle));
+					reset_candidate = 1;
+				}
+			}
+
+			if(cycle == 1 && reset_candidate != 0) {
+				if(get_pin_value(node->output_pins[0], 0) == -1 && latch_value != -1){
+					//printf("***** %s (%d) %d\n", node->name, node->type, get_pin_value(node->output_pins[0], cycle));
+					reset_candidate = 1;
+				}
+			}
+
+			/*printf("***** %s:\t", node->name);
+			for(i=0; i < node->num_output_pins; i++){
+				printf("%d(%d) ", get_pin_value(node->output_pins[i], cycle), get_pin_cycle(node->output_pins[i]));
+			}
+			printf("\n");*/
+		}
+
+		// Enqueue child nodes which are ready, not already queued, and not already complete.
+		int num_children = 0;
+		nnode_t **children = get_children_of(node, &num_children);
+
+		for (i = 0; i < num_children; i++)
+		{
+			nnode_t* node = children[i];
+
+			if (!node->in_queue && is_node_ready(node, cycle) && !is_node_complete(node, cycle))
+			{
+				node->in_queue = TRUE;
+				queue->add(queue,node);
+				//printf("***** ADDED: %s (%d)\n", node->name, node->type);
+			} else {
+				//printf("***** NOT ADDED: %s (%d) [%d, %d, %d]\n", node->name, node->type, !node->in_queue, is_node_ready(node, cycle), !is_node_complete(node, cycle));
+			}
+		}
+		free(children);
+
+		node->in_queue = FALSE;
+	}
+	queue->destroy(queue);
+
+	return reset_candidate;
+}
+
+int find_reset(nnode_t *node, void* visited, int value){
+	if(node == NULL) return 1; // Shouldn't happen, but check just in case
+	if(node->node_data == visited) return 1; // Already visited, shouldn't happen anyway
+
+	/* Mark this node as visited */
+	node->node_data = visited;
+
+	if (node->type == FF_NODE){
+		return 1;
+	}
+
+	//printf("****** %s(%d)\n", node->name, node->type);
+
+	/* Iterate through every fanout node */
+	int retVal = 1;
+	int i, j;
+	for(i = 0; i < node->num_output_pins; i++){
+		if(node->output_pins[i] && node->output_pins[i]->net){
+			for(j = 0; j < node->output_pins[i]->net->num_fanout_pins; j++){
+				if(node->output_pins[i]->net->fanout_pins[j]){
+					nnode_t *child = node->output_pins[i]->net->fanout_pins[j]->node;
+					if(child){
+						/* If this child hasn't already been visited, visit it now */
+						if(child->node_data != visited){
+							/* Visit children only if current value affects them*/
+							retVal &= find_reset(child, visited, value);
+						}
+					}
+				}
+			}
+		}
+	}
+	return retVal;
+}
+
+
+void convert_reset_to_init(netlist_t *netlist){
+	/*Find potential resets*/
+	int i;
+	for(i = 0; i < netlist->num_top_input_nodes; i++){
+		if(netlist->top_input_nodes[i]->type != CLOCK_NODE && (1 || strstr(netlist->top_input_nodes[i]->name, "reset"))){
+			printf("**** Simulating Input: %s\n", netlist->top_input_nodes[i]->name);
+
+			int up_zero = simulate_for_reset(netlist, netlist->top_input_nodes[i], 0, (signed char)1);
+			if(up_zero != 1){
+				//Clear simulation data
+				reinitialize_simulation(netlist);
+				break;
+			}
+			int up_one = simulate_for_reset(netlist, netlist->top_input_nodes[i], 1, (signed char)1);
+			if(up_one == 0){
+				//Clear simulation data
+				reinitialize_simulation(netlist);
+				break;
+			}
+
+			//Clear simulation data
+			reinitialize_simulation(netlist);
+
+			int down_zero = simulate_for_reset(netlist, netlist->top_input_nodes[i], 0, (signed char)0);
+			if(down_zero != 1){
+				//Clear simulation data
+				reinitialize_simulation(netlist);
+				break;
+			}
+
+			int down_one = simulate_for_reset(netlist, netlist->top_input_nodes[i], 1, (signed char)0);
+
+			//Clear simulation data
+			reinitialize_simulation(netlist);
+
+			//printf("Results: %d, %d, %d, %d\n", up_zero, up_one, down_zero, down_one);
+
+			if(up_zero==1 && up_one==1 && down_zero==1 && down_one==-1){
+				printf("**** Potential Positive Reset Found: %s!\n", netlist->top_input_nodes[i]->name);
+			}
+
+			if(up_zero==1 && up_one==-1 && down_zero==1 && down_one==1){
+				printf("**** Potential Negative Reset Found: %s!\n", netlist->top_input_nodes[i]->name);
+			}
+		}
+	}
+}
+
 /* Perform the backwards and forward sweeps and remove the unused nodes */
 void remove_unused_logic(netlist_t *netlist){
 	mark_output_dependencies(netlist);
 	identify_unused_nodes(netlist);
 	remove_unused_nodes(&useless_nodes);
 	calculate_addsub_statistics(&addsub_nodes);
+	if(global_args.reset_elision){
+		convert_reset_to_init(netlist);
+	}
 }

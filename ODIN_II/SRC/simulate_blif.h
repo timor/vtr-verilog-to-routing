@@ -218,6 +218,9 @@ nnode_t *print_update_trace(nnode_t *bottom_node, int cycle);
 
 int is_posedge(npin_t *pin, int cycle);
 
+void reinitialize_simulation(netlist_t *netlist);
+void traverse_reinitialize_simulation(nnode_t *node, void *mark);
+void reinitialize_pin(npin_t *pin);
 
 #endif
 

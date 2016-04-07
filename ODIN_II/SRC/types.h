@@ -173,6 +173,9 @@ struct global_args_t_t
 	char *sim_hold_low;
 	//
 	int sim_initial_value;
+
+	//Reset elision on
+	char reset_elision;
 };
 
 #endif // TYPES_H
