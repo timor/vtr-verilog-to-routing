@@ -221,6 +221,20 @@ void calculate_addsub_statistics(node_list_t *addsub){
  * *********************
  */
 
+void remove_reset(netlist_t *netlist, nnode_t* reset_node, signed char rst_off_value, queue_t *FF_nodes){
+	/*Connect wires from reset to either gnd or vcc*/
+
+	int i;
+	int num_children = 0;
+	nnode_t **children = get_children_of(reset_node, &num_children);
+
+	for (i = 0; i < num_children; i++){
+		nnode_t* node = children[i];
+
+
+	}
+}
+
 int simulate_for_reset(netlist_t *netlist, nnode_t* potential_rst, int cycle, signed char rst_value)
 {
 	//printf("******* Simulating for potential reset %s, value=%d, cycle=%d:\n", potential_rst->name, rst_value, cycle);
@@ -360,11 +374,13 @@ void convert_reset_to_init(netlist_t *netlist){
 
 /* Perform the backwards and forward sweeps and remove the unused nodes */
 void remove_unused_logic(netlist_t *netlist){
+
+	if(global_args.reset_elision){
+		convert_reset_to_init(netlist);
+	}
+
 	mark_output_dependencies(netlist);
 	identify_unused_nodes(netlist);
 	remove_unused_nodes(&useless_nodes);
 	calculate_addsub_statistics(&addsub_nodes);
-	if(global_args.reset_elision){
-		convert_reset_to_init(netlist);
-	}
 }
