@@ -32,12 +32,10 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 /* Used in the nnode_t.node_data field to mark if the node was already visited
  * during a forward or backward sweep traversal or the removal phase */
-int _visited_forward, _visited_backward, _visited_removal, _visited_reset;
+int _visited_forward, _visited_backward, _visited_removal;
 #define VISITED_FORWARD ((void*)&_visited_forward)
 #define VISITED_BACKWARD ((void*)&_visited_backward)
 #define VISITED_REMOVAL ((void*)&_visited_removal)
-#define VISITED_RESET ((void*)&_visited_reset)
-
 
 /* Simple linked list of nodes structure */
 typedef struct node_list_t_t{
@@ -258,7 +256,12 @@ int simulate_for_reset(netlist_t *netlist, nnode_t* potential_rst, int cycle, si
 
 			if(cycle == 0 && reset_candidate != 0){
 				if (latch_value != -1){
+					while ((node = (nnode_t *)queue->remove(queue))){
+						node->in_queue = FALSE;
+					}
+					queue->destroy(queue);
 					reset_candidate = 0;
+					return reset_candidate;
 				} else {
 					//printf("***** %s (%d) %d\n", node->name, node->type, get_pin_value(node->output_pins[0], cycle));
 					reset_candidate = 1;
@@ -305,48 +308,13 @@ int simulate_for_reset(netlist_t *netlist, nnode_t* potential_rst, int cycle, si
 	return reset_candidate;
 }
 
-int find_reset(nnode_t *node, void* visited, int value){
-	if(node == NULL) return 1; // Shouldn't happen, but check just in case
-	if(node->node_data == visited) return 1; // Already visited, shouldn't happen anyway
-
-	/* Mark this node as visited */
-	node->node_data = visited;
-
-	if (node->type == FF_NODE){
-		return 1;
-	}
-
-	//printf("****** %s(%d)\n", node->name, node->type);
-
-	/* Iterate through every fanout node */
-	int retVal = 1;
-	int i, j;
-	for(i = 0; i < node->num_output_pins; i++){
-		if(node->output_pins[i] && node->output_pins[i]->net){
-			for(j = 0; j < node->output_pins[i]->net->num_fanout_pins; j++){
-				if(node->output_pins[i]->net->fanout_pins[j]){
-					nnode_t *child = node->output_pins[i]->net->fanout_pins[j]->node;
-					if(child){
-						/* If this child hasn't already been visited, visit it now */
-						if(child->node_data != visited){
-							/* Visit children only if current value affects them*/
-							retVal &= find_reset(child, visited, value);
-						}
-					}
-				}
-			}
-		}
-	}
-	return retVal;
-}
-
-
 void convert_reset_to_init(netlist_t *netlist){
 	/*Find potential resets*/
+	printf("Looking for reset signals...\n");
 	int i;
 	for(i = 0; i < netlist->num_top_input_nodes; i++){
-		if(netlist->top_input_nodes[i]->type != CLOCK_NODE && (1 || strstr(netlist->top_input_nodes[i]->name, "reset"))){
-			printf("**** Simulating Input: %s\n", netlist->top_input_nodes[i]->name);
+		if(netlist->top_input_nodes[i]->type != CLOCK_NODE){
+			printf("**** Simulating Input: %s(%d/%d)\n", netlist->top_input_nodes[i]->name, i+1, netlist->num_top_input_nodes);
 
 			int up_zero = simulate_for_reset(netlist, netlist->top_input_nodes[i], 0, (signed char)1);
 			if(up_zero != 1){
@@ -386,6 +354,7 @@ void convert_reset_to_init(netlist_t *netlist){
 				printf("**** Potential Negative Reset Found: %s!\n", netlist->top_input_nodes[i]->name);
 			}
 		}
+		//printf("Checked %d out of %d inputs...\n", i+1, netlist->num_top_input_nodes);
 	}
 }
 

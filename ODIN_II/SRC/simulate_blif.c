@@ -1418,9 +1418,12 @@ void initialize_pin(npin_t *pin)
 
 void reinitialize_pin(npin_t *pin)
 {
+	if(!pin->cycle){
+		return;
+	}
 	// Initialise the driver pin if this pin is not the driver.
 	if (pin->net && pin->net->driver_pin && pin->net->driver_pin != pin)
-		initialize_pin(pin->net->driver_pin);
+		reinitialize_pin(pin->net->driver_pin);
 
 	if (pin->net)
 	{
@@ -3777,23 +3780,19 @@ void traverse_reinitialize_simulation(nnode_t *node, void *mark){
 	 */
 	int i, j;
 	for(i = 0; i < node->num_output_pins; i++){
-		if(node->output_pins[i]){
-			//initialize_pin(node->output_pins[i]);
-			if(node->output_pins[i]->cycle){
-				//set_pin_cycle(node->output_pins[i], -1);
-			}
+		if(node->output_pins[i] && node->output_pins[i]->net){
 			reinitialize_pin(node->output_pins[i]);
 			//printf("%d ", get_pin_cycle(node->output_pins[i]));
 		}
 	}
 
 	for(i = 0; i < node->num_input_pins; i++){
-		if(node->input_pins[i]){
+		if(node->input_pins[i] && node->input_pins[i]->net){
 			//initialize_pin(node->output_pins[i]);
-			if(node->input_pins[i]->cycle){
+			//if(node->input_pins[i]->cycle){
 				//set_pin_cycle(node->input_pins[i], -1);
-			}
-			reinitialize_pin(node->input_pins[i]);
+			//}
+			//reinitialize_pin(node->input_pins[i]);
 			//printf("%d ", get_pin_cycle(node->input_pins[i]));
 		}
 	}
