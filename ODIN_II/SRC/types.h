@@ -626,4 +626,9 @@ struct netlist_stats_t_t
 	int *num_combinational_shape_for_sequential_level;
 };
 
+typedef struct To_Init_FF_Nodes{
+	nnode_t *ff_node;
+	signed char initial_value;
+}To_Init_FF_Nodes;
+
 #endif // NET_TYPES_H

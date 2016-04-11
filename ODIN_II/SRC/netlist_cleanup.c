@@ -222,20 +222,42 @@ void calculate_addsub_statistics(node_list_t *addsub){
  */
 
 void remove_reset(netlist_t *netlist, nnode_t* reset_node, signed char rst_off_value, queue_t *FF_nodes){
-	/*Connect wires from reset to either gnd or vcc*/
-
+	/*Connect pins of children of reset to either gnd or vcc*/
+	nnode_t* new_driver_node = (rst_off_value == 1? netlist->vcc_node: netlist->gnd_node);
 	int i;
 	int num_children = 0;
 	nnode_t **children = get_children_of(reset_node, &num_children);
-
-	for (i = 0; i < num_children; i++){
+	for (i = 0; i < num_children; i++)
+	{
 		nnode_t* node = children[i];
 
+		int j;
+		for(j = 0; j < node->num_input_pins; j++){
+			if(node->input_pins[j]->net->driver_pin->node == reset_node){
+				printf("remap_pin_to_new_node: %s %s\n", node->input_pins[j]->name, new_driver_node->name);
+				//remap_pin_to_new_node(node->input_pins[j], new_driver_node, j);
+				remap_pin_to_new_net(node->input_pins[j], new_driver_node->output_pins[0]->net);
+			}
+		}
+	}
+	free(children);
 
+	/*Disconnect reset pins*/
+	/*for(i = 0; i < reset_node->num_input_pins; i++){
+		npin_t *input_pin = reset_node->input_pins[i];
+		input_pin->net->fanout_pins[input_pin->pin_net_idx] = NULL; // Remove the fanout pin from the net
+	}*/
+
+	/*Set initial values for FF_nodes*/
+	To_Init_FF_Nodes *to_init;
+	while ((to_init = (To_Init_FF_Nodes *)FF_nodes->remove(FF_nodes))){
+		nnode_t *node = to_init->ff_node;
+		node->has_initial_value = TRUE;
+		node->initial_value = to_init->initial_value;
 	}
 }
 
-int simulate_for_reset(netlist_t *netlist, nnode_t* potential_rst, int cycle, signed char rst_value)
+int simulate_for_reset(netlist_t *netlist, nnode_t* potential_rst, int cycle, signed char rst_value, queue_t *FF_nodes)
 {
 	//printf("******* Simulating for potential reset %s, value=%d, cycle=%d:\n", potential_rst->name, rst_value, cycle);
 	int reset_candidate = -1;
@@ -285,6 +307,10 @@ int simulate_for_reset(netlist_t *netlist, nnode_t* potential_rst, int cycle, si
 			if(cycle == 1 && reset_candidate != 0) {
 				if(get_pin_value(node->output_pins[0], 0) == -1 && latch_value != -1){
 					//printf("***** %s (%d) %d\n", node->name, node->type, get_pin_value(node->output_pins[0], cycle));
+					To_Init_FF_Nodes *to_Init = (To_Init_FF_Nodes*)malloc(sizeof(To_Init_FF_Nodes));
+					to_Init->ff_node = node;
+					to_Init->initial_value = get_pin_value(node->output_pins[0], cycle);
+					FF_nodes->add(FF_nodes, to_Init);
 					reset_candidate = 1;
 				}
 			}
@@ -330,30 +356,36 @@ void convert_reset_to_init(netlist_t *netlist){
 		if(netlist->top_input_nodes[i]->type != CLOCK_NODE){
 			printf("**** Simulating Input: %s(%d/%d)\n", netlist->top_input_nodes[i]->name, i+1, netlist->num_top_input_nodes);
 
-			int up_zero = simulate_for_reset(netlist, netlist->top_input_nodes[i], 0, (signed char)1);
+			queue_t *FF_nodes_up = create_queue();
+			queue_t *FF_nodes_down = create_queue();
+
+			int up_zero = simulate_for_reset(netlist, netlist->top_input_nodes[i], 0, (signed char)1, NULL);
 			if(up_zero != 1){
 				//Clear simulation data
 				reinitialize_simulation(netlist);
+				FF_nodes_up->destroy(FF_nodes_up); FF_nodes_down->destroy(FF_nodes_down);
 				break;
 			}
-			int up_one = simulate_for_reset(netlist, netlist->top_input_nodes[i], 1, (signed char)1);
+			int up_one = simulate_for_reset(netlist, netlist->top_input_nodes[i], 1, (signed char)1, FF_nodes_up);
 			if(up_one == 0){
 				//Clear simulation data
 				reinitialize_simulation(netlist);
+				FF_nodes_up->destroy(FF_nodes_up); FF_nodes_down->destroy(FF_nodes_down);
 				break;
 			}
 
 			//Clear simulation data
 			reinitialize_simulation(netlist);
 
-			int down_zero = simulate_for_reset(netlist, netlist->top_input_nodes[i], 0, (signed char)0);
+			int down_zero = simulate_for_reset(netlist, netlist->top_input_nodes[i], 0, (signed char)0, NULL);
 			if(down_zero != 1){
 				//Clear simulation data
 				reinitialize_simulation(netlist);
+				FF_nodes_up->destroy(FF_nodes_up); FF_nodes_down->destroy(FF_nodes_down);
 				break;
 			}
 
-			int down_one = simulate_for_reset(netlist, netlist->top_input_nodes[i], 1, (signed char)0);
+			int down_one = simulate_for_reset(netlist, netlist->top_input_nodes[i], 1, (signed char)0, FF_nodes_down);
 
 			//Clear simulation data
 			reinitialize_simulation(netlist);
@@ -362,11 +394,15 @@ void convert_reset_to_init(netlist_t *netlist){
 
 			if(up_zero==1 && up_one==1 && down_zero==1 && down_one==-1){
 				printf("**** Potential Positive Reset Found: %s!\n", netlist->top_input_nodes[i]->name);
+				remove_reset(netlist, netlist->top_input_nodes[i], 0, FF_nodes_up);
 			}
 
 			if(up_zero==1 && up_one==-1 && down_zero==1 && down_one==1){
 				printf("**** Potential Negative Reset Found: %s!\n", netlist->top_input_nodes[i]->name);
+				remove_reset(netlist, netlist->top_input_nodes[i], 0, FF_nodes_down);
 			}
+
+			FF_nodes_up->destroy(FF_nodes_up); FF_nodes_down->destroy(FF_nodes_down);
 		}
 		//printf("Checked %d out of %d inputs...\n", i+1, netlist->num_top_input_nodes);
 	}
