@@ -1421,7 +1421,7 @@ void reinitialize_pin(npin_t *pin)
 	if(!pin->cycle){
 		return;
 	}
-	// Initialise the driver pin if this pin is not the driver.
+	// Initialize the driver pin if this pin is not the driver.
 	if (pin->net && pin->net->driver_pin && pin->net->driver_pin != pin)
 		reinitialize_pin(pin->net->driver_pin);
 
@@ -3796,6 +3796,7 @@ void traverse_reinitialize_simulation(nnode_t *node, void *mark){
 			//printf("%d ", get_pin_cycle(node->input_pins[i]));
 		}
 	}
+
 
 	/* Iterate through every fanout node */
 	for(i = 0; i < node->num_output_pins; i++){

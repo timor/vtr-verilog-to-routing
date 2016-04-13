@@ -32,10 +32,11 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 /* Used in the nnode_t.node_data field to mark if the node was already visited
  * during a forward or backward sweep traversal or the removal phase */
-int _visited_forward, _visited_backward, _visited_removal;
+int _visited_forward, _visited_backward, _visited_removal, _visited_reset_elision;
 #define VISITED_FORWARD ((void*)&_visited_forward)
 #define VISITED_BACKWARD ((void*)&_visited_backward)
 #define VISITED_REMOVAL ((void*)&_visited_removal)
+#define VISITED_RESET_ELISION ((void*)&_visited_reset_elision)
 
 /* Simple linked list of nodes structure */
 typedef struct node_list_t_t{
@@ -221,7 +222,90 @@ void calculate_addsub_statistics(node_list_t *addsub){
  * *********************
  */
 
+int traverse_reset_elision(nnode_t *node){
+	if(node == NULL) return 0; // Shouldn't happen, but check just in case
+	if(node->node_data == VISITED_RESET_ELISION) return 0; // Already visited, shouldn't happen anyway
+
+	/* Mark this node as visited */
+	node->node_data = VISITED_RESET_ELISION;
+
+	int retVal = 0;
+	if(node->type == FF_NODE){
+		if(node->has_initial_value){
+			return -1;
+		}
+		retVal = 1;
+	}
+
+	/* Iterate through every fanout node */
+	int i, j;
+	for(i = 0; i < node->num_output_pins; i++){
+		if(node->output_pins[i] && node->output_pins[i]->net){
+			for(j = 0; j < node->output_pins[i]->net->num_fanout_pins; j++){
+				if(node->output_pins[i]->net->fanout_pins[j]){
+					nnode_t *child = node->output_pins[i]->net->fanout_pins[j]->node;
+					if(child){
+						/* If this child hasn't already been visited, visit it now */
+						if(child->node_data != VISITED_RESET_ELISION){
+							int childRetVal = traverse_reset_elision(child);
+							if (childRetVal == -1){
+								return -1;
+							}
+							if (childRetVal == 1){
+								retVal = 1;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	return retVal;
+}
+
+int reset_elision_check_latches(netlist_t *netlist){
+	int status = 0, retVal;
+
+	retVal = traverse_reset_elision(netlist->gnd_node);
+	if(retVal == -1){
+		return -1;
+	}
+	if(retVal == 1){
+		status = 1;
+	}
+
+	retVal = traverse_reset_elision(netlist->vcc_node);
+	if(retVal == -1){
+		return -1;
+	}
+	if(retVal == 1){
+		status = 1;
+	}
+
+	retVal = traverse_reset_elision(netlist->pad_node);
+	if(retVal == -1){
+		return -1;
+	}
+	if(retVal == 1){
+		status = 1;
+	}
+
+	int i;
+	for(i = 0; i < netlist->num_top_input_nodes; i++){
+		retVal = traverse_reset_elision(netlist->top_input_nodes[i]);
+		if(retVal == -1){
+			return -1;
+		}
+		if(retVal == 1){
+			status = 1;
+		}
+	}
+	return status;
+}
+
 void remove_reset(netlist_t *netlist, nnode_t* reset_node, signed char rst_off_value, queue_t *FF_nodes){
+	printf("Reset Elision: Removing Reset %s...\n", reset_node->name);
 	/*Connect pins of children of reset to either gnd or vcc*/
 	nnode_t* new_driver_node = (rst_off_value == 1? netlist->vcc_node: netlist->gnd_node);
 	int i;
@@ -234,7 +318,7 @@ void remove_reset(netlist_t *netlist, nnode_t* reset_node, signed char rst_off_v
 		int j;
 		for(j = 0; j < node->num_input_pins; j++){
 			if(node->input_pins[j]->net->driver_pin->node == reset_node){
-				printf("remap_pin_to_new_node: %s %s\n", node->input_pins[j]->name, new_driver_node->name);
+				//printf("remap_pin_to_new_node: %s %s\n", node->input_pins[j]->name, new_driver_node->name);
 				//remap_pin_to_new_node(node->input_pins[j], new_driver_node, j);
 				remap_pin_to_new_net(node->input_pins[j], new_driver_node->output_pins[0]->net);
 			}
@@ -282,7 +366,9 @@ int simulate_for_reset(netlist_t *netlist, nnode_t* potential_rst, int cycle, si
 	while ((node = (nnode_t *)queue->remove(queue)))
 	{
 		compute_and_store_value(node, cycle);
-		//printf("***** %s (%d) %d\n", node->name, node->type, get_pin_value(node->output_pins[0], cycle));
+		/*if(node->type==MEMORY || node->type==FF_NODE){
+			printf("***** %s (%d) %d\n", node->name, node->type, get_pin_value(node->output_pins[0], cycle));
+		}*/
 
 		if(node->type==FF_NODE){
 			//printf("***** %s (%d) %d\n", node->name, node->type, get_pin_value(node->output_pins[0], cycle));
@@ -348,16 +434,34 @@ int simulate_for_reset(netlist_t *netlist, nnode_t* potential_rst, int cycle, si
 	return reset_candidate;
 }
 
-void convert_reset_to_init(netlist_t *netlist){
+void detect_and_elide_reset(netlist_t *netlist){
+	/*Ensure latches exist and none has initial value*/
+	int latches_status = reset_elision_check_latches(netlist);
+	if(latches_status == 0){
+		printf("Reset Elision: No latches found\n");
+		return;
+	}
+
+	if(latches_status == -1){
+		printf("Reset Elision: At least one latch is already initialized\n");
+		return;
+	}
+
 	/*Find potential resets*/
-	printf("Looking for reset signals...\n");
+	printf("Reset Elision: Looking for reset signals...\n");
+	queue_t *FF_nodes_up_rst = NULL;
+	queue_t *FF_nodes_down_rst = NULL;
+	nnode_t* potential_rst = NULL;
 	int i;
 	for(i = 0; i < netlist->num_top_input_nodes; i++){
 		if(netlist->top_input_nodes[i]->type != CLOCK_NODE){
-			printf("**** Simulating Input: %s(%d/%d)\n", netlist->top_input_nodes[i]->name, i+1, netlist->num_top_input_nodes);
+			//printf("Reset Elision: Simulating Input: %s(%d/%d)\n", netlist->top_input_nodes[i]->name, i+1, netlist->num_top_input_nodes);
 
 			queue_t *FF_nodes_up = create_queue();
 			queue_t *FF_nodes_down = create_queue();
+
+			//Clear simulation data
+			reinitialize_simulation(netlist);
 
 			int up_zero = simulate_for_reset(netlist, netlist->top_input_nodes[i], 0, (signed char)1, NULL);
 			if(up_zero != 1){
@@ -393,26 +497,58 @@ void convert_reset_to_init(netlist_t *netlist){
 			//printf("Results: %d, %d, %d, %d\n", up_zero, up_one, down_zero, down_one);
 
 			if(up_zero==1 && up_one==1 && down_zero==1 && down_one==-1){
-				printf("**** Potential Positive Reset Found: %s!\n", netlist->top_input_nodes[i]->name);
-				remove_reset(netlist, netlist->top_input_nodes[i], 0, FF_nodes_up);
+				printf("Reset Elision: Potential Positive Reset Found: %s!\n", netlist->top_input_nodes[i]->name);
+				if(potential_rst == NULL){
+					potential_rst = netlist->top_input_nodes[i];
+					FF_nodes_up_rst = FF_nodes_up;
+				} else {
+					printf("Reset Elision: More than one potential resets found.\n");
+					FF_nodes_up->destroy(FF_nodes_up); FF_nodes_down->destroy(FF_nodes_down);
+					if(FF_nodes_up_rst) FF_nodes_up_rst->destroy(FF_nodes_up_rst);
+					if(FF_nodes_down_rst) FF_nodes_down_rst->destroy(FF_nodes_down_rst);
+					return;
+				}
+			} else {
+				FF_nodes_up->destroy(FF_nodes_up);
 			}
 
 			if(up_zero==1 && up_one==-1 && down_zero==1 && down_one==1){
-				printf("**** Potential Negative Reset Found: %s!\n", netlist->top_input_nodes[i]->name);
-				remove_reset(netlist, netlist->top_input_nodes[i], 0, FF_nodes_down);
+				printf("Reset Elision: Potential Negative Reset Found: %s!\n", netlist->top_input_nodes[i]->name);
+				if(potential_rst == NULL){
+					potential_rst = netlist->top_input_nodes[i];
+					FF_nodes_down_rst = FF_nodes_down;
+				} else {
+					printf("Reset Elision: More than one potential resets found.\n");
+					FF_nodes_up->destroy(FF_nodes_up); FF_nodes_down->destroy(FF_nodes_down);
+					if(FF_nodes_up_rst) FF_nodes_up_rst->destroy(FF_nodes_up_rst);
+					if(FF_nodes_down_rst) FF_nodes_down_rst->destroy(FF_nodes_down_rst);
+					return;
+				}
+				remove_reset(netlist, netlist->top_input_nodes[i], 1, FF_nodes_down);
+			} else {
+				FF_nodes_down->destroy(FF_nodes_down);
 			}
-
-			FF_nodes_up->destroy(FF_nodes_up); FF_nodes_down->destroy(FF_nodes_down);
 		}
 		//printf("Checked %d out of %d inputs...\n", i+1, netlist->num_top_input_nodes);
 	}
+
+	if(potential_rst){
+		if(FF_nodes_up_rst){
+			remove_reset(netlist, potential_rst, 0, FF_nodes_up_rst);
+		} else if(FF_nodes_down_rst){
+			remove_reset(netlist, potential_rst, 1, FF_nodes_down_rst);
+		}
+	}
+
+	if(FF_nodes_up_rst) FF_nodes_up_rst->destroy(FF_nodes_up_rst);
+	if(FF_nodes_down_rst) FF_nodes_down_rst->destroy(FF_nodes_down_rst);
 }
 
 /* Perform the backwards and forward sweeps and remove the unused nodes */
 void remove_unused_logic(netlist_t *netlist){
 
 	if(global_args.reset_elision){
-		convert_reset_to_init(netlist);
+		detect_and_elide_reset(netlist);
 	}
 
 	mark_output_dependencies(netlist);
