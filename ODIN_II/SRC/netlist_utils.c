@@ -86,6 +86,9 @@ nnode_t* allocate_nnode() {
 	new_node->has_initial_value = FALSE;
 	new_node->initial_value = 0;
 	
+	new_node->reset_candidate = 0;
+	new_node->potential_reset_value = -1;
+	new_node->is_on_gate = -1;
 
 	return new_node;
 }

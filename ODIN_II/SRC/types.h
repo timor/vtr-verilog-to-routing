@@ -173,6 +173,8 @@ struct global_args_t_t
 	char *sim_hold_low;
 	//
 	int sim_initial_value;
+
+	char reset_elision;
 };
 
 #endif // TYPES_H
@@ -472,6 +474,12 @@ struct nnode_t_t
 	int ratio; //clock ratio for clock nodes
 	signed char has_initial_value; // initial value assigned?
 	signed char initial_value; // initial net value
+
+	signed char derived_initial_value;
+	signed char potential_reset_value;
+	char reset_candidate;
+
+	char is_on_gate;
 };
 
 

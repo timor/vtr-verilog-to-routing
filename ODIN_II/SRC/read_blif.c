@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "hashtable.h"
 #include "netlist_check.h"
 #include "simulate_blif.h"
+#include "netlist_reset_elision.h"
 
 #define TOKENS     " \t\n"
 #define GND_NAME   "gnd"
@@ -172,6 +173,11 @@ void read_blif(char * blif_file)
 	// We the estimate of completion is rough...make sure we end up at 100%. ;)
 	print_progress_bar(1.0, position, 50, wall_time() - time);
 	printf("-------------------------------------\n"); fflush(stdout);
+
+	/* Reset elision*/
+	if(global_args.reset_elision){
+		detect_and_remove_reset(verilog_netlist);
+	}
 
 	// Outputs netlist graph.
 	check_netlist(verilog_netlist);
@@ -999,6 +1005,11 @@ short read_bit_map_find_unknown_gate(int input_count, nnode_t *node, FILE *file)
 	
 	node->bit_map = bit_map;
 	node->bit_map_line_count = line_count_bitmap;
+	if (!strcmp(output_bit_map,"1"))
+		node->is_on_gate = 1;
+	else if (!strcmp(output_bit_map,"0"))
+		node->is_on_gate = 0;
+
 	return GENERIC;
 }
 

@@ -202,7 +202,7 @@ void get_options(int argc, char **argv)
 	
 
 	/* Parse the command line options.  */
-	const char *optString = "hc:V:WREh:o:a:B:b:N:f:s:S:p:g:t:T:L:H:GA3U::";
+	const char *optString = "hc:V:WREh:o:a:B:b:N:f:s:S:p:g:t:T:L:H:GA3U:r::";
 	int opt = getopt(argc, argv, optString);
 	while(opt != -1) 
 	{
@@ -289,6 +289,9 @@ void get_options(int argc, char **argv)
 			case 'R':
 				global_args.sim_output_rising_edge = 1;
 			break;
+			case 'r':
+				global_args.reset_elision = 1;
+				break;
 			default :
 				print_usage();
 				error_message(-1, 0, -1, "Invalid arguments.\n");

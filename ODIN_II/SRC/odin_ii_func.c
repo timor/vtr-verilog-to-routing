@@ -77,6 +77,7 @@ void set_default_options()
 	global_args.sim_output_rising_edge = 0;
 	global_args.sim_initial_value = -1;
 	global_args.all_warnings = 0;
+	global_args.reset_elision = 0;
 
 	/* Set up the global configuration. */
 	configuration.list_of_file_names = NULL;
