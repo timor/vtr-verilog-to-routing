@@ -37,6 +37,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "adders.h"
 #include "subtractions.h"
 
+extern char *top_module_reset_elision_name;
+
 void depth_first_traversal_to_output(short marker_value, FILE *fp, netlist_t *netlist);
 void depth_traverse_output_blif(nnode_t *node, int traverse_mark_number, FILE *fp);
 void output_node(nnode_t *node, short traverse_number, FILE *fp);
@@ -76,7 +78,11 @@ void output_blif(char *file_name, netlist_t *netlist)
 		error_message(NETLIST_ERROR, -1, -1, "Could not open output file %s\n", file_name);
 	}
 
-	fprintf(out, ".model %s\n", top_module->children[0]->types.identifier);
+	if(top_module){
+		fprintf(out, ".model %s\n", top_module->children[0]->types.identifier);
+	} else {
+		fprintf(out, "#Odin Reset Elision: %s\n.model %s\n", top_module_reset_elision_name, top_module_reset_elision_name);
+	}
 
 	/* generate all te signals */
 	for (i = 0; i < netlist->num_top_input_nodes; i++)
@@ -384,6 +390,28 @@ void output_node(nnode_t *node, short traverse_number, FILE *fp)
 			/* some nodes already converted */
 			break;
 
+		case GENERIC:
+			if(global_args.reset_elision){
+				int i, j;
+
+				fprintf(fp, ".names ");
+				for (j = 0; j < node->num_input_pins; j++){
+					fprintf(fp, "%s ", node->input_pins[j]->net->driver_pin->node->name);
+				}
+				fprintf(fp, "%s\n", node->name);
+
+				for (i = 0; i < node->bit_map_line_count; i++){
+					for (j = 0; j < node->num_input_pins; j++){
+						fprintf(fp, "%c", node->bit_map[i][j]);
+					}
+
+					fprintf(fp, " %d\n", node->is_on_gate);
+				}
+
+				fprintf(fp, "\n");
+				break;
+			}
+
 		case BITWISE_AND:
 		case BITWISE_NAND:
 		case BITWISE_NOR:
@@ -403,6 +431,7 @@ void output_node(nnode_t *node, short traverse_number, FILE *fp)
 		//case ADD:
 		//case MINUS:
 		default:
+			printf("ERROR node: %s(%d)\n", node->name, node->type);
 			/* these nodes should have been converted to softer versions */
 			error_message(NETLIST_ERROR, 0,-1,"Output blif: node should have been converted to softer version.");
 			break;
