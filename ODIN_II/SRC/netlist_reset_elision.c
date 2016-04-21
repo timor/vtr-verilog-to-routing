@@ -324,14 +324,13 @@ void print_remove_reset(netlist_t *netlist, nnode_t *reset_node, FILE* file){
 	printf("Creating new BLIF file to output %s\n", global_args.output_file);
 	//printf("Removing reset input %s, to be fixed to value %d\n", reset_node->name, reset_node->potential_reset_value);
 
-	/*Connect pins of children of reset to either gnd or vcc*/
-	nnode_t* new_driver_node = (reset_node->potential_reset_value == 1? netlist->gnd_node: netlist->vcc_node);
-
 	//Create output file
 	FILE* out = fopen(global_args.output_file, "w");
 	if (out == NULL){
 		error_message(NETLIST_ERROR, -1, -1, "Could not open output file %s\n", global_args.output_file);
 	}
+
+	fprintf(out, "#Odin Reset Elision\n");
 
 	//Copy input to output
 	rewind(file);
@@ -342,56 +341,58 @@ void print_remove_reset(netlist_t *netlist, nnode_t *reset_node, FILE* file){
 
 		//Rename all gate references of reset to either GND or VCC
 		if(strstr(line, ".names") && strstr(line, reset_node->name)){
-			printf("replacing line: %s", line);
 			if(first){
 				//Print VCC or GND the first time
 				first = 0;
+
+				/*Connect pins of children of reset to either gnd or vcc*/
 				if(reset_node->potential_reset_value == 1){
-					fprintf(out, ".names vcc\n1\n\n");
-					strncpy(to_replace, "vcc", 4);
+					fprintf(out, ".names vcc_odin_reset_elision\n 1\n\n");
+					strncpy(to_replace, "vcc_odin_reset_elision", 4);
 				} else {
-					fprintf(out, ".names gnd\n\n");
-					strncpy(to_replace, "gnd", 4);
+					fprintf(out, ".names gnd_odin_reset_elision\n\n");
+					strncpy(to_replace, "gnd_odin_reset_elision", 4);
 				}
 			}
 
 			string_replace(line, reset_node->name, to_replace);
 		}
+
+		if(strstr(line, ".latch")){
+			int i, j;
+			int num_children = 0;
+			int found = 0;
+			nnode_t **children = get_children_of(reset_node, &num_children);
+			for (i = 0; i < num_children && !found; i++){
+
+				int num_grand_children = 0;
+				nnode_t **grand_children = get_children_of(children[i], &num_grand_children);
+				for (j = 0; j < num_grand_children && !found; j++){
+					nnode_t* node = grand_children[j];
+
+					if(node->type == FF_NODE){
+						if(strstr(line, node->name)){
+
+							/*Set initial values for FF_nodes*/
+							//node->derived_initial_value;
+							//printf("latch %s to %d\n", node->name, node->derived_initial_value);
+							update_latch_initial(line, node->derived_initial_value);
+							found = 1;
+						}
+					}
+				}
+
+			}
+			free(children);
+		}
+
 		fprintf(out, "%s", line);
 	}
+	char actualpath [1024];
 
+	realpath(global_args.output_file, actualpath);
+	printf("Done writing at %s\n", actualpath);
 	fclose(out);
-
-
-	int i, j;
-	int num_children = 0;
-	nnode_t **children = get_children_of(reset_node, &num_children);
-	for (i = 0; i < num_children; i++){
-
-		nnode_t* lut_node = children[i];
-
-		int num_grand_children = 0;
-		nnode_t **grand_children = get_children_of(children[i], &num_grand_children);
-		for (j = 0; j < num_grand_children; j++){
-			nnode_t* node = grand_children[j];
-
-			if(node->type == FF_NODE){
-				/*Set initial values for FF_nodes*/
-				node->has_initial_value = 1;
-				node->initial_value = node->derived_initial_value;
-			}
-		}
-
-		for(j = 0; j < lut_node->num_input_pins; j++){
-			if(lut_node->input_pins[j]->net->driver_pin->node == reset_node){
-				//printf("old_node: %s\n", lut_node->input_pins[j]->net->driver_pin->node->name);
-				//printf("remap_pin_to_new_node: %s %s\n", lut_node->input_pins[j]->name, new_driver_node->name);
-				remap_pin_to_new_net(lut_node->input_pins[j], new_driver_node->output_pins[0]->net);
-				//printf("new_node: %s\n", lut_node->input_pins[j]->net->driver_pin->node->name);
-			}
-		}
-	}
-	free(children);
 }
 
 void string_replace(char *line, char *old_word, char *new_word){
@@ -407,7 +408,14 @@ void string_replace(char *line, char *old_word, char *new_word){
 	strcat(new_line, new_word);
 	strcat(new_line, pos + strlen(old_word));
 
-	printf("%s", new_line);
-
 	strcpy(line, new_line);
+}
+
+void update_latch_initial(char* line, signed char init){
+	for(int i = strlen(line) - 1; i >= 0; i--){
+		if(line[i] == '0' || line[i] == '1' || line[i] == '2' || line[i] == '3'){
+			line[i] = '0' + init;
+			return;
+		}
+	}
 }

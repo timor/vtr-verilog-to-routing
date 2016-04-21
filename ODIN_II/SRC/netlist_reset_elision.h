@@ -18,5 +18,6 @@ void mark_input_as_reset(nnode_t *input_node, int is_positive_reset);
 void remove_reset(netlist_t *netlist, nnode_t *reset_node);
 void print_remove_reset(netlist_t *netlist, nnode_t *reset_node, FILE* file);
 void string_replace(char *line, char *old_word, char *new_word);
+void update_latch_initial(char* line, signed char init);
 
 #endif /* ODIN_II_SRC_NETLIST_RESET_ELISION_H_ */

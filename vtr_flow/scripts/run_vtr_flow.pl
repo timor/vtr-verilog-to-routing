@@ -114,6 +114,8 @@ my $timeout                 = 14 * 24 * 60 * 60;         # 14 day execution time
 my $abc_quote_addition      = 0;
 my @forwarded_vpr_args;   # VPR arguments that pass through the script
 
+my $reset_elision			= 0;
+
 while ( $token = shift(@ARGV) ) {
 	if ( $token eq "-sdc_file" ) {
 		$sdc_file_path = expand_user_path( shift(@ARGV) );
@@ -134,6 +136,10 @@ while ( $token = shift(@ARGV) ) {
         }
     }
 	elsif ( $token eq "-keep_intermediate_files" ) {
+		$keep_intermediate_files = 1;
+	}
+	elsif ( $token eq "-reset_elision" ) {
+		$reset_elision = 1;
 		$keep_intermediate_files = 1;
 	}
     elsif ( $token eq "-keep_result_files" ) {
@@ -444,6 +450,45 @@ if (    $starting_stage <= $stage_idx_abc
 	}
 	else {
 		print "failed: abc";
+		$error_code = 1;
+	}
+}
+
+#################################################################################
+############################ RESET ELISION ######################################
+#################################################################################
+if (    $starting_stage <= $stage_idx_abc
+	and $ending_stage >= $stage_idx_abc
+	and !$error_code 
+	and $reset_elision)
+{
+	$q =
+	  &system_with_timeout( "$odin2_path", "odin.out", $timeout, $temp_dir,
+		"-b", $abc_output_file_name, "-r", "-o", $odin_output_file_name);
+	
+	if ( -e $odin_output_file_path ) {
+		my $abc_commands="read $odin_output_file_name; time; resyn; resyn2; if -K $lut_size; time; scleanup; time; scleanup; time; scleanup; time; scleanup; time; scleanup; time; scleanup; time; scleanup; time; scleanup; time; scleanup; time; write_hie $odin_output_file_name $abc_output_file_name; print_stats";
+
+		if ($abc_quote_addition) {$abc_commands = "'" . $abc_commands . "'";}
+
+		$q = &system_with_timeout( $abc_path, "abc.out", $timeout, $temp_dir, "-c",
+			$abc_commands);
+
+		if ( -e $abc_output_file_path ) {
+
+			#system "rm -f abc.out";
+			if ( !$keep_intermediate_files ) {
+				system "rm -f $odin_output_file_path";
+				system "rm -f ${temp_dir}*.rc";
+			}
+		}
+		else {
+			print "failed: reset elision abc";
+			$error_code = 1;
+		}
+	}
+	else {
+		print "failed: reset elision odin";
 		$error_code = 1;
 	}
 }
@@ -787,7 +832,9 @@ sub system_with_timeout {
 
         # first strip out empty
         @VPRARGS = grep { $_ ne ''} @VPRARGS;
-
+		use Cwd qw();
+		my $path = Cwd::abs_path();
+		print "$path\n";
 		print "\n$_[0] @VPRARGS\n";
 		exec $_[0], @VPRARGS;
 	}
