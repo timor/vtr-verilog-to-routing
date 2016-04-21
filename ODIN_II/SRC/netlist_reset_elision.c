@@ -19,7 +19,7 @@ HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
-*/
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -30,6 +30,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "netlist_utils.h"
 #include "util.h"
 #include "netlist_reset_elision.h"
+#include "outputs.h"
+#include "partial_map.h"
 
 int _visited_output_to_inputs, _visited_check_latches;
 #define VISITED_OUTPUT_TO_INPUTS ((void*)&_visited_output_to_inputs)
@@ -48,18 +50,25 @@ void detect_and_remove_reset(netlist_t *netlist){
 
 	check_reset_per_latch(netlist);
 	if(reset_candidate_count == 0){
+		printf("No resets found!\n");
 		return;
 	}
+	printf("%d potential reset(s) discovered\n", reset_candidate_count);
 
 	exclude_inputs_directly_driving_outputs(netlist);
 	if(reset_candidate_count == 0){
+		printf("All reset candidates are directly connected to wire outputs\n");
 		return;
 	}
 
-	//printf("%d potential resets left\n", reset_candidate_count);
 	if(reset_candidate_count == 1){
 		remove_reset(netlist, reset_candidate_node);
 	}
+
+	/* point for outputs.  This includes soft and hard mapping all structures to the
+	 * target format.  Some of these could be considred optimizations */
+	printf("Outputting the netlist to the specified output format\n");
+	output_top(verilog_netlist);
 }
 
 void exclude_inputs_directly_driving_outputs(netlist_t *netlist){
@@ -82,6 +91,7 @@ void traverse_from_outputs(nnode_t *node){
 			reset_candidate_count--;
 		}
 		node->reset_candidate = -1;
+		printf("%s not a reset!\n", node->name);
 		return;
 	}
 
@@ -119,7 +129,7 @@ void traverse_check_reset_per_latch(nnode_t *node){
 }
 
 void check_latch_driver(nnode_t *node, nnode_t *latch_node){
-	//printf("*** Reset Elision: Checking latch-driver %s(%d)\n", node->name, node->type);
+	printf("*** Reset Elision: Checking latch-driver %s(%d)\n", node->name, node->type);
 
 	int i;
 	for(i = 0; i < node->num_input_pins; i++){
@@ -155,12 +165,7 @@ void check_latch_driver(nnode_t *node, nnode_t *latch_node){
 				//CASE 1: Either all lines contain the same bit
 				if (is_0 == node->bit_map_line_count || is_1 == node->bit_map_line_count){
 					//Potential reset
-					if(driver_node->reset_candidate == 0){
-						driver_node->reset_candidate = 1;
-						reset_candidate_count++;
-					}
-
-					mark_input_as_reset(driver_node, (is_0 == node->bit_map_line_count));
+					mark_input_as_reset(driver_node, (node->bit_map[0][i] == '1'));
 
 
 					if(node->is_on_gate){
@@ -220,12 +225,9 @@ void check_latch_driver(nnode_t *node, nnode_t *latch_node){
 						reset_candidate_count--;
 					}
 					driver_node->reset_candidate = -1;
+					printf("%s not a reset!\n", driver_node->name);
 				} else {
 					//Potential reset
-					if(driver_node->reset_candidate == 0){
-						driver_node->reset_candidate = 1;
-						reset_candidate_count++;
-					}
 					mark_input_as_reset(driver_node, (case2reset == 2));
 
 					if(node->is_on_gate){
@@ -251,9 +253,17 @@ void mark_input_as_reset(nnode_t *input_node, int is_positive_reset){
 				reset_candidate_count--;
 			}
 			input_node->reset_candidate = -1;
+			printf("%s not a reset!\n", input_node->name);
+		} else {
+			if(input_node->reset_candidate == 0){
+				reset_candidate_count++;
+			}
+			input_node->reset_candidate = 1;
+			printf("%s may be a reset!\n", input_node->name);
+
+			input_node->potential_reset_value = 0;
+			reset_candidate_node = input_node;
 		}
-		input_node->potential_reset_value = 0;
-		reset_candidate_node = input_node;
 	} else {
 		if(input_node->potential_reset_value == 0){
 			//Reset values collision
@@ -262,9 +272,17 @@ void mark_input_as_reset(nnode_t *input_node, int is_positive_reset){
 				reset_candidate_count--;
 			}
 			input_node->reset_candidate = -1;
+			printf("%s not a reset!\n", input_node->name);
+		} else {
+			if(input_node->reset_candidate == 0){
+				reset_candidate_count++;
+			}
+			input_node->reset_candidate = 1;
+			input_node->potential_reset_value = 1;
+			printf("%s may be a reset!\n", input_node->name);
+
+			reset_candidate_node = input_node;
 		}
-		input_node->potential_reset_value = 1;
-		reset_candidate_node = input_node;
 	}
 
 	//printf("Potential reset %s (to be fixed to %d)\n", input_node->name, input_node->potential_reset_value);
@@ -272,5 +290,38 @@ void mark_input_as_reset(nnode_t *input_node, int is_positive_reset){
 
 void remove_reset(netlist_t *netlist, nnode_t *reset_node){
 	printf("Removing reset input %s, to be fixed to value %d\n", reset_node->name, reset_node->potential_reset_value);
+
+	/*Connect pins of children of reset to either gnd or vcc*/
+	nnode_t* new_driver_node = (reset_node->potential_reset_value == 1? netlist->gnd_node: netlist->vcc_node);
+
+	int i, j;
+	int num_children = 0;
+	nnode_t **children = get_children_of(reset_node, &num_children);
+	for (i = 0; i < num_children; i++){
+
+		nnode_t* lut_node = children[i];
+
+		int num_grand_children = 0;
+		nnode_t **grand_children = get_children_of(children[i], &num_grand_children);
+		for (j = 0; j < num_grand_children; j++){
+			nnode_t* node = grand_children[j];
+
+			if(node->type == FF_NODE){
+				/*Set initial values for FF_nodes*/
+				node->has_initial_value = 1;
+				node->initial_value = node->derived_initial_value;
+			}
+		}
+
+		for(j = 0; j < lut_node->num_input_pins; j++){
+			if(lut_node->input_pins[j]->net->driver_pin->node == reset_node){
+				//printf("old_node: %s\n", lut_node->input_pins[j]->net->driver_pin->node->name);
+				//printf("remap_pin_to_new_node: %s %s\n", lut_node->input_pins[j]->name, new_driver_node->name);
+				remap_pin_to_new_net(lut_node->input_pins[j], new_driver_node->output_pins[0]->net);
+				//printf("new_node: %s\n", lut_node->input_pins[j]->net->driver_pin->node->name);
+			}
+		}
+	}
+	free(children);
 }
 
