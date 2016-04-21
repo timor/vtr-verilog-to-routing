@@ -37,7 +37,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "adders.h"
 #include "subtractions.h"
 
-extern char *top_module_reset_elision_name;
+//extern char *top_module_reset_elision_name;
 
 void depth_first_traversal_to_output(short marker_value, FILE *fp, netlist_t *netlist);
 void depth_traverse_output_blif(nnode_t *node, int traverse_mark_number, FILE *fp);
@@ -78,11 +78,11 @@ void output_blif(char *file_name, netlist_t *netlist)
 		error_message(NETLIST_ERROR, -1, -1, "Could not open output file %s\n", file_name);
 	}
 
-	if(top_module){
+	//if(top_module){
 		fprintf(out, ".model %s\n", top_module->children[0]->types.identifier);
-	} else {
-		fprintf(out, "#Odin Reset Elision: %s\n.model %s\n", top_module_reset_elision_name, top_module_reset_elision_name);
-	}
+	//} else {
+	//	fprintf(out, "#Odin Reset Elision: %s\n.model %s\n", top_module_reset_elision_name, top_module_reset_elision_name);
+	//}
 
 	/* generate all te signals */
 	for (i = 0; i < netlist->num_top_input_nodes; i++)

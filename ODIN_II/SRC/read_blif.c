@@ -46,7 +46,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 int file_line_number;
 
-char *top_module_reset_elision_name;
+//char *top_module_reset_elision_name;
 
 const char *BLIF_ONE_STRING    = "ONE_VCC_CNS";
 const char *BLIF_ZERO_STRING   = "ZERO_GND_ZERO";
@@ -178,7 +178,7 @@ void read_blif(char * blif_file)
 
 	/* Reset elision*/
 	if(global_args.reset_elision){
-		detect_and_remove_reset(verilog_netlist);
+		detect_and_remove_reset(verilog_netlist, file);
 	}
 
 	// Outputs netlist graph.
@@ -239,7 +239,7 @@ int read_tokens (char *buffer, hard_block_models *models, FILE *file, hashtable_
 			}
 			else if (strcmp(token,".model")==0)
 			{
-				top_module_reset_elision_name = strdup(my_strtok (NULL, TOKENS, file, buffer));
+				//top_module_reset_elision_name = strdup(my_strtok (NULL, TOKENS, file, buffer));
 				// Ignore models.
 				dum_parse(buffer, file);
 			}
