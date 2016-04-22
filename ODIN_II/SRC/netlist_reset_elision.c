@@ -132,6 +132,7 @@ void check_latch_driver(nnode_t *node, nnode_t *latch_node){
 			nnode_t *driver_node = node->input_pins[i]->net->driver_pin->node;
 			if(driver_node->type == INPUT_NODE && driver_node->reset_candidate != -1){
 				//Ensure this input resets this latch:
+				printf("*** Reset Elision: Checking input %s(%d)\n", driver_node->name, driver_node->type);
 
 				//Count bits of driving input
 				int is_0 = 0;
@@ -157,11 +158,15 @@ void check_latch_driver(nnode_t *node, nnode_t *latch_node){
 					}
 				}
 
+				for(j = 0; j < node->bit_map_line_count; j++){
+					printf("%s\n", node->bit_map[j]);
+				}
+				printf("input=%d/%d, is_0=%d, is_1=%d, is_dash=%d, last0=%d, last1=%d\n\n", i, node->num_input_pins, is_0, is_1, is_dash, last0, last1);
+
 				//CASE 1: Either all lines contain the same bit
 				if (is_0 == node->bit_map_line_count || is_1 == node->bit_map_line_count){
 					//Potential reset
 					mark_input_as_reset(driver_node, (node->bit_map[0][i] == '1'));
-
 
 					if(node->is_on_gate){
 						latch_node->derived_initial_value = 0;
@@ -176,45 +181,37 @@ void check_latch_driver(nnode_t *node, nnode_t *latch_node){
 
 				//CASE 2: One line contains one bit and all other drivers are -
 				//        also, all other lines the opposite bit
-				int case2reset = 1;
-				if ((is_0 == 1 && is_1 == node->bit_map_line_count - 1)){
+				int case2reset0 = 0;
+				if (is_0 == 1){
+					case2reset0 = 1;
 					//Check if all other drivers on this line are -
 					for(j = 0; j < node->num_input_pins; j++){
 						if(j != i){
 							//printf("[%d][%d] = %c\n", j, i, node->bit_map[last0][j]);
 							if(node->bit_map[last0][j] != '-'){
-								case2reset = 0;
+								case2reset0 = 0;
 								break;
 							}
 						}
 					}
 				}
 
-				//Special case needed to distinguish two lines
-				if(node->bit_map_line_count == 2){
-					if(case2reset == 0){
-						case2reset = 2;
-					}
-				} else {
-					if(case2reset == 1){
-						case2reset = 2;
-					}
-				}
-
-				if(case2reset!=0 && is_1 == 1 && is_0 == node->bit_map_line_count - 1){
+				int case2reset1 = 0;
+				if(is_1 == 1){
+					case2reset1 = 1;
 					//Check if all other drivers are -
-					for(j = 0; j < node->bit_map_line_count; j++){
+					for(j = 0; j < node->num_input_pins; j++){
 						if(j != i){
 							//printf("[%d][%d] = %c\n", j, i, node->bit_map[last1][j]);
 							if(node->bit_map[last1][j] != '-'){
-								case2reset = 0;
+								case2reset1 = 0;
 								break;
 							}
 						}
 					}
 				}
 
-				if(!case2reset){
+				if(!case2reset0 && !case2reset1){
 					//Not a reset
 					if(driver_node->reset_candidate == 1){
 						reset_candidate_count--;
@@ -223,7 +220,11 @@ void check_latch_driver(nnode_t *node, nnode_t *latch_node){
 					printf("%s not a reset!\n", driver_node->name);
 				} else {
 					//Potential reset
-					mark_input_as_reset(driver_node, (case2reset == 2));
+					mark_input_as_reset(driver_node, (case2reset1 == 1));
+					printf("case-2(%d, %d)\n", case2reset0, case2reset1);
+					for(j = 0; j < node->bit_map_line_count; j++){
+						printf("%s\n", node->bit_map[j]);
+					}
 
 					if(node->is_on_gate){
 						latch_node->derived_initial_value = 1;
