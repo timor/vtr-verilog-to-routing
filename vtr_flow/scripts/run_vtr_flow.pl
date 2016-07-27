@@ -89,7 +89,7 @@ my $ext;
 my $starting_stage          = stage_index("odin");
 my $ending_stage            = stage_index("vpr");
 my $specific_vpr_stage      = "";
-my $keep_intermediate_files = 0;
+my $keep_intermediate_files = 1;
 my $keep_result_files       = 0;
 my $has_memory              = 1;
 my $timing_driven           = "on";
@@ -307,11 +307,11 @@ if (    $stage_idx_odin >= $starting_stage
 my $abc_path;
 my $abc_rc_path;
 if ( $stage_idx_abc >= $starting_stage and $stage_idx_abc <= $ending_stage ) {
-	$abc_path = "$vtr_flow_path/../abc_with_bb_support/abc";
+	$abc_path = "$vtr_flow_path/../alanmi-abc-5ae4b975c49c/abc";
 	( -e $abc_path or -e "${abc_path}.exe" )
 	  or die "Cannot find ABC executable ($abc_path)";
 
-	$abc_rc_path = "$vtr_flow_path/../abc_with_bb_support/abc.rc";
+	$abc_rc_path = "$vtr_flow_path/../alanmi-abc-5ae4b975c49c/abc.rc";
 	( -e $abc_rc_path ) or die "Cannot find ABC RC file ($abc_rc_path)";
 
 	copy( $abc_rc_path, $temp_dir );
@@ -361,6 +361,8 @@ my $abc_output_file_path = "$temp_dir$abc_output_file_name";
 
 my $ace_output_blif_name = "$benchmark_name" . file_ext_for_stage($stage_idx_ace);
 my $ace_output_blif_path = "$temp_dir$ace_output_blif_name";
+
+my $addMissingLatchInfo_path = "$vtr_flow_path/scripts/addMissingLatchInfo.pl";
 
 my $ace_output_act_name = "$benchmark_name" . ".act";
 my $ace_output_act_path = "$temp_dir$ace_output_act_name";
@@ -432,7 +434,7 @@ if (    $starting_stage <= $stage_idx_abc
 	and $ending_stage >= $stage_idx_abc
 	and !$error_code )
 {
-    my $abc_commands="read $odin_output_file_name; time; resyn; resyn2; if -K $lut_size; time; scleanup; time; scleanup; time; scleanup; time; scleanup; time; scleanup; time; scleanup; time; scleanup; time; scleanup; time; scleanup; time; write_hie $odin_output_file_name $abc_output_file_name; print_stats";
+    my $abc_commands="read $odin_output_file_name; time; resyn; retime; resyn2; resyn2a; resyn3; retime; if -K $lut_size; time; strash; scleanup; time; scleanup; time; scleanup; time; scleanup; time; scleanup; time; scleanup; time; scleanup; time; scleanup; time; scleanup; time; write_hie $odin_output_file_name $abc_output_file_name; print_stats";
 
     if ($abc_quote_addition) {$abc_commands = "'" . $abc_commands . "'";}
     
@@ -449,7 +451,8 @@ if (    $starting_stage <= $stage_idx_abc
     }
 
 	if ( -e $abc_output_file_path and $q eq "success") {
-
+		system("$addMissingLatchInfo_path ${temp_dir}$odin_output_file_name ${temp_dir}$abc_output_file_name > ${temp_dir}LatchInfo");
+		system("mv ${temp_dir}LatchInfo ${temp_dir}$abc_output_file_name");
 		#system "rm -f abc.out";
 		if ( !$keep_intermediate_files ) {
 			system "rm -f $odin_output_file_path";
@@ -677,7 +680,7 @@ if ( $ending_stage >= $stage_idx_vpr and !$error_code ) {
 	if ($q eq "success") {
 		if($check_equivalent eq "on") {
 			if($abc_path eq "") {
-				$abc_path = "$vtr_flow_path/../abc_with_bb_support/abc";
+				$abc_path = "$vtr_flow_path/../alanmi-abc-5ae4b975c49c/abc";
 			}
 			
 			find(\&find_postsynthesis_netlist, ".");
