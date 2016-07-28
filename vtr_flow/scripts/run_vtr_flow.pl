@@ -434,7 +434,7 @@ if (    $starting_stage <= $stage_idx_abc
 	and $ending_stage >= $stage_idx_abc
 	and !$error_code )
 {
-    my $abc_commands="read $odin_output_file_name; time; resyn; resyn2; resyn2a; resyn3; time; strash; scleanup; time; scleanup; time; scleanup; time; scleanup; time; scleanup; time; scleanup; time; scleanup; time; scleanup; time; scleanup; time; if -K $lut_size; write_hie $odin_output_file_name $abc_output_file_name; print_stats";
+    my $abc_commands="read $odin_output_file_name; time; resyn; resyn2; resyn2rs; resyn2a; resyn3; time; strash; scleanup; time; scleanup; time; scleanup; time; scleanup; time; scleanup; time; scleanup; time; scleanup; time; scleanup; time; scleanup; time; if -K $lut_size; write_hie $odin_output_file_name $abc_output_file_name; print_stats";
 
     if ($abc_quote_addition) {$abc_commands = "'" . $abc_commands . "'";}
     
