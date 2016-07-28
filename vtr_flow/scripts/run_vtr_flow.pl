@@ -692,7 +692,7 @@ if ( $ending_stage >= $stage_idx_vpr and !$error_code ) {
 							$timeout,
 							$temp_dir,
 							"-c", 
-							"sec $odin_output_file_name $vpr_postsynthesis_netlist"
+							"dsec $odin_output_file_name $vpr_postsynthesis_netlist"
 			);
 
             # Parse ABC verification output
