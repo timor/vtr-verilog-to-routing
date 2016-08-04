@@ -1,0 +1,7527 @@
+# Benchmark "system" written by ABC on Fri Jul 29 11:02:43 2016
+.model system
+.inputs top^clk top^resetn top^boot_iaddr~0 top^boot_iaddr~1 \
+ top^boot_iaddr~2 top^boot_iaddr~3 top^boot_iaddr~4 top^boot_iaddr~5 \
+ top^boot_iaddr~6 top^boot_iaddr~7 top^boot_iaddr~8 top^boot_iaddr~9 \
+ top^boot_iaddr~10 top^boot_iaddr~11 top^boot_iaddr~12 top^boot_iaddr~13 \
+ top^boot_iaddr~14 top^boot_iaddr~15 top^boot_iaddr~16 top^boot_iaddr~17 \
+ top^boot_iaddr~18 top^boot_iaddr~19 top^boot_iaddr~20 top^boot_iaddr~21 \
+ top^boot_iaddr~22 top^boot_iaddr~23 top^boot_iaddr~24 top^boot_iaddr~25 \
+ top^boot_iaddr~26 top^boot_iaddr~27 top^boot_iaddr~28 top^boot_iaddr~29 \
+ top^boot_iaddr~30 top^boot_iaddr~31 top^boot_idata~0 top^boot_idata~1 \
+ top^boot_idata~2 top^boot_idata~3 top^boot_idata~4 top^boot_idata~5 \
+ top^boot_idata~6 top^boot_idata~7 top^boot_idata~8 top^boot_idata~9 \
+ top^boot_idata~10 top^boot_idata~11 top^boot_idata~12 top^boot_idata~13 \
+ top^boot_idata~14 top^boot_idata~15 top^boot_idata~16 top^boot_idata~17 \
+ top^boot_idata~18 top^boot_idata~19 top^boot_idata~20 top^boot_idata~21 \
+ top^boot_idata~22 top^boot_idata~23 top^boot_idata~24 top^boot_idata~25 \
+ top^boot_idata~26 top^boot_idata~27 top^boot_idata~28 top^boot_idata~29 \
+ top^boot_idata~30 top^boot_idata~31 top^boot_iwe top^boot_daddr~0 \
+ top^boot_daddr~1 top^boot_daddr~2 top^boot_daddr~3 top^boot_daddr~4 \
+ top^boot_daddr~5 top^boot_daddr~6 top^boot_daddr~7 top^boot_daddr~8 \
+ top^boot_daddr~9 top^boot_daddr~10 top^boot_daddr~11 top^boot_daddr~12 \
+ top^boot_daddr~13 top^boot_daddr~14 top^boot_daddr~15 top^boot_daddr~16 \
+ top^boot_daddr~17 top^boot_daddr~18 top^boot_daddr~19 top^boot_daddr~20 \
+ top^boot_daddr~21 top^boot_daddr~22 top^boot_daddr~23 top^boot_daddr~24 \
+ top^boot_daddr~25 top^boot_daddr~26 top^boot_daddr~27 top^boot_daddr~28 \
+ top^boot_daddr~29 top^boot_daddr~30 top^boot_daddr~31 top^boot_ddata~0 \
+ top^boot_ddata~1 top^boot_ddata~2 top^boot_ddata~3 top^boot_ddata~4 \
+ top^boot_ddata~5 top^boot_ddata~6 top^boot_ddata~7 top^boot_ddata~8 \
+ top^boot_ddata~9 top^boot_ddata~10 top^boot_ddata~11 top^boot_ddata~12 \
+ top^boot_ddata~13 top^boot_ddata~14 top^boot_ddata~15 top^boot_ddata~16 \
+ top^boot_ddata~17 top^boot_ddata~18 top^boot_ddata~19 top^boot_ddata~20 \
+ top^boot_ddata~21 top^boot_ddata~22 top^boot_ddata~23 top^boot_ddata~24 \
+ top^boot_ddata~25 top^boot_ddata~26 top^boot_ddata~27 top^boot_ddata~28 \
+ top^boot_ddata~29 top^boot_ddata~30 top^boot_ddata~31 top^boot_dwe
+.outputs top^nop7_q~0 top^nop7_q~1 top^nop7_q~2 top^nop7_q~3 top^nop7_q~4 \
+ top^nop7_q~5 top^nop7_q~6 top^nop7_q~7 top^nop7_q~8 top^nop7_q~9 \
+ top^nop7_q~10 top^nop7_q~11 top^nop7_q~12 top^nop7_q~13 top^nop7_q~14 \
+ top^nop7_q~15 top^nop7_q~16 top^nop7_q~17 top^nop7_q~18 top^nop7_q~19 \
+ top^nop7_q~20 top^nop7_q~21 top^nop7_q~22 top^nop7_q~23 top^nop7_q~24 \
+ top^nop7_q~25 top^nop7_q~26 top^nop7_q~27 top^nop7_q~28 top^nop7_q~29 \
+ top^nop7_q~30 top^nop7_q~31
+
+.latch n335 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6468 re top^clk 3
+.latch n340 top.pipereg_w32+pipereg^q~0_FF_NODE re top^clk 3
+.latch n345 top.mul+mul.dummy_mult+fake_mult_one^result~0_FF_NODE re top^clk 3
+.latch n355 top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3193 re top^clk 3
+.latch n365 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6660 re top^clk 3
+.latch n370 top.pipereg_w1+pipereg15^q_FF_NODE re top^clk 3
+.latch n375 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6476 re top^clk 3
+.latch n380 top.pipereg_w32+pipereg^q~1_FF_NODE re top^clk 3
+.latch n385 top.mul+mul.dummy_mult+fake_mult_one^result~1_FF_NODE re top^clk 3
+.latch n400 top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3201 re top^clk 3
+.latch n410 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6668 re top^clk 3
+.latch n415 top.pipereg_w26+pipereg1^q~25_FF_NODE re top^clk 3
+.latch n420 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6684 re top^clk 3
+.latch n425 top^ctrl_mux2to1_pipereg_d_sel_FF_NODE re top^clk 3
+.latch n430 top.pipereg_w32+pipereg^q~2_FF_NODE re top^clk 3
+.latch n435 top.mul+mul.dummy_mult+fake_mult_one^result~2_FF_NODE re top^clk 3
+.latch n445 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6484 re top^clk 3
+.latch n450 top.pipereg_w26+pipereg1^q~2_FF_NODE re top^clk 3
+.latch n455 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6500 re top^clk 3
+.latch n460 top.pipereg_w32+pipereg^q~4_FF_NODE re top^clk 3
+.latch n465 top.mul+mul.dummy_mult+fake_mult_one^result~4_FF_NODE re top^clk 3
+.latch n480 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6492 re top^clk 3
+.latch n485 top.pipereg_w32+pipereg^q~3_FF_NODE re top^clk 3
+.latch n490 top.mul+mul.dummy_mult+fake_mult_one^result~3_FF_NODE re top^clk 3
+.latch n495 top.lo_reg+lo_reg^q~3_FF_NODE re top^clk 3
+.latch n500 top.mul+mul.dummy_mult+fake_mult_one^result~5_FF_NODE re top^clk 3
+.latch n510 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6508 re top^clk 3
+.latch n515 top.pipereg_w32+pipereg^q~5_FF_NODE re top^clk 3
+.latch n520 top.mul+mul.dummy_mult+fake_mult_one^result~6_FF_NODE re top^clk 3
+.latch n530 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6516 re top^clk 3
+.latch n535 top.pipereg_w5+pipereg2^q~0_FF_NODE re top^clk 3
+.latch n540 top.pipereg_w32+pipereg^q~6_FF_NODE re top^clk 3
+.latch n545 top.mul+mul.dummy_mult+fake_mult_one^result~7_FF_NODE re top^clk 3
+.latch n555 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6524 re top^clk 3
+.latch n560 top.pipereg_w5+pipereg2^q~1_FF_NODE re top^clk 3
+.latch n565 top.pipereg_w32+pipereg^q~7_FF_NODE re top^clk 3
+.latch n570 top.mul+mul.dummy_mult+fake_mult_one^result~8_FF_NODE re top^clk 3
+.latch n575 top.hi_reg+hi_reg^q~0_FF_NODE re top^clk 3
+.latch n580 top.mul+mul.dummy_mult+fake_mult_one^result~9_FF_NODE re top^clk 3
+.latch n585 top.hi_reg+hi_reg^q~1_FF_NODE re top^clk 3
+.latch n590 top.mul+mul.dummy_mult+fake_mult_one^result~10_FF_NODE re top^clk 3
+.latch n595 top.hi_reg+hi_reg^q~2_FF_NODE re top^clk 3
+.latch n600 top.mul+mul.dummy_mult+fake_mult_one^result~11_FF_NODE re top^clk 3
+.latch n605 top.hi_reg+hi_reg^q~3_FF_NODE re top^clk 3
+.latch n610 top.mul+mul.dummy_mult+fake_mult_one^result~12_FF_NODE re top^clk 3
+.latch n615 top.hi_reg+hi_reg^q~4_FF_NODE re top^clk 3
+.latch n620 top.mul+mul.dummy_mult+fake_mult_one^result~13_FF_NODE re top^clk 3
+.latch n625 top.hi_reg+hi_reg^q~5_FF_NODE re top^clk 3
+.latch n630 top.mul+mul.dummy_mult+fake_mult_one^result~14_FF_NODE re top^clk 3
+.latch n635 top.hi_reg+hi_reg^q~6_FF_NODE re top^clk 3
+.latch n640 top.mul+mul.dummy_mult+fake_mult_one^result~15_FF_NODE re top^clk 3
+.latch n645 top.hi_reg+hi_reg^q~7_FF_NODE re top^clk 3
+.latch n650 top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3001 re top^clk 3
+.latch n655 top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3009 re top^clk 3
+.latch n660 top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3017 re top^clk 3
+.latch n665 top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3025 re top^clk 3
+.latch n670 top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3033 re top^clk 3
+.latch n675 top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3041 re top^clk 3
+.latch n680 top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3049 re top^clk 3
+.latch n685 top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3057 re top^clk 3
+.latch n690 top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3065 re top^clk 3
+.latch n700 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6532 re top^clk 3
+.latch n705 top.pipereg_w5+pipereg2^q~2_FF_NODE re top^clk 3
+.latch n710 top.pipereg_w32+pipereg^q~8_FF_NODE re top^clk 3
+.latch n720 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6540 re top^clk 3
+.latch n725 top.pipereg_w5+pipereg2^q~3_FF_NODE re top^clk 3
+.latch n730 top.pipereg_w32+pipereg^q~9_FF_NODE re top^clk 3
+.latch n740 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6548 re top^clk 3
+.latch n745 top.pipereg_w5+pipereg2^q~4_FF_NODE re top^clk 3
+.latch n750 top.pipereg_w32+pipereg^q~10_FF_NODE re top^clk 3
+.latch n760 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6556 re top^clk 3
+.latch n765 top.pipereg_w5+pipereg5^q~0_FF_NODE re top^clk 3
+.latch n770 top.pipereg_w1+pipereg16^q_FF_NODE re top^clk 3
+.latch n775 top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3209 re top^clk 3
+.latch n785 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6676 re top^clk 3
+.latch n790 top^ctrl_mux3to1_zeroer4_d_sel~0_FF_NODE re top^clk 3
+.latch n795 top.pipereg_w5+pipereg5^q~1_FF_NODE re top^clk 3
+.latch n805 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6564 re top^clk 3
+.latch n810 top.pipereg_w32+pipereg^q~12_FF_NODE re top^clk 3
+.latch n820 top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3225 re top^clk 3
+.latch n830 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6692 re top^clk 3
+.latch n835 top^ctrl_mux3to1_zeroer4_d_sel~1_FF_NODE re top^clk 3
+.latch n840 top.pipereg_w5+pipereg5^q~2_FF_NODE re top^clk 3
+.latch n845 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6572 re top^clk 3
+.latch n850 top.pipereg_w32+pipereg^q~13_FF_NODE re top^clk 3
+.latch n865 top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3233 re top^clk 3
+.latch n875 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6700 re top^clk 3
+.latch n880 top^ctrl_zeroer0_en_FF_NODE re top^clk 3
+.latch n895 top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3217 re top^clk 3
+.latch n910 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6708 re top^clk 3
+.latch n915 top^ctrl_zeroer4_en_FF_NODE re top^clk 3
+.latch n920 top.pipereg_w5+pipereg5^q~3_FF_NODE re top^clk 3
+.latch n930 top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3161 re top^clk 3
+.latch n940 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6628 re top^clk 3
+.latch n945 top.pipereg_w5+pipereg5^q~4_FF_NODE re top^clk 3
+.latch n950 top.mul+mul.onecyclestall+staller^T_FF_NODE re top^clk 3
+.latch n960 top^ctrl_branchresolve_en_FF_NODE re top^clk 3
+.latch n965 top.ifetch+ifetch.dummy_counter+pc_reg^q~0_FF_NODE re top^clk 3
+.latch n970 top.ifetch+ifetch.dummy_counter+pc_reg^q~1_FF_NODE re top^clk 3
+.latch n975 top.ifetch+ifetch.dummy_counter+pc_reg^q~2_FF_NODE re top^clk 3
+.latch n980 top.ifetch+ifetch.dummy_counter+pc_reg^q~3_FF_NODE re top^clk 3
+.latch n985 top.ifetch+ifetch.dummy_counter+pc_reg^q~4_FF_NODE re top^clk 3
+.latch n990 top.ifetch+ifetch.dummy_counter+pc_reg^q~5_FF_NODE re top^clk 3
+.latch n995 top.ifetch+ifetch.dummy_counter+pc_reg^q~6_FF_NODE re top^clk 3
+.latch n1000 top.ifetch+ifetch.dummy_counter+pc_reg^q~7_FF_NODE re top^clk 3
+.latch n1005 top.ifetch+ifetch.dummy_counter+pc_reg^q~8_FF_NODE re top^clk 3
+.latch n1010 top.ifetch+ifetch.dummy_counter+pc_reg^q~9_FF_NODE re top^clk 3
+.latch n1015 top.ifetch+ifetch.dummy_counter+pc_reg^q~10_FF_NODE re top^clk 3
+.latch n1020 top.ifetch+ifetch.dummy_counter+pc_reg^q~11_FF_NODE re top^clk 3
+.latch n1025 top.ifetch+ifetch.dummy_counter+pc_reg^q~12_FF_NODE re top^clk 3
+.latch n1030 top.ifetch+ifetch.dummy_counter+pc_reg^q~13_FF_NODE re top^clk 3
+.latch n1035 top.ifetch+ifetch.dummy_counter+pc_reg^q~14_FF_NODE re top^clk 3
+.latch n1040 top.ifetch+ifetch.dummy_counter+pc_reg^q~15_FF_NODE re top^clk 3
+.latch n1045 top.ifetch+ifetch.dummy_counter+pc_reg^q~16_FF_NODE re top^clk 3
+.latch n1050 top.ifetch+ifetch.dummy_counter+pc_reg^q~17_FF_NODE re top^clk 3
+.latch n1055 top.ifetch+ifetch.dummy_counter+pc_reg^q~18_FF_NODE re top^clk 3
+.latch n1060 top.ifetch+ifetch.dummy_counter+pc_reg^q~19_FF_NODE re top^clk 3
+.latch n1065 top.ifetch+ifetch.dummy_counter+pc_reg^q~20_FF_NODE re top^clk 3
+.latch n1070 top.ifetch+ifetch.dummy_counter+pc_reg^q~21_FF_NODE re top^clk 3
+.latch n1075 top.ifetch+ifetch.dummy_counter+pc_reg^q~22_FF_NODE re top^clk 3
+.latch n1080 top.ifetch+ifetch.dummy_counter+pc_reg^q~23_FF_NODE re top^clk 3
+.latch n1085 top.ifetch+ifetch.dummy_counter+pc_reg^q~24_FF_NODE re top^clk 3
+.latch n1090 top.ifetch+ifetch.dummy_counter+pc_reg^q~25_FF_NODE re top^clk 3
+.latch n1095 top.ifetch+ifetch.dummy_counter+pc_reg^q~26_FF_NODE re top^clk 3
+.latch n1100 top.ifetch+ifetch.dummy_counter+pc_reg^q~27_FF_NODE re top^clk 3
+.latch n1105 top.ifetch+ifetch.dummy_counter+pc_reg^q~28_FF_NODE re top^clk 3
+.latch n1110 top.ifetch+ifetch.dummy_counter+pc_reg^q~29_FF_NODE re top^clk 3
+.latch n1115 top.pipereg_w32+pipereg3^q~31_FF_NODE re top^clk 3
+.latch n1120 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6716 re top^clk 3
+.latch n1125 top^ctrl_zeroer_en_FF_NODE re top^clk 3
+.latch n1130 top.pipereg_w6+pipereg11^q~5_FF_NODE re top^clk 3
+.latch n1135 top^ctrl_addersub_op~0_FF_NODE re top^clk 3
+.latch n1140 top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3081 re top^clk 3
+.latch n1145 top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3089 re top^clk 3
+.latch n1150 top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3097 re top^clk 3
+.latch n1155 top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3105 re top^clk 3
+.latch n1160 top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3113 re top^clk 3
+.latch n1170 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6580 re top^clk 3
+.latch n1175 top.pipereg_w32+pipereg^q~14_FF_NODE re top^clk 3
+.latch n1185 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6588 re top^clk 3
+.latch n1190 top.pipereg_w32+pipereg^q~15_FF_NODE re top^clk 3
+.latch n1200 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6596 re top^clk 3
+.latch n1205 top.pipereg_w5+pipereg13^q~0_FF_NODE re top^clk 3
+.latch n1210 top^ctrl_ifetch_op_FF_NODE re top^clk 3
+.latch n1215 top^ctrl_mux3to1_ifetch_load_data_sel~0_FF_NODE re top^clk 3
+.latch n1220 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6604 re top^clk 3
+.latch n1225 top.pipereg_w26+pipereg1^q~17_FF_NODE re top^clk 3
+.latch n1230 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6620 re top^clk 3
+.latch n1235 top.pipereg_w26+pipereg1^q~19_FF_NODE re top^clk 3
+.latch n1240 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6636 re top^clk 3
+.latch n1245 top.pipereg_w26+pipereg1^q~21_FF_NODE re top^clk 3
+.latch n1250 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6652 re top^clk 3
+.latch n1255 top.pipereg_w26+pipereg1^q~23_FF_NODE re top^clk 3
+.latch n1260 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6612 re top^clk 3
+.latch n1265 top.pipereg_w26+pipereg1^q~18_FF_NODE re top^clk 3
+.latch n1270 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6644 re top^clk 3
+.latch n1275 top.pipereg_w26+pipereg1^q~22_FF_NODE re top^clk 3
+.latch n1280 top^ctrl_mux3to1_ifetch_load_data_sel~1_FF_NODE re top^clk 3
+.latch n1285 top^ctrl_mux6to1_ifetch_load_sel~0_FF_NODE re top^clk 3
+.latch n1290 top^ctrl_mux6to1_ifetch_load_sel~1_FF_NODE re top^clk 3
+.latch n1295 top^ctrl_mux6to1_ifetch_load_sel~2_FF_NODE re top^clk 3
+.latch n1300 top^ctrl_ifetch_we_FF_NODE re top^clk 3
+.latch n1305 top.ifetch+ifetch.register_1bit+sync_pcs_up^q_FF_NODE re top^clk 3
+.latch n1310 top.pipereg_w26+pipereg1^q~16_FF_NODE re top^clk 3
+.latch n1350 top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3185 re top^clk 3
+.latch n1355 top.pipereg_w32+pipereg14^q~23_FF_NODE re top^clk 3
+.latch n1365 top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3177 re top^clk 3
+.latch n1370 top.pipereg_w32+pipereg14^q~22_FF_NODE re top^clk 3
+.latch n1380 top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3169 re top^clk 3
+.latch n1385 top.pipereg_w32+pipereg14^q~21_FF_NODE re top^clk 3
+.latch n1395 top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3153 re top^clk 3
+.latch n1400 top.pipereg_w32+pipereg14^q~19_FF_NODE re top^clk 3
+.latch n1410 top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3145 re top^clk 3
+.latch n1415 top.pipereg_w32+pipereg14^q~18_FF_NODE re top^clk 3
+.latch n1425 top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3137 re top^clk 3
+.latch n1430 top.pipereg_w32+pipereg14^q~17_FF_NODE re top^clk 3
+.latch n1440 top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3129 re top^clk 3
+.latch n1445 top.pipereg_w32+pipereg14^q~16_FF_NODE re top^clk 3
+.latch n1450 top.pipereg_w32+pipereg^q~30_FF_NODE re top^clk 3
+.latch n1465 top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3249 re top^clk 3
+.latch n1470 top.pipereg_w32+pipereg14^q~31_FF_NODE re top^clk 3
+.latch n1475 top.pipereg_w32+pipereg^q~31_FF_NODE re top^clk 3
+.latch n1480 top.pipereg_w32+pipereg^q~29_FF_NODE re top^clk 3
+.latch n1485 top.pipereg_w32+pipereg^q~28_FF_NODE re top^clk 3
+.latch n1490 top.pipereg_w32+pipereg^q~27_FF_NODE re top^clk 3
+.latch n1495 top.pipereg_w32+pipereg^q~26_FF_NODE re top^clk 3
+.latch n1500 top.pipereg_w32+pipereg^q~25_FF_NODE re top^clk 3
+.latch n1505 top.pipereg_w32+pipereg^q~24_FF_NODE re top^clk 3
+.latch n1510 top.pipereg_w32+pipereg^q~23_FF_NODE re top^clk 3
+.latch n1515 top.pipereg_w32+pipereg^q~22_FF_NODE re top^clk 3
+.latch n1520 top.pipereg_w32+pipereg^q~21_FF_NODE re top^clk 3
+.latch n1525 top.pipereg_w32+pipereg^q~20_FF_NODE re top^clk 3
+.latch n1530 top.pipereg_w32+pipereg^q~19_FF_NODE re top^clk 3
+.latch n1535 top.pipereg_w32+pipereg^q~18_FF_NODE re top^clk 3
+.latch n1540 top.pipereg_w32+pipereg^q~17_FF_NODE re top^clk 3
+.latch n1545 top.pipereg_w32+pipereg^q~16_FF_NODE re top^clk 3
+.latch n1550 top.pipereg_w26+pipereg1^q~15_FF_NODE re top^clk 3
+.latch n1560 top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3121 re top^clk 3
+.latch n1565 top.pipereg_w32+pipereg14^q~15_FF_NODE re top^clk 3
+.latch n1570 top.pipereg_w26+pipereg1^q~14_FF_NODE re top^clk 3
+.latch n1580 top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3241 re top^clk 3
+.latch n1585 top.pipereg_w32+pipereg14^q~14_FF_NODE re top^clk 3
+.latch n1590 top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3073 re top^clk 3
+.latch n1595 top^ctrl_data_mem_op~0_FF_NODE re top^clk 3
+.latch n1600 top^ctrl_data_mem_op~1_FF_NODE re top^clk 3
+.latch n1605 top^ctrl_data_mem_op~3_FF_NODE re top^clk 3
+.latch n1610 top.data_mem+data_mem.onecyclestall+staller^T_FF_NODE re top^clk 3
+.latch n1615 top^ctrl_hi_reg_en_FF_NODE re top^clk 3
+.latch n1740 top^ctrl_lo_reg_en_FF_NODE re top^clk 3
+.latch n1745 top.lo_reg+lo_reg^q~0_FF_NODE re top^clk 3
+.latch n1750 top.lo_reg+lo_reg^q~1_FF_NODE re top^clk 3
+.latch n1805 top.lo_reg+lo_reg^q~2_FF_NODE re top^clk 3
+.latch n1870 top.lo_reg+lo_reg^q~4_FF_NODE re top^clk 3
+.latch n1875 top.lo_reg+lo_reg^q~5_FF_NODE re top^clk 3
+.latch n1880 top.lo_reg+lo_reg^q~6_FF_NODE re top^clk 3
+.latch n1885 top.lo_reg+lo_reg^q~7_FF_NODE re top^clk 3
+.latch n1900 top^ctrl_ifetch_en_FF_NODE re top^clk 3
+.latch n1905 top.pipereg_w6+pipereg12^q~0_FF_NODE re top^clk 3
+.latch n1910 top^ctrl_logic_unit_op~0_FF_NODE re top^clk 3
+.latch n1915 top^ctrl_logic_unit_op~1_FF_NODE re top^clk 3
+.latch n1920 top^ctrl_mul_op~0_FF_NODE re top^clk 3
+.latch n1925 top^ctrl_mul_op~2_FF_NODE re top^clk 3
+.latch n1930 top^ctrl_mux2to1_addersub_opA_sel_FF_NODE re top^clk 3
+.latch n1935 top^ctrl_mux2to1_mul_opA_sel_FF_NODE re top^clk 3
+.latch n1940 top^ctrl_mux3to1_mul_sa_sel~0_FF_NODE re top^clk 3
+.latch n1945 top^ctrl_mux3to1_mul_sa_sel~1_FF_NODE re top^clk 3
+.latch n1950 top^ctrl_mux3to1_nop6_d_sel~0_FF_NODE re top^clk 3
+.latch n1955 top^ctrl_mux3to1_nop6_d_sel~1_FF_NODE re top^clk 3
+.latch n1960 top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE re top^clk 3
+.latch n1965 top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE re top^clk 3
+.latch n1970 top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE re top^clk 3
+.latch n1975 top^ctrl_mul_start_FF_NODE re top^clk 3
+.latch n1980 top.pipereg_w6+pipereg12^q~1_FF_NODE re top^clk 3
+.latch n1985 top.pipereg_w6+pipereg12^q~2_FF_NODE re top^clk 3
+.latch n1990 top.pipereg_w6+pipereg12^q~3_FF_NODE re top^clk 3
+.latch n1995 top.pipereg_w6+pipereg12^q~4_FF_NODE re top^clk 3
+.latch n2000 top.pipereg_w6+pipereg12^q~5_FF_NODE re top^clk 3
+.latch n2005 top.pipereg_w6+pipereg11^q~0_FF_NODE re top^clk 3
+.latch n2010 top.pipereg_w6+pipereg11^q~1_FF_NODE re top^clk 3
+.latch n2015 top.pipereg_w6+pipereg11^q~2_FF_NODE re top^clk 3
+.latch n2020 top.pipereg_w6+pipereg11^q~3_FF_NODE re top^clk 3
+.latch n2025 top.pipereg_w6+pipereg11^q~4_FF_NODE re top^clk 3
+.latch n2030 top.pipereg_w26+pipereg1^q~0_FF_NODE re top^clk 3
+.latch n2035 top.pipereg_w26+pipereg1^q~1_FF_NODE re top^clk 3
+.latch n2040 top.pipereg_w26+pipereg1^q~10_FF_NODE re top^clk 3
+.latch n2045 top.pipereg_w26+pipereg1^q~11_FF_NODE re top^clk 3
+.latch n2050 top.pipereg_w26+pipereg1^q~12_FF_NODE re top^clk 3
+.latch n2055 top.pipereg_w26+pipereg1^q~13_FF_NODE re top^clk 3
+.latch n2060 top.pipereg_w26+pipereg1^q~20_FF_NODE re top^clk 3
+.latch n2065 top.pipereg_w26+pipereg1^q~24_FF_NODE re top^clk 3
+.latch n2070 top.pipereg_w26+pipereg1^q~3_FF_NODE re top^clk 3
+.latch n2075 top.pipereg_w26+pipereg1^q~4_FF_NODE re top^clk 3
+.latch n2080 top.pipereg_w26+pipereg1^q~5_FF_NODE re top^clk 3
+.latch n2085 top.pipereg_w26+pipereg1^q~6_FF_NODE re top^clk 3
+.latch n2090 top.pipereg_w26+pipereg1^q~7_FF_NODE re top^clk 3
+.latch n2095 top.pipereg_w26+pipereg1^q~8_FF_NODE re top^clk 3
+.latch n2100 top.pipereg_w26+pipereg1^q~9_FF_NODE re top^clk 3
+.latch n2115 top.pipereg_w32+pipereg3^q~10_FF_NODE re top^clk 3
+.latch n2120 top.pipereg_w32+pipereg3^q~11_FF_NODE re top^clk 3
+.latch n2125 top.pipereg_w32+pipereg3^q~12_FF_NODE re top^clk 3
+.latch n2130 top.pipereg_w32+pipereg3^q~13_FF_NODE re top^clk 3
+.latch n2135 top.pipereg_w32+pipereg3^q~14_FF_NODE re top^clk 3
+.latch n2140 top.pipereg_w32+pipereg3^q~15_FF_NODE re top^clk 3
+.latch n2145 top.pipereg_w32+pipereg3^q~16_FF_NODE re top^clk 3
+.latch n2150 top.pipereg_w32+pipereg3^q~17_FF_NODE re top^clk 3
+.latch n2155 top.pipereg_w32+pipereg3^q~18_FF_NODE re top^clk 3
+.latch n2160 top.pipereg_w32+pipereg3^q~19_FF_NODE re top^clk 3
+.latch n2165 top.pipereg_w32+pipereg3^q~2_FF_NODE re top^clk 3
+.latch n2170 top.pipereg_w32+pipereg3^q~20_FF_NODE re top^clk 3
+.latch n2175 top.pipereg_w32+pipereg3^q~21_FF_NODE re top^clk 3
+.latch n2180 top.pipereg_w32+pipereg3^q~22_FF_NODE re top^clk 3
+.latch n2185 top.pipereg_w32+pipereg3^q~23_FF_NODE re top^clk 3
+.latch n2190 top.pipereg_w32+pipereg3^q~24_FF_NODE re top^clk 3
+.latch n2195 top.pipereg_w32+pipereg3^q~25_FF_NODE re top^clk 3
+.latch n2200 top.pipereg_w32+pipereg3^q~26_FF_NODE re top^clk 3
+.latch n2205 top.pipereg_w32+pipereg3^q~27_FF_NODE re top^clk 3
+.latch n2210 top.pipereg_w32+pipereg3^q~28_FF_NODE re top^clk 3
+.latch n2215 top.pipereg_w32+pipereg3^q~29_FF_NODE re top^clk 3
+.latch n2220 top.pipereg_w32+pipereg3^q~3_FF_NODE re top^clk 3
+.latch n2225 top.pipereg_w32+pipereg3^q~30_FF_NODE re top^clk 3
+.latch n2230 top.pipereg_w32+pipereg3^q~4_FF_NODE re top^clk 3
+.latch n2235 top.pipereg_w32+pipereg3^q~5_FF_NODE re top^clk 3
+.latch n2240 top.pipereg_w32+pipereg3^q~6_FF_NODE re top^clk 3
+.latch n2245 top.pipereg_w32+pipereg3^q~7_FF_NODE re top^clk 3
+.latch n2250 top.pipereg_w32+pipereg3^q~8_FF_NODE re top^clk 3
+.latch n2255 top.pipereg_w32+pipereg3^q~9_FF_NODE re top^clk 3
+.latch n2395 top.pipereg_w32+pipereg^q~11_FF_NODE re top^clk 3
+.latch n2400 top.pipereg_w32+pipereg14^q~0_FF_NODE re top^clk 3
+.latch n2405 top.pipereg_w32+pipereg14^q~1_FF_NODE re top^clk 3
+.latch n2410 top.pipereg_w32+pipereg14^q~10_FF_NODE re top^clk 3
+.latch n2415 top.pipereg_w32+pipereg14^q~11_FF_NODE re top^clk 3
+.latch n2420 top.pipereg_w32+pipereg14^q~12_FF_NODE re top^clk 3
+.latch n2425 top.pipereg_w32+pipereg14^q~13_FF_NODE re top^clk 3
+.latch n2430 top.pipereg_w32+pipereg14^q~2_FF_NODE re top^clk 3
+.latch n2435 top.pipereg_w32+pipereg14^q~20_FF_NODE re top^clk 3
+.latch n2440 top.pipereg_w32+pipereg14^q~24_FF_NODE re top^clk 3
+.latch n2445 top.pipereg_w32+pipereg14^q~25_FF_NODE re top^clk 3
+.latch n2450 top.pipereg_w32+pipereg14^q~26_FF_NODE re top^clk 3
+.latch n2455 top.pipereg_w32+pipereg14^q~27_FF_NODE re top^clk 3
+.latch n2460 top.pipereg_w32+pipereg14^q~28_FF_NODE re top^clk 3
+.latch n2465 top.pipereg_w32+pipereg14^q~29_FF_NODE re top^clk 3
+.latch n2470 top.pipereg_w32+pipereg14^q~3_FF_NODE re top^clk 3
+.latch n2475 top.pipereg_w32+pipereg14^q~30_FF_NODE re top^clk 3
+.latch n2480 top.pipereg_w32+pipereg14^q~4_FF_NODE re top^clk 3
+.latch n2485 top.pipereg_w32+pipereg14^q~5_FF_NODE re top^clk 3
+.latch n2490 top.pipereg_w32+pipereg14^q~6_FF_NODE re top^clk 3
+.latch n2495 top.pipereg_w32+pipereg14^q~7_FF_NODE re top^clk 3
+.latch n2500 top.pipereg_w32+pipereg14^q~8_FF_NODE re top^clk 3
+.latch n2505 top.pipereg_w32+pipereg14^q~9_FF_NODE re top^clk 3
+
+.names top.pipereg_w1+pipereg16^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~0_FF_NODE top^nop7_q~0
+11 1
+.names top.pipereg_w1+pipereg16^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~1_FF_NODE top^nop7_q~1
+11 1
+.names top.pipereg_w1+pipereg16^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~2_FF_NODE top^nop7_q~2
+11 1
+.names top.pipereg_w1+pipereg16^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~3_FF_NODE top^nop7_q~3
+11 1
+.names top.pipereg_w1+pipereg16^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~4_FF_NODE top^nop7_q~4
+11 1
+.names top.pipereg_w1+pipereg16^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~5_FF_NODE top^nop7_q~5
+11 1
+.names top.pipereg_w1+pipereg16^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~6_FF_NODE top^nop7_q~6
+11 1
+.names top.pipereg_w1+pipereg16^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~7_FF_NODE top^nop7_q~7
+11 1
+.names top.pipereg_w1+pipereg16^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~8_FF_NODE top^nop7_q~8
+11 1
+.names top.pipereg_w1+pipereg16^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~9_FF_NODE top^nop7_q~9
+11 1
+.names top.pipereg_w1+pipereg16^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~10_FF_NODE top^nop7_q~10
+11 1
+.names top.pipereg_w1+pipereg16^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~11_FF_NODE top^nop7_q~11
+11 1
+.names top.pipereg_w1+pipereg16^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~12_FF_NODE top^nop7_q~12
+11 1
+.names top.pipereg_w1+pipereg16^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~13_FF_NODE top^nop7_q~13
+11 1
+.names top.pipereg_w1+pipereg16^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~14_FF_NODE top^nop7_q~14
+11 1
+.names top.pipereg_w1+pipereg16^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~15_FF_NODE top^nop7_q~15
+11 1
+.names top.pipereg_w1+pipereg16^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~16_FF_NODE top^nop7_q~16
+11 1
+.names top.pipereg_w1+pipereg16^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~17_FF_NODE top^nop7_q~17
+11 1
+.names top.pipereg_w1+pipereg16^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~18_FF_NODE top^nop7_q~18
+11 1
+.names top.pipereg_w1+pipereg16^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~19_FF_NODE top^nop7_q~19
+11 1
+.names top.pipereg_w1+pipereg16^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~20_FF_NODE top^nop7_q~20
+11 1
+.names top.pipereg_w1+pipereg16^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~21_FF_NODE top^nop7_q~21
+11 1
+.names top.pipereg_w1+pipereg16^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~22_FF_NODE top^nop7_q~22
+11 1
+.names top.pipereg_w1+pipereg16^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~23_FF_NODE top^nop7_q~23
+11 1
+.names top.pipereg_w1+pipereg16^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~24_FF_NODE top^nop7_q~24
+11 1
+.names top.pipereg_w1+pipereg16^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~25_FF_NODE top^nop7_q~25
+11 1
+.names top.pipereg_w1+pipereg16^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~26_FF_NODE top^nop7_q~26
+11 1
+.names top.pipereg_w1+pipereg16^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~27_FF_NODE top^nop7_q~27
+11 1
+.names top.pipereg_w1+pipereg16^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~28_FF_NODE top^nop7_q~28
+11 1
+.names top.pipereg_w1+pipereg16^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~29_FF_NODE top^nop7_q~29
+11 1
+.names top.pipereg_w1+pipereg16^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~30_FF_NODE top^nop7_q~30
+11 1
+.names top.pipereg_w1+pipereg16^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~31_FF_NODE top^nop7_q~31
+11 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6468 \
+ top^boot_idata~0 n1126 n335
+-11 1
+1-0 1
+.names top^boot_iaddr~30 top^boot_iaddr~31 n1133 n1127 n1131 top^boot_iwe \
+ n1126
+001111 1
+.names top^boot_iaddr~10 top^boot_iaddr~11 top^boot_iaddr~12 \
+ top^boot_iaddr~13 n1128 n1130_1 n1127
+000011 1
+.names top^boot_iaddr~18 top^boot_iaddr~19 top^boot_iaddr~20 \
+ top^boot_iaddr~21 n1129 n1128
+00001 1
+.names top^boot_iaddr~14 top^boot_iaddr~15 top^boot_iaddr~16 \
+ top^boot_iaddr~17 n1129
+0000 1
+.names top^boot_iaddr~6 top^boot_iaddr~7 top^boot_iaddr~8 top^boot_iaddr~9 \
+ n1130_1
+0000 1
+.names top^boot_iaddr~26 top^boot_iaddr~27 top^boot_iaddr~28 \
+ top^boot_iaddr~29 n1132 n1131
+00001 1
+.names top^boot_iaddr~22 top^boot_iaddr~23 top^boot_iaddr~24 \
+ top^boot_iaddr~25 n1132
+0000 1
+.names top^boot_iaddr~0 top^boot_iaddr~1 top^boot_iaddr~2 top^boot_iaddr~3 \
+ top^boot_iaddr~4 top^boot_iaddr~5 n1133
+000000 1
+.names top.pipereg_w32+pipereg^q~0_FF_NODE n1135_1 n1900 top^resetn n340
+-111 1
+1-01 1
+.names n1136 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6468 \
+ n1135_1
+11 1
+.names n1189 n1191 n1213 n1137 n1215_1 n1152 n1136
+----11 1
+1111-0 1
+.names n1138 n1147 n1149 n1137
+111 1
+.names n1145_1 n1139 top.pipereg_w32+pipereg^q~13_FF_NODE \
+ top.pipereg_w32+pipereg3^q~15_FF_NODE n1146 n1138
+-0010 1
+-0100 1
+-1000 1
+-1110 1
+0---0 1
+.names n1140_1 top.pipereg_w32+pipereg^q~12_FF_NODE \
+ top.pipereg_w32+pipereg3^q~14_FF_NODE \
+ top.pipereg_w32+pipereg3^q~13_FF_NODE top.pipereg_w32+pipereg^q~11_FF_NODE \
+ n1139
+--000 1
+-0-00 1
+-00-- 1
+1-0-0 1
+1-00- 1
+10--0 1
+10-0- 1
+.names n1141 top.pipereg_w32+pipereg^q~10_FF_NODE \
+ top.pipereg_w32+pipereg3^q~12_FF_NODE top.pipereg_w32+pipereg^q~9_FF_NODE \
+ top.pipereg_w32+pipereg3^q~11_FF_NODE n1140_1
+--000 1
+-0-00 1
+-00-- 1
+1-0-0 1
+1-00- 1
+10--0 1
+10-0- 1
+.names n1142 top.pipereg_w32+pipereg^q~8_FF_NODE \
+ top.pipereg_w32+pipereg3^q~10_FF_NODE top.pipereg_w32+pipereg^q~7_FF_NODE \
+ top.pipereg_w32+pipereg3^q~9_FF_NODE n1141
+--000 1
+-0-00 1
+-00-- 1
+1-0-0 1
+1-00- 1
+10--0 1
+10-0- 1
+.names n1143 top.pipereg_w32+pipereg^q~6_FF_NODE \
+ top.pipereg_w32+pipereg3^q~8_FF_NODE top.pipereg_w32+pipereg^q~5_FF_NODE \
+ top.pipereg_w32+pipereg3^q~7_FF_NODE n1142
+--000 1
+-0-00 1
+-00-- 1
+1-0-0 1
+1-00- 1
+10--0 1
+10-0- 1
+.names n1144 top.pipereg_w32+pipereg^q~4_FF_NODE \
+ top.pipereg_w32+pipereg3^q~6_FF_NODE top.pipereg_w32+pipereg^q~3_FF_NODE \
+ top.pipereg_w32+pipereg3^q~5_FF_NODE n1143
+--000 1
+-0-00 1
+-00-- 1
+1-0-0 1
+1-00- 1
+10--0 1
+10-0- 1
+.names top.pipereg_w32+pipereg^q~1_FF_NODE \
+ top.pipereg_w32+pipereg^q~2_FF_NODE top.pipereg_w32+pipereg3^q~4_FF_NODE \
+ top.pipereg_w32+pipereg3^q~3_FF_NODE top.pipereg_w32+pipereg3^q~2_FF_NODE \
+ top.pipereg_w32+pipereg^q~0_FF_NODE n1144
+--1111 0
+-1-111 0
+-11--- 0
+1-1-11 0
+1-11-- 0
+11--11 0
+11-1-- 0
+.names top^ctrl_mux3to1_ifetch_load_data_sel~0_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~1_FF_NODE n1145_1
+01 1
+.names top.pipereg_w26+pipereg1^q~13_FF_NODE \
+ top.pipereg_w32+pipereg14^q~15_FF_NODE top.pipereg_w1+pipereg15^q_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~1_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~0_FF_NODE n1146
+-1100 1
+-1111 1
+1--01 1
+.names top.pipereg_w26+pipereg1^q~12_FF_NODE n1148 \
+ top.pipereg_w32+pipereg14^q~14_FF_NODE top.pipereg_w1+pipereg15^q_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~1_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~0_FF_NODE n1147
+--1100 0
+--1111 0
+-1---- 0
+1---01 0
+.names n1140_1 top.pipereg_w32+pipereg3^q~13_FF_NODE \
+ top.pipereg_w32+pipereg^q~11_FF_NODE top.pipereg_w32+pipereg^q~12_FF_NODE \
+ top.pipereg_w32+pipereg3^q~14_FF_NODE n1145_1 n1148
+-00011 1
+-00101 1
+-11001 1
+-11111 1
+0-1001 1
+0-1111 1
+01-001 1
+01-111 1
+1-0011 1
+1-0101 1
+10-011 1
+10-101 1
+.names top.pipereg_w26+pipereg1^q~11_FF_NODE n1150_1 n1140_1 n1151 \
+ top^ctrl_mux3to1_ifetch_load_data_sel~0_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~1_FF_NODE n1149
+--0101 1
+--1001 1
+-0--00 1
+-0--11 1
+0---10 1
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~13_FF_NODE n1150_1
+11 1
+.names top.pipereg_w32+pipereg3^q~13_FF_NODE \
+ top.pipereg_w32+pipereg^q~11_FF_NODE n1151
+01 1
+10 1
+.names top^ctrl_branchresolve_en_FF_NODE n1153 n1168 n1187 \
+ top^ctrl_ifetch_op_FF_NODE n1188 n1152
+--0-01 1
+--1100 1
+-0-000 1
+0--100 1
+.names top^ctrl_mux6to1_ifetch_load_sel~0_FF_NODE n1154 \
+ top^ctrl_mux6to1_ifetch_load_sel~2_FF_NODE \
+ top^ctrl_mux6to1_ifetch_load_sel~1_FF_NODE n1166 \
+ top^ctrl_branchresolve_en_FF_NODE n1153
+--0111 1
+-0-001 1
+-01-01 1
+1-0001 1
+1101-- 1
+.names n1166 n1162 n1164 n1155_1 n1167 top^ctrl_branchresolve_en_FF_NODE \
+ n1154
+011111 1
+.names top.pipereg_w32+pipereg14^q~24_FF_NODE \
+ top.pipereg_w32+pipereg14^q~25_FF_NODE \
+ top.pipereg_w32+pipereg14^q~29_FF_NODE top.pipereg_w1+pipereg15^q_FF_NODE \
+ n1156 n1161 n1155_1
+---011 1
+000-11 1
+.names n1157 n1158 n1159 n1160_1 n1156
+0000 1
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~0_FF_NODE n1157
+11 1
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~1_FF_NODE n1158
+11 1
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~3_FF_NODE n1159
+11 1
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~4_FF_NODE n1160_1
+11 1
+.names top.pipereg_w32+pipereg14^q~21_FF_NODE \
+ top.pipereg_w32+pipereg14^q~17_FF_NODE \
+ top.pipereg_w32+pipereg14^q~5_FF_NODE \
+ top.pipereg_w32+pipereg14^q~9_FF_NODE top.pipereg_w1+pipereg15^q_FF_NODE \
+ n1161
+----0 1
+0000- 1
+.names top.pipereg_w32+pipereg14^q~16_FF_NODE \
+ top.pipereg_w32+pipereg14^q~10_FF_NODE \
+ top.pipereg_w32+pipereg14^q~26_FF_NODE \
+ top.pipereg_w32+pipereg14^q~8_FF_NODE top.pipereg_w1+pipereg15^q_FF_NODE \
+ n1163 n1162
+----01 1
+0000-1 1
+.names top.pipereg_w32+pipereg14^q~22_FF_NODE \
+ top.pipereg_w32+pipereg14^q~15_FF_NODE \
+ top.pipereg_w32+pipereg14^q~14_FF_NODE \
+ top.pipereg_w32+pipereg14^q~12_FF_NODE top.pipereg_w1+pipereg15^q_FF_NODE \
+ n1163
+----0 1
+0000- 1
+.names top.pipereg_w32+pipereg14^q~19_FF_NODE \
+ top.pipereg_w32+pipereg14^q~18_FF_NODE \
+ top.pipereg_w32+pipereg14^q~11_FF_NODE \
+ top.pipereg_w32+pipereg14^q~20_FF_NODE top.pipereg_w1+pipereg15^q_FF_NODE \
+ n1165 n1164
+----01 1
+0000-1 1
+.names top.pipereg_w32+pipereg14^q~13_FF_NODE \
+ top.pipereg_w32+pipereg14^q~27_FF_NODE \
+ top.pipereg_w32+pipereg14^q~28_FF_NODE \
+ top.pipereg_w32+pipereg14^q~30_FF_NODE top.pipereg_w1+pipereg15^q_FF_NODE \
+ n1165
+----0 1
+0000- 1
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~31_FF_NODE n1166
+11 1
+.names top.pipereg_w32+pipereg14^q~23_FF_NODE \
+ top.pipereg_w32+pipereg14^q~2_FF_NODE \
+ top.pipereg_w32+pipereg14^q~6_FF_NODE \
+ top.pipereg_w32+pipereg14^q~7_FF_NODE top.pipereg_w1+pipereg15^q_FF_NODE \
+ n1167
+----0 1
+0000- 1
+.names n1169 n1182 n1184 n1185_1 n1186 n1168
+11111 1
+.names n1170_1 n1173 n1178 n1180 n1181 n1169
+11111 1
+.names top.pipereg_w32+pipereg14^q~20_FF_NODE \
+ top.pipereg_w32+pipereg14^q~5_FF_NODE \
+ top.pipereg_w32+pipereg14^q~6_FF_NODE top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w1+pipereg16^q_FF_NODE n1171 n1170_1
+---001 1
+---111 1
+--0-01 1
+00--11 1
+.names top.pipereg_w32+pipereg14^q~21_FF_NODE \
+ top.pipereg_w32+pipereg14^q~4_FF_NODE top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~19_FF_NODE top.pipereg_w1+pipereg16^q_FF_NODE \
+ n1172 n1171
+--0-01 1
+--1-11 1
+-0-011 1
+0--001 1
+.names top.pipereg_w32+pipereg14^q~18_FF_NODE \
+ top.pipereg_w32+pipereg14^q~11_FF_NODE \
+ top.pipereg_w32+pipereg14^q~7_FF_NODE \
+ top.pipereg_w32+pipereg14^q~9_FF_NODE top.pipereg_w1+pipereg16^q_FF_NODE \
+ top.pipereg_w1+pipereg15^q_FF_NODE n1172
+-----1 1
+----0- 1
+0000-- 1
+.names n1174 n1175_1 n1176 n1177 n1173
+1111 1
+.names top.pipereg_w32+pipereg14^q~22_FF_NODE \
+ top.pipereg_w32+pipereg14^q~20_FF_NODE \
+ top.pipereg_w32+pipereg14^q~5_FF_NODE \
+ top.pipereg_w32+pipereg14^q~17_FF_NODE top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w1+pipereg16^q_FF_NODE n1174
+----00 1
+----11 1
+---0-1 1
+000--0 1
+.names top.pipereg_w32+pipereg14^q~1_FF_NODE \
+ top.pipereg_w32+pipereg14^q~26_FF_NODE \
+ top.pipereg_w32+pipereg14^q~30_FF_NODE \
+ top.pipereg_w32+pipereg14^q~4_FF_NODE top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w1+pipereg16^q_FF_NODE n1175_1
+----00 1
+----11 1
+---0-0 1
+000--1 1
+.names top.pipereg_w32+pipereg14^q~29_FF_NODE \
+ top.pipereg_w32+pipereg14^q~9_FF_NODE \
+ top.pipereg_w32+pipereg14^q~21_FF_NODE \
+ top.pipereg_w32+pipereg14^q~6_FF_NODE top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w1+pipereg16^q_FF_NODE n1176
+----00 1
+----11 1
+--00-1 1
+00---0 1
+.names top.pipereg_w32+pipereg14^q~16_FF_NODE \
+ top.pipereg_w32+pipereg14^q~7_FF_NODE \
+ top.pipereg_w32+pipereg14^q~13_FF_NODE \
+ top.pipereg_w32+pipereg14^q~29_FF_NODE top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w1+pipereg16^q_FF_NODE n1177
+----00 1
+----11 1
+--00-1 1
+00---0 1
+.names top.pipereg_w32+pipereg14^q~3_FF_NODE \
+ top.pipereg_w32+pipereg14^q~24_FF_NODE top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~28_FF_NODE top.pipereg_w1+pipereg16^q_FF_NODE \
+ n1179 n1178
+--0-01 1
+--1-11 1
+-0-011 1
+0--001 1
+.names top.pipereg_w32+pipereg14^q~11_FF_NODE \
+ top.pipereg_w32+pipereg14^q~24_FF_NODE top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~27_FF_NODE top.pipereg_w1+pipereg16^q_FF_NODE \
+ n1179
+---01 1
+--0-0 1
+--1-1 1
+00-0- 1
+.names top.pipereg_w32+pipereg14^q~17_FF_NODE \
+ top.pipereg_w32+pipereg14^q~12_FF_NODE \
+ top.pipereg_w32+pipereg14^q~26_FF_NODE \
+ top.pipereg_w32+pipereg14^q~3_FF_NODE top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w1+pipereg16^q_FF_NODE n1180
+----00 1
+----11 1
+---0-1 1
+000--0 1
+.names top.pipereg_w32+pipereg14^q~1_FF_NODE \
+ top.pipereg_w32+pipereg14^q~13_FF_NODE \
+ top.pipereg_w32+pipereg14^q~2_FF_NODE \
+ top.pipereg_w32+pipereg14^q~8_FF_NODE top.pipereg_w1+pipereg16^q_FF_NODE \
+ top.pipereg_w1+pipereg15^q_FF_NODE n1181
+-----0 1
+----1- 1
+0000-- 1
+.names top.pipereg_w32+pipereg14^q~31_FF_NODE \
+ top.pipereg_w32+pipereg14^q~0_FF_NODE top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~10_FF_NODE top.pipereg_w1+pipereg16^q_FF_NODE \
+ n1183 n1182
+---011 1
+--0-01 1
+--1-11 1
+00-0-1 1
+.names top.pipereg_w32+pipereg14^q~15_FF_NODE \
+ top.pipereg_w32+pipereg14^q~0_FF_NODE \
+ top.pipereg_w32+pipereg14^q~12_FF_NODE \
+ top.pipereg_w32+pipereg14^q~25_FF_NODE top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w1+pipereg16^q_FF_NODE n1183
+----00 1
+----11 1
+---0-0 1
+000--1 1
+.names top.pipereg_w32+pipereg14^q~22_FF_NODE \
+ top.pipereg_w1+pipereg15^q_FF_NODE top.pipereg_w32+pipereg14^q~23_FF_NODE \
+ top.pipereg_w32+pipereg14^q~14_FF_NODE top.pipereg_w1+pipereg16^q_FF_NODE \
+ top^ctrl_branchresolve_en_FF_NODE n1184
+--0001 1
+-0--01 1
+-1--11 1
+0-00-1 1
+.names top.pipereg_w32+pipereg14^q~16_FF_NODE \
+ top.pipereg_w32+pipereg14^q~25_FF_NODE \
+ top.pipereg_w32+pipereg14^q~8_FF_NODE \
+ top.pipereg_w32+pipereg14^q~15_FF_NODE top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w1+pipereg16^q_FF_NODE n1185_1
+----00 1
+----11 1
+---0-0 1
+000--1 1
+.names top.pipereg_w32+pipereg14^q~18_FF_NODE \
+ top.pipereg_w32+pipereg14^q~30_FF_NODE \
+ top.pipereg_w32+pipereg14^q~31_FF_NODE \
+ top.pipereg_w32+pipereg14^q~2_FF_NODE top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w1+pipereg16^q_FF_NODE n1186
+----00 1
+----11 1
+--00-1 1
+00---0 1
+.names top^ctrl_mux6to1_ifetch_load_sel~0_FF_NODE \
+ top^ctrl_mux6to1_ifetch_load_sel~1_FF_NODE \
+ top^ctrl_mux6to1_ifetch_load_sel~2_FF_NODE n1187
+001 1
+.names top^ctrl_mux6to1_ifetch_load_sel~1_FF_NODE \
+ top^ctrl_mux6to1_ifetch_load_sel~0_FF_NODE \
+ top^ctrl_mux6to1_ifetch_load_sel~2_FF_NODE n1188
+011 1
+.names top.pipereg_w26+pipereg1^q~10_FF_NODE n1190_1 \
+ top.pipereg_w1+pipereg15^q_FF_NODE top.pipereg_w32+pipereg14^q~12_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~1_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~0_FF_NODE n1189
+--1100 0
+--1111 0
+-1---- 0
+1---01 0
+.names n1141 top.pipereg_w32+pipereg^q~9_FF_NODE \
+ top.pipereg_w32+pipereg3^q~11_FF_NODE top.pipereg_w32+pipereg^q~10_FF_NODE \
+ top.pipereg_w32+pipereg3^q~12_FF_NODE n1145_1 n1190_1
+-00011 1
+-00101 1
+-11001 1
+-11111 1
+0-1001 1
+0-1111 1
+01-001 1
+01-111 1
+1-0011 1
+1-0101 1
+10-011 1
+10-101 1
+.names n1192 n1194 n1196 n1198 n1191
+1111 1
+.names top.pipereg_w26+pipereg1^q~8_FF_NODE n1193 \
+ top.pipereg_w1+pipereg15^q_FF_NODE top.pipereg_w32+pipereg14^q~10_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~1_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~0_FF_NODE n1192
+--1100 0
+--1111 0
+-1---- 0
+1---01 0
+.names n1142 top.pipereg_w32+pipereg^q~7_FF_NODE \
+ top.pipereg_w32+pipereg3^q~9_FF_NODE top.pipereg_w32+pipereg^q~8_FF_NODE \
+ top.pipereg_w32+pipereg3^q~10_FF_NODE n1145_1 n1193
+-00011 1
+-00101 1
+-11001 1
+-11111 1
+0-1001 1
+0-1111 1
+01-001 1
+01-111 1
+1-0011 1
+1-0101 1
+10-011 1
+10-101 1
+.names n1145_1 n1142 top.pipereg_w32+pipereg^q~7_FF_NODE \
+ top.pipereg_w32+pipereg3^q~9_FF_NODE n1195 n1194
+-0010 1
+-0100 1
+-1000 1
+-1110 1
+0---0 1
+.names top.pipereg_w26+pipereg1^q~7_FF_NODE \
+ top.pipereg_w1+pipereg15^q_FF_NODE top.pipereg_w32+pipereg14^q~9_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~1_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~0_FF_NODE n1195
+-1100 1
+-1111 1
+1--01 1
+.names top.pipereg_w26+pipereg1^q~6_FF_NODE n1197 \
+ top.pipereg_w1+pipereg15^q_FF_NODE top.pipereg_w32+pipereg14^q~8_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~1_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~0_FF_NODE n1196
+--1100 0
+--1111 0
+-1---- 0
+1---01 0
+.names n1143 top.pipereg_w32+pipereg^q~5_FF_NODE \
+ top.pipereg_w32+pipereg3^q~7_FF_NODE top.pipereg_w32+pipereg^q~6_FF_NODE \
+ top.pipereg_w32+pipereg3^q~8_FF_NODE n1145_1 n1197
+-00011 1
+-00101 1
+-11001 1
+-11111 1
+0-1001 1
+0-1111 1
+01-001 1
+01-111 1
+1-0011 1
+1-0101 1
+10-011 1
+10-101 1
+.names n1208 n1201 n1204 n1206 n1199 n1210_1 n1198
+011111 1
+.names n1145_1 n1143 top.pipereg_w32+pipereg^q~5_FF_NODE \
+ top.pipereg_w32+pipereg3^q~7_FF_NODE n1200_1 n1199
+-0010 1
+-0100 1
+-1000 1
+-1110 1
+0---0 1
+.names top.pipereg_w26+pipereg1^q~5_FF_NODE \
+ top.pipereg_w1+pipereg15^q_FF_NODE top.pipereg_w32+pipereg14^q~7_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~1_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~0_FF_NODE n1200_1
+-1100 1
+-1111 1
+1--01 1
+.names top.pipereg_w26+pipereg1^q~4_FF_NODE n1203 \
+ top^ctrl_mux3to1_ifetch_load_data_sel~1_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~0_FF_NODE n1202 n1201
+--100 1
+-0-00 1
+-01-0 1
+0-010 1
+.names n1144 top.pipereg_w32+pipereg^q~3_FF_NODE \
+ top.pipereg_w32+pipereg3^q~5_FF_NODE top.pipereg_w32+pipereg^q~4_FF_NODE \
+ top.pipereg_w32+pipereg3^q~6_FF_NODE n1145_1 n1202
+-00011 1
+-00101 1
+-11001 1
+-11111 1
+0-1001 1
+0-1111 1
+01-001 1
+01-111 1
+1-0011 1
+1-0101 1
+10-011 1
+10-101 1
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~6_FF_NODE n1203
+11 1
+.names top.pipereg_w26+pipereg1^q~1_FF_NODE n1159 \
+ top^ctrl_mux3to1_ifetch_load_data_sel~1_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~0_FF_NODE n1205_1 n1204
+--100 1
+-0-00 1
+-01-0 1
+0-010 1
+.names top.pipereg_w32+pipereg^q~0_FF_NODE \
+ top.pipereg_w32+pipereg3^q~2_FF_NODE top.pipereg_w32+pipereg^q~1_FF_NODE \
+ top.pipereg_w32+pipereg3^q~3_FF_NODE n1145_1 n1205_1
+-0011 1
+-0101 1
+0-011 1
+0-101 1
+11001 1
+11111 1
+.names n1145_1 n1144 top.pipereg_w32+pipereg^q~3_FF_NODE \
+ top.pipereg_w32+pipereg3^q~5_FF_NODE n1207 n1206
+-0010 1
+-0100 1
+-1000 1
+-1110 1
+0---0 1
+.names top.pipereg_w26+pipereg1^q~3_FF_NODE \
+ top.pipereg_w1+pipereg15^q_FF_NODE top.pipereg_w32+pipereg14^q~5_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~1_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~0_FF_NODE n1207
+-1100 1
+-1111 1
+1--01 1
+.names top.pipereg_w26+pipereg1^q~0_FF_NODE n1209 \
+ top.pipereg_w32+pipereg^q~0_FF_NODE top.pipereg_w32+pipereg3^q~2_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~0_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~1_FF_NODE n1208
+--0101 1
+--1001 1
+-1--00 1
+-1--11 1
+1---10 1
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~2_FF_NODE n1209
+11 1
+.names top.pipereg_w26+pipereg1^q~2_FF_NODE n1160_1 n1211 n1212 \
+ top^ctrl_mux3to1_ifetch_load_data_sel~0_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~1_FF_NODE n1210_1
+--0101 1
+--1001 1
+-0--00 1
+-0--11 1
+0---10 1
+.names top.pipereg_w32+pipereg^q~2_FF_NODE \
+ top.pipereg_w32+pipereg3^q~4_FF_NODE n1211
+01 1
+10 1
+.names top.pipereg_w32+pipereg^q~1_FF_NODE \
+ top.pipereg_w32+pipereg3^q~3_FF_NODE top.pipereg_w32+pipereg3^q~2_FF_NODE \
+ top.pipereg_w32+pipereg^q~0_FF_NODE n1212
+-111 0
+1-11 0
+11-- 0
+.names n1145_1 n1141 top.pipereg_w32+pipereg^q~9_FF_NODE \
+ top.pipereg_w32+pipereg3^q~11_FF_NODE n1214 n1213
+-0010 1
+-0100 1
+-1000 1
+-1110 1
+0---0 1
+.names top.pipereg_w26+pipereg1^q~9_FF_NODE \
+ top.pipereg_w1+pipereg15^q_FF_NODE top.pipereg_w32+pipereg14^q~11_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~1_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~0_FF_NODE n1214
+-1100 1
+-1111 1
+1--01 1
+.names top.ifetch+ifetch.dummy_counter+pc_reg^q~10_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~11_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~12_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~13_FF_NODE n1216 n1217 n1215_1
+000011 1
+.names top.ifetch+ifetch.dummy_counter+pc_reg^q~0_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~1_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~2_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~3_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~4_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~5_FF_NODE n1216
+000000 1
+.names top.ifetch+ifetch.dummy_counter+pc_reg^q~6_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~7_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~8_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~9_FF_NODE n1217
+0000 1
+.names top.data_mem+data_mem.onecyclestall+staller^T_FF_NODE \
+ top^ctrl_data_mem_op~3_FF_NODE n1219 n1900
+-10 1
+1-0 1
+.names n1220_1 top.mul+mul.onecyclestall+staller^T_FF_NODE \
+ top^ctrl_mul_start_FF_NODE n1219
+001 1
+.names top.pipereg_w5+pipereg5^q~0_FF_NODE \
+ top.pipereg_w5+pipereg5^q~1_FF_NODE top.pipereg_w5+pipereg5^q~2_FF_NODE \
+ top.pipereg_w5+pipereg5^q~3_FF_NODE top.pipereg_w5+pipereg5^q~4_FF_NODE \
+ top^ctrl_mul_op~2_FF_NODE n1220_1
+000000 1
+.names n1222 top^resetn top^nop7_q~0 n345
+001 1
+.names n1223 n1224 n1222
+00 1
+.names top.pipereg_w1+pipereg16^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~0_FF_NODE top.pipereg_w32+pipereg^q~0_FF_NODE \
+ top^ctrl_mux2to1_mul_opA_sel_FF_NODE top^ctrl_mux3to1_nop6_d_sel~1_FF_NODE \
+ top^ctrl_mux3to1_nop6_d_sel~0_FF_NODE n1223
+--1010 1
+11-001 1
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top^ctrl_mux2to1_mul_opA_sel_FF_NODE top.pipereg_w32+pipereg14^q~0_FF_NODE \
+ n1224
+111 1
+.names top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3193 \
+ top^boot_ddata~24 n1340 n1226 n1332 n355
+--01- 1
+-1--1 1
+1--00 1
+.names n1227 n1329 n1330 n1325 n1305_1 top^ctrl_data_mem_op~3_FF_NODE n1226
+-00111 1
+-11011 1
+0-0111 1
+00-111 1
+1-1011 1
+11-011 1
+.names n1301 n1302 n1228 n1300_1 n1304 n1303 n1227
+--0011 1
+-1--11 1
+-100-1 1
+1----1 1
+1-001- 1
+11--1- 1
+1100-- 1
+.names n1229 n1296 n1299 n1297 n1298 n1293 n1228
+--0000 1
+-0-000 1
+-00--0 1
+0-0-00 1
+0-00-0 1
+00--00 1
+00-0-0 1
+.names n1230_1 n1289 n1292 n1290_1 n1291 n1229
+--111 1
+-1-11 1
+-11-- 1
+1-1-1 1
+1-11- 1
+11--1 1
+11-1- 1
+.names n1231 n1285_1 n1288 n1286 n1287 n1230_1
+--111 1
+-1-11 1
+-11-- 1
+1-1-1 1
+1-11- 1
+11--1 1
+11-1- 1
+.names n1232 n1280_1 n1282 n1281 n1284 n1231
+--111 1
+-1-11 1
+-11-- 1
+1-1-1 1
+1-11- 1
+11--1 1
+11-1- 1
+.names n1233 n1275_1 n1277 n1276 n1279 n1232
+--111 1
+-1-11 1
+-11-- 1
+1-1-1 1
+1-11- 1
+11--1 1
+11-1- 1
+.names n1270_1 n1273 n1234 n1269 n1274 n1271 n1233
+--0011 1
+-1--11 1
+-100-1 1
+1----1 1
+1-001- 1
+11--1- 1
+1100-- 1
+.names n1235_1 n1265_1 n1267 n1266 n1268 n1263 n1234
+--0000 1
+-0-000 1
+-00--0 1
+0-0-00 1
+0-00-0 1
+00--00 1
+00-0-0 1
+.names n1236 n1259 n1262 n1260_1 n1261 n1235_1
+--111 1
+-1-11 1
+-11-- 1
+1-1-1 1
+1-11- 1
+11--1 1
+11-1- 1
+.names n1237 n1255_1 n1258 n1256 n1257 n1236
+--111 1
+-1-11 1
+-11-- 1
+1-1-1 1
+1-11- 1
+11--1 1
+11-1- 1
+.names n1238 n1251 n1254 n1252 n1253 n1237
+--111 1
+-1-11 1
+-11-- 1
+1-1-1 1
+1-11- 1
+11--1 1
+11-1- 1
+.names n1239 n1249 n1250_1 n1247 n1248 n1238
+--111 1
+-1-11 1
+-11-- 1
+1-1-1 1
+1-11- 1
+11--1 1
+11-1- 1
+.names n1240_1 n1242 n1245_1 n1246 n1241 n1239
+--111 1
+-0-11 1
+-01-1 1
+1---1 1
+1-11- 1
+10-1- 1
+101-- 1
+.names top.pipereg_w32+pipereg^q~3_FF_NODE top^nop7_q~3 \
+ top^ctrl_mux3to1_nop6_d_sel~0_FF_NODE \
+ top^ctrl_mux3to1_nop6_d_sel~1_FF_NODE n1240_1
+-110 0
+1-01 0
+.names top.ifetch+ifetch.dummy_counter+pc_reg^q~1_FF_NODE n1159 \
+ top^ctrl_mux2to1_addersub_opA_sel_FF_NODE n1241
+-00 1
+0-1 1
+.names n1244 n1157 n1243 top^ctrl_addersub_op~0_FF_NODE n1158 \
+ top^ctrl_mux2to1_addersub_opA_sel_FF_NODE n1242
+--0010 1
+-1-010 1
+-10-10 1
+0---10 1
+0-00-- 1
+01-0-0 1
+010--0 1
+.names top.pipereg_w1+pipereg16^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~0_FF_NODE top.pipereg_w32+pipereg^q~0_FF_NODE \
+ top^ctrl_mux3to1_nop6_d_sel~1_FF_NODE \
+ top^ctrl_mux3to1_nop6_d_sel~0_FF_NODE n1243
+--110 0
+11-01 0
+.names top.pipereg_w1+pipereg16^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~1_FF_NODE top.pipereg_w32+pipereg^q~1_FF_NODE \
+ top^ctrl_mux3to1_nop6_d_sel~1_FF_NODE \
+ top^ctrl_mux3to1_nop6_d_sel~0_FF_NODE n1244
+--110 0
+11-01 0
+.names top.ifetch+ifetch.dummy_counter+pc_reg^q~0_FF_NODE n1209 \
+ top^ctrl_mux2to1_addersub_opA_sel_FF_NODE n1245_1
+-00 1
+0-1 1
+.names top.pipereg_w1+pipereg16^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~2_FF_NODE top.pipereg_w32+pipereg^q~2_FF_NODE \
+ top^ctrl_mux3to1_nop6_d_sel~1_FF_NODE \
+ top^ctrl_mux3to1_nop6_d_sel~0_FF_NODE n1246
+--110 0
+11-01 0
+.names top.pipereg_w32+pipereg^q~4_FF_NODE top^nop7_q~4 \
+ top^ctrl_mux3to1_nop6_d_sel~0_FF_NODE \
+ top^ctrl_mux3to1_nop6_d_sel~1_FF_NODE n1247
+-110 0
+1-01 0
+.names top.ifetch+ifetch.dummy_counter+pc_reg^q~2_FF_NODE n1160_1 \
+ top^ctrl_mux2to1_addersub_opA_sel_FF_NODE n1248
+-00 1
+0-1 1
+.names top.pipereg_w1+pipereg16^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~5_FF_NODE top.pipereg_w32+pipereg^q~5_FF_NODE \
+ top^ctrl_mux3to1_nop6_d_sel~1_FF_NODE \
+ top^ctrl_mux3to1_nop6_d_sel~0_FF_NODE n1249
+--110 0
+11-01 0
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~5_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~3_FF_NODE \
+ top^ctrl_mux2to1_addersub_opA_sel_FF_NODE n1250_1
+--11 0
+11-0 0
+.names top.pipereg_w32+pipereg^q~7_FF_NODE top^nop7_q~7 \
+ top^ctrl_mux3to1_nop6_d_sel~0_FF_NODE \
+ top^ctrl_mux3to1_nop6_d_sel~1_FF_NODE n1251
+-110 0
+1-01 0
+.names top.ifetch+ifetch.dummy_counter+pc_reg^q~4_FF_NODE n1203 \
+ top^ctrl_mux2to1_addersub_opA_sel_FF_NODE n1252
+-00 1
+0-1 1
+.names top.pipereg_w1+pipereg16^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~6_FF_NODE top.pipereg_w32+pipereg^q~6_FF_NODE \
+ top^ctrl_mux3to1_nop6_d_sel~1_FF_NODE \
+ top^ctrl_mux3to1_nop6_d_sel~0_FF_NODE n1253
+--110 0
+11-01 0
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~7_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~5_FF_NODE \
+ top^ctrl_mux2to1_addersub_opA_sel_FF_NODE n1254
+--11 0
+11-0 0
+.names top.pipereg_w32+pipereg^q~9_FF_NODE top^nop7_q~9 \
+ top^ctrl_mux3to1_nop6_d_sel~0_FF_NODE \
+ top^ctrl_mux3to1_nop6_d_sel~1_FF_NODE n1255_1
+-110 0
+1-01 0
+.names top.pipereg_w32+pipereg^q~8_FF_NODE top^nop7_q~8 \
+ top^ctrl_mux3to1_nop6_d_sel~0_FF_NODE \
+ top^ctrl_mux3to1_nop6_d_sel~1_FF_NODE n1256
+-110 0
+1-01 0
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~8_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~6_FF_NODE \
+ top^ctrl_mux2to1_addersub_opA_sel_FF_NODE n1257
+--11 0
+11-0 0
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~9_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~7_FF_NODE \
+ top^ctrl_mux2to1_addersub_opA_sel_FF_NODE n1258
+--11 0
+11-0 0
+.names top.pipereg_w32+pipereg^q~11_FF_NODE top^nop7_q~11 \
+ top^ctrl_mux3to1_nop6_d_sel~0_FF_NODE \
+ top^ctrl_mux3to1_nop6_d_sel~1_FF_NODE n1259
+-110 0
+1-01 0
+.names top.pipereg_w32+pipereg^q~10_FF_NODE top^nop7_q~10 \
+ top^ctrl_mux3to1_nop6_d_sel~0_FF_NODE \
+ top^ctrl_mux3to1_nop6_d_sel~1_FF_NODE n1260_1
+-110 0
+1-01 0
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~10_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~8_FF_NODE \
+ top^ctrl_mux2to1_addersub_opA_sel_FF_NODE n1261
+--11 0
+11-0 0
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~11_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~9_FF_NODE \
+ top^ctrl_mux2to1_addersub_opA_sel_FF_NODE n1262
+--11 0
+11-0 0
+.names top.pipereg_w32+pipereg14^q~14_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~12_FF_NODE \
+ top.pipereg_w1+pipereg15^q_FF_NODE \
+ top^ctrl_mux2to1_addersub_opA_sel_FF_NODE n1264 n1263
+--001 1
+-0-11 1
+0--01 1
+.names top.pipereg_w32+pipereg^q~14_FF_NODE top^nop7_q~14 \
+ top^ctrl_mux3to1_nop6_d_sel~0_FF_NODE \
+ top^ctrl_mux3to1_nop6_d_sel~1_FF_NODE n1264
+-110 0
+1-01 0
+.names top.pipereg_w32+pipereg^q~13_FF_NODE top^nop7_q~13 \
+ top^ctrl_mux3to1_nop6_d_sel~0_FF_NODE \
+ top^ctrl_mux3to1_nop6_d_sel~1_FF_NODE n1265_1
+-110 0
+1-01 0
+.names top.pipereg_w32+pipereg^q~12_FF_NODE top^nop7_q~12 \
+ top^ctrl_mux3to1_nop6_d_sel~0_FF_NODE \
+ top^ctrl_mux3to1_nop6_d_sel~1_FF_NODE n1266
+-110 0
+1-01 0
+.names top.ifetch+ifetch.dummy_counter+pc_reg^q~11_FF_NODE n1150_1 \
+ top^ctrl_mux2to1_addersub_opA_sel_FF_NODE n1267
+-00 1
+0-1 1
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~12_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~10_FF_NODE \
+ top^ctrl_mux2to1_addersub_opA_sel_FF_NODE n1268
+--11 0
+11-0 0
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~14_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~12_FF_NODE n1264 \
+ top^ctrl_mux2to1_addersub_opA_sel_FF_NODE n1269
+--101 1
+11-00 1
+.names top.pipereg_w32+pipereg^q~16_FF_NODE top^nop7_q~16 \
+ top^ctrl_mux3to1_nop6_d_sel~0_FF_NODE \
+ top^ctrl_mux3to1_nop6_d_sel~1_FF_NODE n1270_1
+-110 0
+1-01 0
+.names top.ifetch+ifetch.dummy_counter+pc_reg^q~14_FF_NODE n1272 \
+ top^ctrl_mux2to1_addersub_opA_sel_FF_NODE n1271
+-00 1
+0-1 1
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~16_FF_NODE n1272
+11 1
+.names top.pipereg_w32+pipereg^q~15_FF_NODE top^nop7_q~15 \
+ top^ctrl_mux3to1_nop6_d_sel~0_FF_NODE \
+ top^ctrl_mux3to1_nop6_d_sel~1_FF_NODE n1273
+-110 0
+1-01 0
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~15_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~13_FF_NODE \
+ top^ctrl_mux2to1_addersub_opA_sel_FF_NODE n1274
+--11 0
+11-0 0
+.names top.pipereg_w32+pipereg^q~18_FF_NODE top^nop7_q~18 \
+ top^ctrl_mux3to1_nop6_d_sel~0_FF_NODE \
+ top^ctrl_mux3to1_nop6_d_sel~1_FF_NODE n1275_1
+-110 0
+1-01 0
+.names top.pipereg_w32+pipereg^q~17_FF_NODE top^nop7_q~17 \
+ top^ctrl_mux3to1_nop6_d_sel~0_FF_NODE \
+ top^ctrl_mux3to1_nop6_d_sel~1_FF_NODE n1276
+-110 0
+1-01 0
+.names top.ifetch+ifetch.dummy_counter+pc_reg^q~16_FF_NODE n1278 \
+ top^ctrl_mux2to1_addersub_opA_sel_FF_NODE n1277
+-00 1
+0-1 1
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~18_FF_NODE n1278
+11 1
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~17_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~15_FF_NODE \
+ top^ctrl_mux2to1_addersub_opA_sel_FF_NODE n1279
+--11 0
+11-0 0
+.names top.pipereg_w32+pipereg^q~20_FF_NODE top^nop7_q~20 \
+ top^ctrl_mux3to1_nop6_d_sel~0_FF_NODE \
+ top^ctrl_mux3to1_nop6_d_sel~1_FF_NODE n1280_1
+-110 0
+1-01 0
+.names top.pipereg_w32+pipereg^q~19_FF_NODE top^nop7_q~19 \
+ top^ctrl_mux3to1_nop6_d_sel~0_FF_NODE \
+ top^ctrl_mux3to1_nop6_d_sel~1_FF_NODE n1281
+-110 0
+1-01 0
+.names top.ifetch+ifetch.dummy_counter+pc_reg^q~18_FF_NODE n1283 \
+ top^ctrl_mux2to1_addersub_opA_sel_FF_NODE n1282
+-00 1
+0-1 1
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~20_FF_NODE n1283
+11 1
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~19_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~17_FF_NODE \
+ top^ctrl_mux2to1_addersub_opA_sel_FF_NODE n1284
+--11 0
+11-0 0
+.names top.pipereg_w32+pipereg^q~22_FF_NODE top^nop7_q~22 \
+ top^ctrl_mux3to1_nop6_d_sel~0_FF_NODE \
+ top^ctrl_mux3to1_nop6_d_sel~1_FF_NODE n1285_1
+-110 0
+1-01 0
+.names top.pipereg_w32+pipereg^q~21_FF_NODE top^nop7_q~21 \
+ top^ctrl_mux3to1_nop6_d_sel~0_FF_NODE \
+ top^ctrl_mux3to1_nop6_d_sel~1_FF_NODE n1286
+-110 0
+1-01 0
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~21_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~19_FF_NODE \
+ top^ctrl_mux2to1_addersub_opA_sel_FF_NODE n1287
+--11 0
+11-0 0
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~22_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~20_FF_NODE \
+ top^ctrl_mux2to1_addersub_opA_sel_FF_NODE n1288
+--11 0
+11-0 0
+.names top.pipereg_w32+pipereg^q~24_FF_NODE top^nop7_q~24 \
+ top^ctrl_mux3to1_nop6_d_sel~0_FF_NODE \
+ top^ctrl_mux3to1_nop6_d_sel~1_FF_NODE n1289
+-110 0
+1-01 0
+.names top.pipereg_w32+pipereg^q~23_FF_NODE top^nop7_q~23 \
+ top^ctrl_mux3to1_nop6_d_sel~0_FF_NODE \
+ top^ctrl_mux3to1_nop6_d_sel~1_FF_NODE n1290_1
+-110 0
+1-01 0
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~23_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~21_FF_NODE \
+ top^ctrl_mux2to1_addersub_opA_sel_FF_NODE n1291
+--11 0
+11-0 0
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~24_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~22_FF_NODE \
+ top^ctrl_mux2to1_addersub_opA_sel_FF_NODE n1292
+--11 0
+11-0 0
+.names n1294 n1295_1 n1293
+11 1
+.names top.pipereg_w32+pipereg^q~27_FF_NODE top^nop7_q~27 \
+ top^ctrl_mux3to1_nop6_d_sel~0_FF_NODE \
+ top^ctrl_mux3to1_nop6_d_sel~1_FF_NODE n1294
+-110 0
+1-01 0
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~27_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~25_FF_NODE \
+ top^ctrl_mux2to1_addersub_opA_sel_FF_NODE n1295_1
+--11 0
+11-0 0
+.names top.pipereg_w32+pipereg^q~26_FF_NODE top^nop7_q~26 \
+ top^ctrl_mux3to1_nop6_d_sel~0_FF_NODE \
+ top^ctrl_mux3to1_nop6_d_sel~1_FF_NODE n1296
+-110 0
+1-01 0
+.names top.pipereg_w32+pipereg^q~25_FF_NODE top^nop7_q~25 \
+ top^ctrl_mux3to1_nop6_d_sel~0_FF_NODE \
+ top^ctrl_mux3to1_nop6_d_sel~1_FF_NODE n1297
+-110 0
+1-01 0
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~25_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~23_FF_NODE \
+ top^ctrl_mux2to1_addersub_opA_sel_FF_NODE n1298
+--11 0
+11-0 0
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~26_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~24_FF_NODE \
+ top^ctrl_mux2to1_addersub_opA_sel_FF_NODE n1299
+--11 0
+11-0 0
+.names n1294 n1295_1 n1300_1
+00 1
+.names top.pipereg_w32+pipereg^q~29_FF_NODE top^nop7_q~29 \
+ top^ctrl_mux3to1_nop6_d_sel~0_FF_NODE \
+ top^ctrl_mux3to1_nop6_d_sel~1_FF_NODE n1301
+-110 0
+1-01 0
+.names top.pipereg_w32+pipereg^q~28_FF_NODE top^nop7_q~28 \
+ top^ctrl_mux3to1_nop6_d_sel~0_FF_NODE \
+ top^ctrl_mux3to1_nop6_d_sel~1_FF_NODE n1302
+-110 0
+1-01 0
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~29_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~27_FF_NODE \
+ top^ctrl_mux2to1_addersub_opA_sel_FF_NODE n1303
+--11 0
+11-0 0
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~28_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~26_FF_NODE \
+ top^ctrl_mux2to1_addersub_opA_sel_FF_NODE n1304
+--11 0
+11-0 0
+.names n1306 n1308 n1309 n1311 n1312 n1305_1
+00001 1
+.names n1307 n1273 n1274 n1270_1 n1271 n1306
+-0000 1
+-0011 1
+-1101 1
+-1110 1
+0-000 1
+0-011 1
+00-00 1
+00-11 1
+1-101 1
+1-110 1
+11-01 1
+11-10 1
+.names n1234 n1269 n1307
+00 1
+.names n1307 n1273 n1274 n1308
+000 1
+011 1
+101 1
+110 1
+.names n1310_1 n1269 n1263 n1265_1 n1267 n1309
+--100 1
+-0011 1
+-1-00 1
+0-1-0 1
+0-10- 1
+01--0 1
+01-0- 1
+100-1 1
+1001- 1
+.names n1235_1 n1266 n1268 n1310_1
+-11 1
+1-1 1
+11- 1
+.names n1310_1 n1265_1 n1267 n1311
+000 1
+011 1
+101 1
+110 1
+.names n1313 n1314 n1315 n1316 n1317 n1318 n1312
+000001 1
+.names n1235_1 n1266 n1268 n1313
+000 1
+011 1
+101 1
+110 1
+.names n1236 n1260_1 n1261 n1259 n1262 n1314
+-0000 1
+-0011 1
+-1101 1
+-1110 1
+0-000 1
+0-011 1
+00-00 1
+00-11 1
+1-101 1
+1-110 1
+11-01 1
+11-10 1
+.names n1236 n1260_1 n1261 n1315
+000 1
+011 1
+101 1
+110 1
+.names n1237 n1256 n1257 n1255_1 n1258 n1316
+-0000 1
+-0011 1
+-1101 1
+-1110 1
+0-000 1
+0-011 1
+00-00 1
+00-11 1
+1-101 1
+1-110 1
+11-01 1
+11-10 1
+.names n1237 n1256 n1257 n1317
+000 1
+011 1
+101 1
+110 1
+.names n1319 n1320 n1321 n1322 n1323 n1324 n1318
+000001 1
+.names n1238 n1252 n1253 n1251 n1254 n1319
+-0000 1
+-0011 1
+-1101 1
+-1110 1
+0-000 1
+0-011 1
+00-00 1
+00-11 1
+1-101 1
+1-110 1
+11-01 1
+11-10 1
+.names n1238 n1252 n1253 n1320
+000 1
+011 1
+101 1
+110 1
+.names n1239 n1247 n1248 n1249 n1250_1 n1321
+-0000 1
+-0011 1
+-1101 1
+-1110 1
+0-000 1
+0-011 1
+00-00 1
+00-11 1
+1-101 1
+1-110 1
+11-01 1
+11-10 1
+.names n1239 n1247 n1248 n1322
+000 1
+011 1
+101 1
+110 1
+.names n1242 n1245_1 n1246 n1240_1 n1241 n1323
+-0000 1
+-0011 1
+-1101 1
+-1110 1
+0-101 1
+0-110 1
+01-01 1
+01-10 1
+1-000 1
+1-011 1
+10-00 1
+10-11 1
+.names n1242 n1245_1 n1246 n1324
+000 1
+011 1
+101 1
+110 1
+.names n1326 n1328 n1325
+00 1
+.names top.ifetch+ifetch.dummy_counter+pc_reg^q~29_FF_NODE n1166 n1327 \
+ top^ctrl_mux2to1_addersub_opA_sel_FF_NODE n1326
+-100 1
+1-01 1
+.names top.pipereg_w32+pipereg^q~31_FF_NODE top^nop7_q~31 \
+ top^ctrl_mux3to1_nop6_d_sel~0_FF_NODE \
+ top^ctrl_mux3to1_nop6_d_sel~1_FF_NODE n1327
+-110 0
+1-01 0
+.names top.ifetch+ifetch.dummy_counter+pc_reg^q~29_FF_NODE n1166 \
+ top^ctrl_mux2to1_addersub_opA_sel_FF_NODE n1327 n1328
+-001 1
+0-11 1
+.names top.pipereg_w32+pipereg^q~30_FF_NODE top^nop7_q~30 \
+ top^ctrl_mux3to1_nop6_d_sel~0_FF_NODE \
+ top^ctrl_mux3to1_nop6_d_sel~1_FF_NODE n1329
+-110 0
+1-01 0
+.names top.ifetch+ifetch.dummy_counter+pc_reg^q~28_FF_NODE n1331 \
+ top^ctrl_mux2to1_addersub_opA_sel_FF_NODE n1330
+-00 1
+0-1 1
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~30_FF_NODE n1331
+11 1
+.names top^boot_daddr~30 top^boot_daddr~31 n1339 n1333 n1337 top^boot_dwe \
+ n1332
+001111 1
+.names top^boot_daddr~10 top^boot_daddr~11 top^boot_daddr~12 \
+ top^boot_daddr~13 n1334 n1336 n1333
+000011 1
+.names top^boot_daddr~18 top^boot_daddr~19 top^boot_daddr~20 \
+ top^boot_daddr~21 n1335 n1334
+00001 1
+.names top^boot_daddr~14 top^boot_daddr~15 top^boot_daddr~16 \
+ top^boot_daddr~17 n1335
+0000 1
+.names top^boot_daddr~6 top^boot_daddr~7 top^boot_daddr~8 top^boot_daddr~9 \
+ n1336
+0000 1
+.names top^boot_daddr~26 top^boot_daddr~27 top^boot_daddr~28 \
+ top^boot_daddr~29 n1338 n1337
+00001 1
+.names top^boot_daddr~22 top^boot_daddr~23 top^boot_daddr~24 \
+ top^boot_daddr~25 n1338
+0000 1
+.names top^boot_daddr~0 top^boot_daddr~1 top^boot_daddr~2 top^boot_daddr~3 \
+ top^boot_daddr~4 top^boot_daddr~5 n1339
+000000 1
+.names top^ctrl_data_mem_op~0_FF_NODE top^nop7_q~24 n1341 n1343 n1340
+--00 0
+01-- 0
+.names top^nop7_q~0 n1342 top^nop7_q~8 top^ctrl_data_mem_op~1_FF_NODE \
+ top^ctrl_data_mem_op~0_FF_NODE n1341
+--101 0
+11-11 0
+.names top^ctrl_mux2to1_addersub_opA_sel_FF_NODE n1157 n1243 \
+ top^ctrl_addersub_op~0_FF_NODE n1342
+-000 1
+-011 1
+0101 1
+0110 1
+1-00 1
+1-11 1
+.names n1157 n1243 top^ctrl_addersub_op~0_FF_NODE \
+ top^ctrl_mux2to1_addersub_opA_sel_FF_NODE n1158 n1244 n1343
+--11-0 1
+-00-01 1
+-00010 1
+-001-1 1
+-1-1-0 1
+-11-00 1
+-11011 1
+0-1-00 1
+0-1011 1
+01--00 1
+01-011 1
+1-0001 1
+1-0010 1
+10-001 1
+10-010 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6660 \
+ top^boot_idata~24 n1126 n365
+-11 1
+1-0 1
+.names n1900 top.pipereg_w1+pipereg15^q_FF_NODE n1346 top^resetn n370
+--11 1
+01-1 1
+.names n1136 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6668 \
+ top^ctrl_zeroer_en_FF_NODE top.pipereg_w5+pipereg5^q~4_FF_NODE n1352 n1347 \
+ n1346
+---001 1
+111--1 1
+.names n1136 top^ctrl_zeroer_en_FF_NODE \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6636 \
+ top.pipereg_w5+pipereg5^q~0_FF_NODE n1350_1 n1348 n1347
+--0011 1
+-0-011 1
+0--011 1
+111111 1
+.names n1136 top^ctrl_zeroer_en_FF_NODE \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6652 \
+ top.pipereg_w5+pipereg5^q~2_FF_NODE n1349 n1348
+--001 1
+-0-01 1
+0--01 1
+11111 1
+.names top.pipereg_w5+pipereg5^q~1_FF_NODE \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6644 \
+ top.pipereg_w5+pipereg5^q~4_FF_NODE \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6668 \
+ top^ctrl_zeroer_en_FF_NODE n1136 n1349
+--0111 0
+01--11 0
+.names n1136 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6660 \
+ top^ctrl_zeroer_en_FF_NODE n1351 top.pipereg_w5+pipereg5^q~3_FF_NODE n1900 \
+ n1350_1
+--0001 1
+-0-001 1
+0--001 1
+111011 1
+.names n1136 top^ctrl_zeroer_en_FF_NODE \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6644 \
+ top.pipereg_w5+pipereg5^q~1_FF_NODE n1351
+---0 0
+111- 0
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6660 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6636 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6652 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6644 \
+ top^ctrl_zeroer_en_FF_NODE n1136 n1352
+-----0 1
+----0- 1
+0000-- 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6476 \
+ top^boot_idata~1 n1126 n375
+-11 1
+1-0 1
+.names n1900 top.pipereg_w32+pipereg^q~1_FF_NODE n1355_1 top^resetn n380
+--11 1
+01-1 1
+.names n1136 n1900 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6476 n1355_1
+111 1
+.names n1222 n1357 top.pipereg_w32+pipereg14^q~1_FF_NODE \
+ top.pipereg_w32+pipereg14^q~0_FF_NODE top^resetn \
+ top.pipereg_w1+pipereg16^q_FF_NODE n385
+-00101 1
+0-1001 1
+011-01 1
+10-101 1
+.names n1358 n1359 n1357
+00 1
+.names top.pipereg_w1+pipereg16^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~1_FF_NODE top.pipereg_w32+pipereg^q~1_FF_NODE \
+ top^ctrl_mux2to1_mul_opA_sel_FF_NODE top^ctrl_mux3to1_nop6_d_sel~1_FF_NODE \
+ top^ctrl_mux3to1_nop6_d_sel~0_FF_NODE n1358
+--1010 1
+11-001 1
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top^ctrl_mux2to1_mul_opA_sel_FF_NODE top.pipereg_w32+pipereg14^q~1_FF_NODE \
+ n1359
+111 1
+.names top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3201 \
+ top^boot_ddata~25 n1361 n1226 n1332 n400
+--01- 1
+-1--1 1
+1--00 1
+.names top^ctrl_data_mem_op~0_FF_NODE top^nop7_q~25 n1362 n1343 n1361
+--00 0
+01-- 0
+.names top^nop7_q~1 n1342 top^nop7_q~9 top^ctrl_data_mem_op~1_FF_NODE \
+ top^ctrl_data_mem_op~0_FF_NODE n1362
+--101 0
+11-11 0
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6668 \
+ top^boot_idata~25 n1126 n410
+-11 1
+1-0 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6668 n1136 \
+ top.pipereg_w26+pipereg1^q~25_FF_NODE n1900 top^resetn n415
+--101 1
+11-11 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6684 \
+ top^boot_idata~27 n1126 n420
+-11 1
+1-0 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6676 n1377 \
+ n1369 n1380_1 n1375 n1367 n425
+--0011 0
+-0-011 0
+0--011 0
+.names n1372 n1374 n1368 n1367
+001 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6676 n1369 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6684 n1371 n1136 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6692 n1368
+--1-11 1
+-0-0-- 1
+-01--- 1
+1--011 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6708 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6716 n1370_1 n1369
+001 1
+.names n1136 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6700 \
+ n1370_1
+11 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6700 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6708 n1136 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6716 n1371
+0011 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6676 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6684 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6692 n1373 n1136 \
+ n1372
+-1111 1
+10011 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6700 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6708 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6716 n1136 n1373
+---0 1
+000- 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6684 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6708 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6700 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6716 n1136 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6692 n1374
+000011 1
+001111 1
+.names n1376 n1379 n1375
+01 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6708 n1370_1 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6676 n1377 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6716 n1376
+01111 1
+.names n1378 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6692 \
+ n1377
+11 1
+.names n1136 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6684 \
+ n1378
+11 1
+.names n1371 n1369 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6692 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6684 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6676 n1136 n1379
+-11011 0
+-11101 0
+1-0111 0
+.names n1136 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6692 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6684 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6676 \
+ top^ctrl_mux2to1_pipereg_d_sel_FF_NODE n1373 n1380_1
+-00011 1
+-01111 1
+0---11 1
+.names top.pipereg_w32+pipereg^q~2_FF_NODE n1382 n1900 top^resetn n430
+-111 1
+1-01 1
+.names n1136 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6484 \
+ n1382
+11 1
+.names n1222 top^nop7_q~2 top^resetn n1384 n435
+-000 1
+0101 1
+1-00 1
+.names top^nop7_q~0 n1385_1 n1387 n1386 n1384
+-010 1
+-100 1
+-111 1
+0-00 1
+1001 1
+.names n1223 n1358 n1359 n1224 top^nop7_q~1 top^nop7_q~0 n1385_1
+--1111 1
+-1-111 1
+1-1-11 1
+11--11 1
+.names n1359 n1358 top^nop7_q~1 n1386
+-11 1
+1-1 1
+.names n1246 n1209 top^ctrl_mux2to1_mul_opA_sel_FF_NODE n1387
+-01 1
+1-0 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6484 \
+ top^boot_idata~2 n1126 n445
+-11 1
+1-0 1
+.names top.pipereg_w26+pipereg1^q~2_FF_NODE n1382 n1900 top^resetn n450
+-111 1
+1-01 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6500 \
+ top^boot_idata~4 n1126 n455
+-11 1
+1-0 1
+.names n1900 top.pipereg_w32+pipereg^q~4_FF_NODE n1392 top^resetn n460
+--11 1
+01-1 1
+.names n1136 n1900 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6500 n1392
+111 1
+.names n1222 top^nop7_q~4 top^resetn n1394 n1409 n465
+-0001 1
+-0010 1
+01000 1
+01011 1
+1-001 1
+1-010 1
+.names n1397 n1395_1 n1396 n1398 n1404 n1405 n1394
+--1100 1
+--1111 1
+-00001 1
+-00010 1
+-01-00 1
+-01-11 1
+-10101 1
+-10110 1
+-11001 1
+-11010 1
+0-0001 1
+0-0010 1
+00-100 1
+00-111 1
+1-0101 1
+1-0110 1
+110000 1
+110011 1
+.names n1222 top^nop7_q~3 n1395_1
+01 1
+.names n1387 n1222 top^nop7_q~0 n1357 top^nop7_q~1 top^nop7_q~2 n1396
+---0-1 0
+001--1 0
+.names top^nop7_q~1 n1387 n1222 n1357 top^nop7_q~0 top^nop7_q~2 n1397
+-00011 1
+1-0001 1
+.names n1385_1 n1399 n1386 n1400_1 n1403 n1398
+--000 1
+--011 1
+-1101 1
+-1110 1
+00-00 1
+00-11 1
+1-101 1
+1-110 1
+.names n1246 n1209 top^ctrl_mux2to1_mul_opA_sel_FF_NODE top^nop7_q~0 n1399
+-111 1
+0-01 1
+.names n1402 n1401 top^nop7_q~0 n1400_1
+-11 1
+1-1 1
+.names top.pipereg_w1+pipereg16^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~3_FF_NODE top.pipereg_w32+pipereg^q~3_FF_NODE \
+ top^ctrl_mux2to1_mul_opA_sel_FF_NODE top^ctrl_mux3to1_nop6_d_sel~1_FF_NODE \
+ top^ctrl_mux3to1_nop6_d_sel~0_FF_NODE n1401
+--1010 1
+11-001 1
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top^ctrl_mux2to1_mul_opA_sel_FF_NODE top.pipereg_w32+pipereg14^q~3_FF_NODE \
+ n1402
+111 1
+.names n1246 n1209 top^ctrl_mux2to1_mul_opA_sel_FF_NODE top^nop7_q~1 n1403
+-111 1
+0-01 1
+.names n1387 top^nop7_q~2 n1404
+01 1
+.names n1385_1 n1399 n1400_1 n1403 n1386 n1406 n1405
+---000 1
+--0-00 1
+--00-0 1
+--11-1 1
+-1-111 1
+-11-11 1
+00-0-0 1
+000--0 1
+1--111 1
+1-1-11 1
+.names n1401 n1407 n1408 n1402 top^nop7_q~0 top^nop7_q~1 n1406
+---101 1
+--1-10 1
+-001-1 1
+-1--10 1
+0-101- 1
+01-01- 1
+1---01 1
+100--1 1
+.names top.pipereg_w1+pipereg16^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~4_FF_NODE top.pipereg_w32+pipereg^q~4_FF_NODE \
+ top^ctrl_mux2to1_mul_opA_sel_FF_NODE top^ctrl_mux3to1_nop6_d_sel~1_FF_NODE \
+ top^ctrl_mux3to1_nop6_d_sel~0_FF_NODE n1407
+--1010 1
+11-001 1
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top^ctrl_mux2to1_mul_opA_sel_FF_NODE top.pipereg_w32+pipereg14^q~4_FF_NODE \
+ n1408
+111 1
+.names n1357 top^nop7_q~3 n1409
+01 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6492 \
+ top^boot_idata~3 n1126 n480
+-11 1
+1-0 1
+.names top.pipereg_w32+pipereg^q~3_FF_NODE n1412 n1900 top^resetn n485
+-111 1
+1-01 1
+.names n1136 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6492 \
+ n1412
+11 1
+.names n1396 n1397 top^resetn n1395_1 n1398 n490
+-1000 1
+-1011 1
+00001 1
+00010 1
+1-000 1
+1-011 1
+.names top.lo_reg+lo_reg^q~3_FF_NODE \
+ top.mul+mul.dummy_mult+fake_mult_one^result~3_FF_NODE \
+ top^ctrl_lo_reg_en_FF_NODE top^resetn n495
+-111 1
+1-01 1
+.names n1222 top^nop7_q~5 top^resetn n1416 n1417 n1429 n500
+-00001 1
+-00010 1
+-00100 1
+-00111 1
+010000 1
+010011 1
+010101 1
+010110 1
+1-0001 1
+1-0010 1
+1-0100 1
+1-0111 1
+.names n1222 n1394 n1409 top^nop7_q~4 n1416
+0011 1
+0101 1
+.names n1418 n1419 n1409 n1420 n1427 n1428 n1417
+-00000 1
+-00011 1
+-00101 1
+-00110 1
+-11001 1
+-11010 1
+-11100 1
+-11111 1
+0-0000 1
+0-0011 1
+0-0101 1
+0-0110 1
+00-000 1
+00-011 1
+00-101 1
+00-110 1
+1-1001 1
+1-1010 1
+1-1100 1
+1-1111 1
+11-001 1
+11-010 1
+11-100 1
+11-111 1
+.names n1396 n1397 n1398 n1395_1 n1418
+-101 1
+0011 1
+1-01 1
+.names n1397 n1398 n1396 n1404 n1405 n1419
+--100 1
+--111 1
+-0001 1
+-0010 1
+01-00 1
+01-11 1
+1-001 1
+1-010 1
+.names n1421 n1422 n1424 top^nop7_q~2 n1425_1 n1420
+--101 1
+-0110 1
+-11-1 1
+0-000 1
+00011 1
+010-0 1
+1--01 1
+10-10 1
+11--1 1
+.names n1423 top^nop7_q~0 n1422 top^nop7_q~1 n1421
+--01 0
+01-- 0
+.names n1401 n1402 n1422
+00 1
+.names n1407 n1408 n1423
+00 1
+.names n1386 n1385_1 n1399 n1400_1 n1403 n1406 n1424
+---001 1
+-00-01 1
+-000-1 1
+0---01 1
+0--0-1 1
+.names n1423 n1426 top^nop7_q~1 top^nop7_q~0 n1425_1
+-001 1
+0-10 1
+011- 1
+10-1 1
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~5_FF_NODE n1249 \
+ top^ctrl_mux2to1_mul_opA_sel_FF_NODE n1426
+--00 0
+11-1 0
+.names n1396 n1397 n1398 n1404 n1405 n1427
+---01 1
+-01-1 1
+-010- 1
+1---1 1
+1--0- 1
+.names n1387 top^nop7_q~3 n1428
+01 1
+.names n1357 top^nop7_q~4 n1429
+01 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6508 \
+ top^boot_idata~5 n1126 n510
+-11 1
+1-0 1
+.names top.pipereg_w32+pipereg^q~5_FF_NODE n1432 n1900 top^resetn n515
+-111 1
+1-01 1
+.names n1136 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6508 \
+ n1432
+11 1
+.names n1222 top.pipereg_w1+pipereg16^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~6_FF_NODE top^resetn n1434 n520
+--000 1
+-0-00 1
+01101 1
+1--00 1
+.names top^nop7_q~5 n1435 n1357 n1436 n1434
+-010 1
+-100 1
+-111 1
+0-00 1
+1001 1
+.names n1222 n1416 n1417 n1429 top^nop7_q~5 n1435
+00011 1
+00101 1
+01001 1
+01111 1
+.names n1416 n1417 n1429 n1437 n1444 n1445_1 n1436
+-00000 1
+-00011 1
+-00101 1
+-00110 1
+-11001 1
+-11010 1
+-11100 1
+-11111 1
+0-0000 1
+0-0011 1
+0-0101 1
+0-0110 1
+00-000 1
+00-011 1
+00-101 1
+00-110 1
+1-1001 1
+1-1010 1
+1-1100 1
+1-1111 1
+11-001 1
+11-010 1
+11-100 1
+11-111 1
+.names top^nop7_q~2 n1438 n1427 n1422 top^nop7_q~3 n1439 n1437
+--11-1 1
+-00-00 1
+-00011 1
+-001-0 1
+-1-1-1 1
+-11-01 1
+-11010 1
+0-1-01 1
+0-1010 1
+01--01 1
+01-010 1
+1-0000 1
+1-0011 1
+10-000 1
+10-011 1
+.names n1421 n1424 n1425_1 n1438
+-10 1
+001 1
+1-0 1
+.names n1421 n1424 n1425_1 n1440_1 n1441 n1442 n1439
+---101 1
+---110 1
+--0000 1
+--0011 1
+-11-01 1
+-11-10 1
+00-000 1
+00-011 1
+1-1-01 1
+1-1-10 1
+.names n1426 top^nop7_q~0 n1423 top^nop7_q~1 n1440_1
+--01 0
+01-- 0
+.names n1423 top^nop7_q~2 n1441
+01 1
+.names n1426 n1443 top^nop7_q~1 top^nop7_q~0 n1442
+-001 1
+0-10 1
+011- 1
+10-1 1
+.names n1253 n1203 top^ctrl_mux2to1_mul_opA_sel_FF_NODE n1443
+-01 1
+1-0 1
+.names n1428 n1418 n1419 n1409 n1420 n1427 n1444
+--0001 1
+--0010 1
+-0-001 1
+-0-010 1
+-00-01 1
+-00-10 1
+0---01 1
+0---10 1
+0-00-- 1
+00-0-- 1
+000--- 1
+.names n1387 top^nop7_q~4 n1445_1
+01 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6516 \
+ top^boot_idata~6 n1126 n530
+-11 1
+1-0 1
+.names n1900 top.pipereg_w5+pipereg2^q~0_FF_NODE n1448 top^resetn n535
+--11 1
+01-1 1
+.names n1136 n1900 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6516 n1448
+111 1
+.names n1900 top.pipereg_w32+pipereg^q~6_FF_NODE n1448 top^resetn n540
+--11 1
+01-1 1
+.names top^resetn n1451 n1468 n545
+001 1
+010 1
+.names n1357 top^nop7_q~6 n1452 n1453 n1454 n1451
+-0001 1
+-0010 1
+-0100 1
+-0111 1
+01000 1
+01011 1
+01101 1
+01110 1
+1-001 1
+1-010 1
+1-100 1
+1-111 1
+.names top^nop7_q~5 n1435 n1222 n1357 n1436 top^nop7_q~6 n1452
+-00111 1
+-10011 1
+-10101 1
+0-0011 1
+100001 1
+.names n1436 n1357 n1435 n1387 top^nop7_q~5 n1453
+-01-0 1
+-011- 1
+-1001 1
+0-001 1
+01-01 1
+1-1-0 1
+1-11- 1
+10-11 1
+.names n1455 n1466 n1467 n1454
+001 1
+010 1
+100 1
+111 1
+.names n1456 n1444 n1464 n1458 n1463 n1465_1 n1455
+-01000 1
+-01011 1
+-01101 1
+-01110 1
+-10001 1
+-10010 1
+-10100 1
+-10111 1
+0-0001 1
+0-0010 1
+0-0100 1
+0-0111 1
+01-001 1
+01-010 1
+01-100 1
+01-111 1
+1-1000 1
+1-1011 1
+1-1101 1
+1-1110 1
+10-000 1
+10-011 1
+10-101 1
+10-110 1
+.names n1422 n1438 n1427 top^nop7_q~2 n1423 n1457 n1456
+--10-1 1
+-00-10 1
+-000-0 1
+-00101 1
+-1-0-1 1
+-11-11 1
+-11100 1
+0-0101 1
+0-0110 1
+00-101 1
+00-110 1
+1-1-11 1
+1-1100 1
+11--11 1
+11-100 1
+.names n1421 n1424 n1425_1 n1440_1 n1442 n1457
+---11 1
+--000 1
+-11-1 1
+00-00 1
+1-1-1 1
+.names n1426 top^nop7_q~2 n1459 n1461 n1458
+-000 1
+-011 1
+0101 1
+0110 1
+1-00 1
+1-11 1
+.names n1460 n1443 top^nop7_q~0 top^nop7_q~1 n1459
+-001 1
+0-10 1
+011- 1
+10-1 1
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~7_FF_NODE n1251 \
+ top^ctrl_mux2to1_mul_opA_sel_FF_NODE n1460
+--00 0
+11-1 0
+.names n1424 n1421 n1425_1 n1462 n1440_1 n1442 n1461
+---1-- 0
+--0-01 0
+00--01 0
+.names n1426 n1443 top^nop7_q~0 top^nop7_q~1 n1462
+0011 1
+.names n1438 n1457 n1423 n1427 n1422 top^nop7_q~2 n1463
+--0001 0
+-1-001 0
+-10--1 0
+0-0-01 0
+0-00-1 0
+01--01 0
+01-0-- 0
+.names n1422 top^nop7_q~3 n1464
+01 1
+.names n1423 top^nop7_q~3 n1465_1
+01 1
+.names n1445_1 n1416 n1417 n1429 n1437 n1444 n1466
+--0001 1
+--0010 1
+-0-001 1
+-0-010 1
+-00-01 1
+-00-10 1
+0---01 1
+0---10 1
+0-00-- 1
+00-0-- 1
+000--- 1
+.names n1422 top^nop7_q~4 n1467
+01 1
+.names n1222 top^nop7_q~7 n1468
+01 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6524 \
+ top^boot_idata~7 n1126 n555
+-11 1
+1-0 1
+.names n1900 top.pipereg_w5+pipereg2^q~1_FF_NODE n1471 top^resetn n560
+--11 1
+01-1 1
+.names n1136 n1900 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6524 n1471
+111 1
+.names n1900 top.pipereg_w32+pipereg^q~7_FF_NODE n1471 top^resetn n565
+--11 1
+01-1 1
+.names top^resetn n1490_1 n1474 n570
+000 1
+011 1
+.names top^nop7_q~7 n1475_1 n1357 n1476 n1489 n1474
+-0101 1
+-0110 1
+-1001 1
+-1010 1
+-1100 1
+-1111 1
+0-001 1
+0-010 1
+10000 1
+10011 1
+.names n1357 top^nop7_q~6 n1452 n1453 n1454 n1468 n1475_1
+-00011 1
+-00101 1
+-01001 1
+-01111 1
+010001 1
+010111 1
+011011 1
+011101 1
+1-0011 1
+1-0101 1
+1-1001 1
+1-1111 1
+.names n1454 n1453 n1477 n1478 n1487 n1488 n1476
+--1001 1
+--1010 1
+--1100 1
+--1111 1
+-00000 1
+-00011 1
+-00101 1
+-00110 1
+01-001 1
+01-010 1
+01-100 1
+01-111 1
+1-0000 1
+1-0011 1
+1-0101 1
+1-0110 1
+.names n1387 n1435 n1357 n1436 top^nop7_q~5 n1477
+--011 0
+-1-1- 0
+-10-- 0
+0---1 0
+.names n1455 n1466 n1467 n1479 n1485_1 n1486 n1478
+-01000 1
+-01011 1
+-01101 1
+-01110 1
+-10001 1
+-10010 1
+-10100 1
+-10111 1
+0-1000 1
+0-1011 1
+0-1101 1
+0-1110 1
+00-000 1
+00-011 1
+00-101 1
+00-110 1
+1-0001 1
+1-0010 1
+1-0100 1
+1-0111 1
+11-001 1
+11-010 1
+11-100 1
+11-111 1
+.names top^nop7_q~2 n1480_1 n1463 n1426 top^nop7_q~3 n1481 n1479
+--11-1 1
+-00-00 1
+-00011 1
+-001-0 1
+-1-1-1 1
+-11-01 1
+-11010 1
+0-1-01 1
+0-1010 1
+01--01 1
+01-010 1
+1-0000 1
+1-0011 1
+10-000 1
+10-011 1
+.names n1459 n1461 n1480_1
+01 1
+10 1
+.names n1459 n1461 n1443 top^nop7_q~2 n1482 n1483 n1481
+---011 1
+--0110 1
+--1-11 1
+-0-000 1
+-00101 1
+-01-00 1
+0--000 1
+0-0101 1
+0-1-00 1
+11-0-1 1
+1101-0 1
+111--1 1
+.names n1443 top^nop7_q~1 n1460 top^nop7_q~0 n1482
+--01 0
+01-- 0
+.names n1460 n1484 top^nop7_q~1 top^nop7_q~0 n1483
+-001 1
+0-10 1
+011- 1
+10-1 1
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~8_FF_NODE n1256 \
+ top^ctrl_mux2to1_mul_opA_sel_FF_NODE n1484
+--00 0
+11-1 0
+.names n1465_1 n1456 n1444 n1464 n1463 n1458 n1485_1
+--0100 1
+--0111 1
+-1-100 1
+-1-111 1
+-10-00 1
+-10-11 1
+1---00 1
+1---11 1
+1-01-- 1
+11-1-- 1
+110--- 1
+.names n1423 top^nop7_q~4 n1486
+01 1
+.names n1387 top^nop7_q~6 n1487
+01 1
+.names n1422 top^nop7_q~5 n1488
+01 1
+.names n1452 n1357 top^nop7_q~6 n1453 n1454 n1489
+-0101 0
+-0110 0
+1--01 0
+1--10 0
+101-- 0
+.names n1222 top^nop7_q~8 n1490_1
+01 1
+.names top.hi_reg+hi_reg^q~0_FF_NODE \
+ top.mul+mul.dummy_mult+fake_mult_one^result~8_FF_NODE \
+ top^ctrl_hi_reg_en_FF_NODE top^resetn n575
+-111 1
+1-01 1
+.names top^resetn n1493 n1494 n1495_1 n1516 n1517 n580
+000000 1
+000011 1
+000101 1
+000110 1
+001001 1
+001010 1
+001100 1
+001111 1
+010001 1
+010010 1
+010100 1
+010111 1
+011000 1
+011011 1
+011101 1
+011110 1
+.names top^nop7_q~7 n1475_1 n1357 n1476 n1489 n1490_1 n1493
+-01001 1
+-01111 1
+-10001 1
+-10111 1
+-11011 1
+-11101 1
+0-0001 1
+0-0111 1
+100011 1
+100101 1
+.names n1357 n1475_1 n1476 n1489 n1387 top^nop7_q~7 n1494
+-00101 1
+-01001 1
+-100-0 1
+-1001- 1
+-111-0 1
+-1111- 1
+0-0011 1
+0-1111 1
+01---0 1
+01--1- 1
+1-0101 1
+1-1001 1
+10--01 1
+.names n1496 n1489 n1487 n1497 n1499 n1515_1 n1495_1
+-01001 1
+-01010 1
+-01100 1
+-01111 1
+-10000 1
+-10011 1
+-10101 1
+-10110 1
+0-1001 1
+0-1010 1
+0-1100 1
+0-1111 1
+00-001 1
+00-010 1
+00-100 1
+00-111 1
+1-0000 1
+1-0011 1
+1-0101 1
+1-0110 1
+11-000 1
+11-011 1
+11-101 1
+11-110 1
+.names n1454 n1453 n1477 n1478 n1488 n1496
+--100 1
+--111 1
+-0001 1
+-0010 1
+01-00 1
+01-11 1
+1-001 1
+1-010 1
+.names n1454 n1453 n1477 n1478 n1488 n1498 n1497
+---001 1
+---110 1
+--1-01 1
+--10-1 1
+-00-10 1
+-001-0 1
+01--01 1
+01-0-1 1
+1-0-10 1
+1-01-0 1
+.names n1423 top^nop7_q~5 n1498
+01 1
+.names n1500_1 n1513 n1514 n1499
+001 1
+010 1
+100 1
+111 1
+.names n1479 n1485_1 n1501 n1502 n1510_1 n1512 n1500_1
+--1001 1
+--1010 1
+--1100 1
+--1111 1
+-00000 1
+-00011 1
+-00101 1
+-00110 1
+0-0000 1
+0-0011 1
+0-0101 1
+0-0110 1
+11-001 1
+11-010 1
+11-100 1
+11-111 1
+.names n1480_1 n1463 top^nop7_q~2 n1426 n1481 top^nop7_q~3 n1501
+-01001 1
+-10011 1
+0-1001 1
+00-001 1
+1-0011 1
+11-011 1
+.names n1503 n1507 n1509 n1502
+000 1
+011 1
+101 1
+110 1
+.names n1504 n1506 n1503
+00 1
+.names n1505_1 top^nop7_q~0 n1484 top^nop7_q~1 n1504
+--01 0
+01-- 0
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~9_FF_NODE n1255_1 \
+ top^ctrl_mux2to1_mul_opA_sel_FF_NODE n1505_1
+--00 0
+11-1 0
+.names n1484 n1505_1 top^nop7_q~0 top^nop7_q~1 n1506
+0011 1
+.names n1461 n1459 n1483 n1482 n1508 n1507
+---10 1
+--0-0 1
+11--0 1
+.names n1460 n1484 top^nop7_q~0 top^nop7_q~1 n1508
+0011 1
+.names n1460 top^nop7_q~2 n1509
+01 1
+.names n1480_1 n1511 n1443 n1463 n1426 top^nop7_q~2 n1510_1
+--0001 1
+-1-001 1
+-10--1 1
+0-0-01 1
+0-00-1 1
+01--01 1
+01-0-- 1
+.names n1459 n1461 n1482 n1483 n1511
+--11 1
+-000 1
+0-00 1
+11-1 1
+.names n1443 top^nop7_q~3 n1512
+01 1
+.names n1486 n1455 n1467 n1466 n1479 n1485_1 n1513
+--0100 1
+--0111 1
+-1-100 1
+-1-111 1
+-10-00 1
+-10-11 1
+0---00 1
+0---11 1
+0-01-- 1
+01-1-- 1
+010--- 1
+.names n1426 top^nop7_q~4 n1514
+01 1
+.names n1422 top^nop7_q~6 n1515_1
+01 1
+.names n1222 top^nop7_q~9 n1516
+01 1
+.names n1357 top^nop7_q~8 n1517
+01 1
+.names top.hi_reg+hi_reg^q~1_FF_NODE \
+ top.mul+mul.dummy_mult+fake_mult_one^result~9_FF_NODE \
+ top^ctrl_hi_reg_en_FF_NODE top^resetn n585
+-111 1
+1-01 1
+.names n1544 n1546 top^resetn n1520_1 n1547 n590
+-1001 1
+-1010 1
+00000 1
+00011 1
+1-001 1
+1-010 1
+.names n1521 n1542 n1543 n1520_1
+001 1
+010 1
+100 1
+111 1
+.names n1522 n1495_1 n1540_1 n1523 n1539 n1541 n1521
+-01001 1
+-01010 1
+-01100 1
+-01111 1
+-10000 1
+-10011 1
+-10101 1
+-10110 1
+0-0000 1
+0-0011 1
+0-0101 1
+0-0110 1
+01-000 1
+01-011 1
+01-101 1
+01-110 1
+1-1001 1
+1-1010 1
+1-1100 1
+1-1111 1
+10-001 1
+10-010 1
+10-100 1
+10-111 1
+.names top^nop7_q~7 n1475_1 n1357 n1489 n1476 n1522
+-1-00 1
+-1-11 1
+-10-- 1
+1-000 1
+1-011 1
+.names n1524 n1499 n1498 n1525_1 n1537 n1538 n1523
+-00001 1
+-00010 1
+-00100 1
+-00111 1
+-11000 1
+-11011 1
+-11101 1
+-11110 1
+0-1000 1
+0-1011 1
+0-1101 1
+0-1110 1
+01-000 1
+01-011 1
+01-101 1
+01-110 1
+1-0001 1
+1-0010 1
+1-0100 1
+1-0111 1
+10-001 1
+10-010 1
+10-100 1
+10-111 1
+.names n1477 n1454 n1453 n1478 n1488 n1524
+---00 1
+-01-0 1
+-010- 1
+1---0 1
+1--0- 1
+.names n1500_1 n1513 n1514 n1526 n1535_1 n1536 n1525_1
+-01000 1
+-01011 1
+-01101 1
+-01110 1
+-10001 1
+-10010 1
+-10100 1
+-10111 1
+0-1000 1
+0-1011 1
+0-1101 1
+0-1110 1
+00-000 1
+00-011 1
+00-101 1
+00-110 1
+1-0001 1
+1-0010 1
+1-0100 1
+1-0111 1
+11-001 1
+11-010 1
+11-100 1
+11-111 1
+.names n1510_1 n1502 n1527 n1528 n1534 n1526
+--101 1
+--110 1
+-0000 1
+-0011 1
+01-01 1
+01-10 1
+1-000 1
+1-011 1
+.names n1509 n1503 n1507 n1527
+001 1
+010 1
+.names n1529 n1504 n1530_1 n1531 n1532 n1528
+-1001 1
+-1010 1
+-1100 1
+-1111 1
+00000 1
+00011 1
+00101 1
+00110 1
+1-001 1
+1-010 1
+1-100 1
+1-111 1
+.names n1461 n1459 n1483 n1482 n1508 n1506 n1529
+---100 1
+--0-00 1
+11--00 1
+.names n1505_1 top^nop7_q~1 n1530_1
+01 1
+.names n1484 top^nop7_q~2 n1531
+01 1
+.names n1533 top^nop7_q~0 n1532
+01 1
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~10_FF_NODE n1260_1 \
+ top^ctrl_mux2to1_mul_opA_sel_FF_NODE n1533
+--00 0
+11-1 0
+.names n1460 top^nop7_q~3 n1534
+01 1
+.names n1501 n1479 n1485_1 n1512 n1502 n1510_1 n1535_1
+---101 1
+---110 1
+-11-01 1
+-11-10 1
+-111-- 1
+1---01 1
+1---10 1
+1--1-- 1
+.names n1443 top^nop7_q~4 n1536
+01 1
+.names n1423 top^nop7_q~6 n1537
+01 1
+.names n1426 top^nop7_q~5 n1538
+01 1
+.names n1515_1 n1496 n1489 n1487 n1497 n1499 n1539
+--0101 1
+--0110 1
+-0-101 1
+-0-110 1
+-00-01 1
+-00-10 1
+1---01 1
+1---10 1
+1-01-- 1
+10-1-- 1
+100--- 1
+.names n1387 top^nop7_q~7 n1540_1
+01 1
+.names n1422 top^nop7_q~7 n1541
+01 1
+.names n1493 n1517 n1494 n1495_1 n1542
+-001 1
+-010 1
+0-01 1
+0-10 1
+00-- 1
+.names n1387 top^nop7_q~8 n1543
+01 1
+.names n1516 n1493 n1494 n1495_1 n1517 n1545_1 n1544
+-00010 1
+-00100 1
+-01000 1
+-01110 1
+-10000 1
+-10110 1
+-11010 1
+-11100 1
+0----0 1
+.names n1357 top^nop7_q~9 n1545_1
+01 1
+.names n1357 n1493 n1494 n1495_1 top^nop7_q~8 n1516 n1546
+000001 1
+000111 1
+001011 1
+001101 1
+010011 1
+010101 1
+011001 1
+011111 1
+.names n1222 top^nop7_q~10 n1547
+01 1
+.names top.hi_reg+hi_reg^q~2_FF_NODE \
+ top.mul+mul.dummy_mult+fake_mult_one^result~10_FF_NODE \
+ top^ctrl_hi_reg_en_FF_NODE top^resetn n595
+-111 1
+1-01 1
+.names top^resetn n1550_1 n1577 n1578 n600
+0001 1
+0010 1
+0100 1
+0111 1
+.names n1551 n1552 n1554 n1576 n1550_1
+0000 1
+0011 1
+0101 1
+0110 1
+1001 1
+1010 1
+1100 1
+1111 1
+.names n1544 n1546 n1521 n1542 n1543 n1547 n1551
+-10011 1
+-10101 1
+-11001 1
+-11111 1
+000001 1
+000111 1
+001011 1
+001101 1
+1-0011 1
+1-0101 1
+1-1001 1
+1-1111 1
+.names n1544 n1546 n1521 n1542 n1543 n1553 n1552
+-00001 1
+-00111 1
+-01011 1
+-01101 1
+-1---0 1
+0-0010 1
+0-0100 1
+0-1000 1
+0-1110 1
+10---1 1
+.names n1387 top^nop7_q~9 n1553
+01 1
+.names n1422 top^nop7_q~8 n1555 n1556 n1575 n1554
+-0000 1
+-0011 1
+-0101 1
+-0110 1
+01001 1
+01010 1
+01100 1
+01111 1
+1-000 1
+1-011 1
+1-101 1
+1-110 1
+.names n1541 n1522 n1540_1 n1495_1 n1523 n1539 n1555
+--0100 1
+--0111 1
+-0-100 1
+-0-111 1
+-00-00 1
+-00-11 1
+0---00 1
+0---11 1
+0-01-- 1
+00-1-- 1
+000--- 1
+.names n1557 n1539 n1537 n1558 n1560_1 n1574 n1556
+-00001 1
+-00010 1
+-00100 1
+-00111 1
+-11000 1
+-11011 1
+-11101 1
+-11110 1
+0-0001 1
+0-0010 1
+0-0100 1
+0-0111 1
+00-001 1
+00-010 1
+00-100 1
+00-111 1
+1-1000 1
+1-1011 1
+1-1101 1
+1-1110 1
+11-000 1
+11-011 1
+11-101 1
+11-110 1
+.names n1524 n1499 n1498 n1525_1 n1538 n1557
+-0001 1
+-0010 1
+-1100 1
+-1111 1
+0-100 1
+0-111 1
+01-00 1
+01-11 1
+1-001 1
+1-010 1
+10-01 1
+10-10 1
+.names n1524 n1525_1 n1538 n1499 n1498 n1559 n1558
+--0001 1
+--1110 1
+-0-001 1
+-00--1 1
+-1-110 1
+-11--0 1
+0-1-10 1
+0-11-0 1
+01--10 1
+01-1-0 1
+1-0-01 1
+1-00-1 1
+10--01 1
+10-0-1 1
+.names n1443 top^nop7_q~5 n1559
+01 1
+.names n1561 n1573 n1560_1
+00 1
+11 1
+.names n1562 n1535_1 n1534 n1563 n1571 n1572 n1561
+-00000 1
+-00011 1
+-00101 1
+-00110 1
+-11001 1
+-11010 1
+-11100 1
+-11111 1
+0-1001 1
+0-1010 1
+0-1100 1
+0-1111 1
+01-001 1
+01-010 1
+01-100 1
+01-111 1
+1-0000 1
+1-0011 1
+1-0101 1
+1-0110 1
+10-000 1
+10-011 1
+10-101 1
+10-110 1
+.names n1510_1 n1502 n1527 n1528 n1562
+--10 1
+-001 1
+01-0 1
+1-01 1
+.names n1510_1 n1502 n1527 n1528 n1564 n1565_1 n1563
+----10 1
+---001 1
+--11-0 1
+-00-01 1
+01-1-0 1
+1-0-01 1
+.names n1529 n1504 n1531 n1530_1 n1532 n1564
+-1000 1
+-1011 1
+00001 1
+00010 1
+1-000 1
+1-011 1
+.names n1529 n1504 n1530_1 n1532 n1566 n1570_1 n1565_1
+--0001 1
+--0010 1
+--1100 1
+--1111 1
+-1-001 1
+-1-010 1
+-10-01 1
+-10-10 1
+00-100 1
+00-111 1
+001-00 1
+001-11 1
+1--001 1
+1--010 1
+1-0-01 1
+1-0-10 1
+.names n1567 n1568 n1566
+01 1
+10 1
+.names n1533 top^nop7_q~1 n1567
+01 1
+.names n1569 top^nop7_q~0 n1568
+01 1
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~11_FF_NODE n1259 \
+ top^ctrl_mux2to1_mul_opA_sel_FF_NODE n1569
+--00 0
+11-1 0
+.names n1505_1 top^nop7_q~2 n1570_1
+01 1
+.names n1460 top^nop7_q~4 n1571
+01 1
+.names n1484 top^nop7_q~3 n1572
+01 1
+.names n1536 n1500_1 n1514 n1513 n1526 n1535_1 n1573
+--0100 1
+--0111 1
+-1-100 1
+-1-111 1
+-10-00 1
+-10-11 1
+0---00 1
+0---11 1
+0-01-- 1
+01-1-- 1
+010--- 1
+.names n1426 top^nop7_q~6 n1574
+01 1
+.names n1423 top^nop7_q~7 n1575
+01 1
+.names n1521 n1543 n1542 n1576
+-01 1
+1-1 1
+10- 1
+.names n1222 top^nop7_q~11 n1577
+01 1
+.names n1357 top^nop7_q~10 n1578
+01 1
+.names top.hi_reg+hi_reg^q~3_FF_NODE \
+ top.mul+mul.dummy_mult+fake_mult_one^result~11_FF_NODE \
+ top^ctrl_hi_reg_en_FF_NODE top^resetn n605
+-111 1
+1-01 1
+.names n1222 top^nop7_q~12 top^resetn n1581 n1583 n610
+-0001 1
+-0010 1
+01000 1
+01011 1
+1-001 1
+1-010 1
+.names top^nop7_q~11 n1357 n1582 n1581
+-11 1
+100 1
+.names n1551 n1552 n1554 n1576 n1578 n1577 n1582
+000001 1
+000111 1
+001011 1
+001101 1
+010011 1
+010101 1
+011001 1
+011111 1
+100011 1
+100101 1
+101001 1
+101111 1
+110001 1
+110111 1
+111011 1
+111101 1
+.names n1387 top^nop7_q~10 n1584 n1587 n1612 n1583
+-0000 1
+-0011 1
+-0101 1
+-0110 1
+01001 1
+01010 1
+01100 1
+01111 1
+1-000 1
+1-011 1
+1-101 1
+1-110 1
+.names n1585_1 n1553 n1554 n1576 n1586 n1584
+-0011 1
+-0101 1
+-1000 1
+-1110 1
+0-000 1
+0-110 1
+01--0 1
+1-011 1
+1-101 1
+10--1 1
+.names n1544 n1521 n1542 n1543 n1546 n1585_1
+-0000 1
+-0110 1
+-1010 1
+-1100 1
+1---0 1
+.names n1422 top^nop7_q~9 n1586
+01 1
+.names n1576 n1554 n1588 n1589 n1591 n1611 n1587
+--1000 1
+--1011 1
+--1101 1
+--1110 1
+-00001 1
+-00010 1
+-00100 1
+-00111 1
+01-000 1
+01-011 1
+01-101 1
+01-110 1
+1-0001 1
+1-0010 1
+1-0100 1
+1-0111 1
+.names n1422 n1555 n1556 n1575 top^nop7_q~8 n1588
+00001 1
+00111 1
+01011 1
+01101 1
+.names n1555 n1556 n1575 n1590_1 n1589
+-001 1
+-110 1
+0-10 1
+01-0 1
+1-01 1
+10-1 1
+.names n1426 top^nop7_q~7 n1590_1
+01 1
+.names n1592 n1610_1 n1591
+00 1
+11 1
+.names n1593 n1560_1 n1559 n1594 n1608 n1609 n1592
+-00001 1
+-00010 1
+-00100 1
+-00111 1
+-11000 1
+-11011 1
+-11101 1
+-11110 1
+0-1000 1
+0-1011 1
+0-1101 1
+0-1110 1
+01-000 1
+01-011 1
+01-101 1
+01-110 1
+1-0001 1
+1-0010 1
+1-0100 1
+1-0111 1
+10-001 1
+10-010 1
+10-100 1
+10-111 1
+.names n1524 n1525_1 n1538 n1499 n1498 n1593
+--000 1
+-0-00 1
+-00-- 1
+1-0-0 1
+1-00- 1
+10--0 1
+10-0- 1
+.names n1573 n1561 n1595_1 n1596 n1606 n1607 n1594
+--1001 1
+--1010 1
+--1100 1
+--1111 1
+-00000 1
+-00011 1
+-00101 1
+-00110 1
+01-001 1
+01-010 1
+01-100 1
+01-111 1
+1-0000 1
+1-0011 1
+1-0101 1
+1-0110 1
+.names n1562 n1535_1 n1534 n1563 n1572 n1571 n1595_1
+-00001 1
+-00111 1
+-11011 1
+-11101 1
+0-1011 1
+0-1101 1
+01-011 1
+01-101 1
+1-0001 1
+1-0111 1
+10-001 1
+10-111 1
+.names top^nop7_q~2 n1597 n1605_1 n1505_1 top^nop7_q~3 n1598 n1596
+--01-1 1
+-0-1-1 1
+-00-01 1
+-00010 1
+-11-00 1
+-11011 1
+-111-0 1
+0-0-01 1
+0-0010 1
+00--01 1
+00-010 1
+1-1000 1
+1-1011 1
+11-000 1
+11-011 1
+.names n1510_1 n1502 n1528 n1527 n1564 n1597
+--0-0 1
+-0-00 1
+1--00 1
+.names n1599 n1600_1 n1604 n1598
+000 1
+011 1
+101 1
+110 1
+.names n1530_1 n1567 n1529 n1504 n1568 n1532 n1599
+--0011 0
+-1--1- 0
+-100-1 0
+1---11 0
+1-001- 0
+11---1 0
+1100-- 0
+.names n1601 n1602 n1600_1
+01 1
+10 1
+.names n1569 top^nop7_q~1 n1601
+01 1
+.names n1603 top^nop7_q~0 n1602
+01 1
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~12_FF_NODE n1266 \
+ top^ctrl_mux2to1_mul_opA_sel_FF_NODE n1603
+--00 0
+11-1 0
+.names n1533 top^nop7_q~2 n1604
+01 1
+.names n1529 n1504 n1530_1 n1532 n1566 n1605_1
+--001 1
+--110 1
+-1-01 1
+-10-1 1
+00-10 1
+001-0 1
+1--01 1
+1-0-1 1
+.names n1572 n1562 n1535_1 n1534 n1565_1 n1597 n1606
+--0000 1
+--0011 1
+-1-000 1
+-1-011 1
+-10-00 1
+-10-11 1
+0---00 1
+0---11 1
+0-00-- 1
+01-0-- 1
+010--- 1
+.names n1484 top^nop7_q~4 n1607
+01 1
+.names n1460 top^nop7_q~5 n1608
+01 1
+.names n1443 top^nop7_q~6 n1609
+01 1
+.names n1574 n1557 n1539 n1537 n1560_1 n1558 n1610_1
+--0000 1
+--0011 1
+-0-000 1
+-0-011 1
+-00-00 1
+-00-11 1
+0---00 1
+0---11 1
+0-00-- 1
+00-0-- 1
+000--- 1
+.names n1423 top^nop7_q~8 n1611
+01 1
+.names n1551 n1578 n1552 n1554 n1576 n1612
+-0001 1
+-0010 1
+-0100 1
+-0111 1
+0-001 1
+0-010 1
+0-100 1
+0-111 1
+00--- 1
+.names top.hi_reg+hi_reg^q~4_FF_NODE \
+ top.mul+mul.dummy_mult+fake_mult_one^result~12_FF_NODE \
+ top^ctrl_hi_reg_en_FF_NODE top^resetn n615
+-111 1
+1-01 1
+.names top^resetn n1615_1 n1616 n1617 n1644 n1645 n620
+000000 1
+000011 1
+000101 1
+000110 1
+001001 1
+001010 1
+001100 1
+001111 1
+010001 1
+010010 1
+010100 1
+010111 1
+011000 1
+011011 1
+011101 1
+011110 1
+.names n1222 n1581 n1583 top^nop7_q~12 n1615_1
+0011 1
+0101 1
+.names n1583 n1357 n1582 n1387 top^nop7_q~11 n1616
+-01-0 1
+-011- 1
+-1001 1
+0-001 1
+01-01 1
+1-1-0 1
+1-11- 1
+10-11 1
+.names n1618 n1642 n1643 n1617
+000 1
+011 1
+101 1
+110 1
+.names n1619 n1587 n1586 n1620 n1640 n1641 n1618
+-00001 1
+-00010 1
+-00100 1
+-00111 1
+-11000 1
+-11011 1
+-11101 1
+-11110 1
+0-0001 1
+0-0010 1
+0-0100 1
+0-0111 1
+00-001 1
+00-010 1
+00-100 1
+00-111 1
+1-1000 1
+1-1011 1
+1-1101 1
+1-1110 1
+11-000 1
+11-011 1
+11-101 1
+11-110 1
+.names n1585_1 n1553 n1576 n1554 n1619
+-100 1
+-111 1
+0-00 1
+0-11 1
+01-- 1
+.names n1426 top^nop7_q~8 n1621 n1622 n1639 n1620
+-0001 1
+-0010 1
+-0100 1
+-0111 1
+01000 1
+01011 1
+01101 1
+01110 1
+1-001 1
+1-010 1
+1-100 1
+1-111 1
+.names n1590_1 n1555 n1556 n1575 n1592 n1610_1 n1621
+--0001 1
+--0010 1
+-1-001 1
+-1-010 1
+-10-01 1
+-10-10 1
+0---01 1
+0---10 1
+0-00-- 1
+01-0-- 1
+010--- 1
+.names n1623 n1610_1 n1609 n1624 n1626 n1638 n1622
+-01001 1
+-01010 1
+-01100 1
+-01111 1
+-10000 1
+-10011 1
+-10101 1
+-10110 1
+0-1001 1
+0-1010 1
+0-1100 1
+0-1111 1
+00-001 1
+00-010 1
+00-100 1
+00-111 1
+1-0000 1
+1-0011 1
+1-0101 1
+1-0110 1
+11-000 1
+11-011 1
+11-101 1
+11-110 1
+.names n1593 n1560_1 n1559 n1594 n1608 n1623
+-0000 1
+-0011 1
+-1101 1
+-1110 1
+0-101 1
+0-110 1
+01-01 1
+01-10 1
+1-000 1
+1-011 1
+10-00 1
+10-11 1
+.names n1593 n1594 n1608 n1560_1 n1559 n1625 n1624
+--0001 1
+--1110 1
+-0-001 1
+-00--1 1
+-1-110 1
+-11--0 1
+0-1-10 1
+0-11-0 1
+01--10 1
+01-1-0 1
+1-0-01 1
+1-00-1 1
+10--01 1
+10-0-1 1
+.names n1484 top^nop7_q~5 n1625
+01 1
+.names n1627 n1637 n1626
+00 1
+11 1
+.names n1606 n1596 n1628 n1629 n1635 n1636 n1627
+--1001 1
+--1010 1
+--1100 1
+--1111 1
+-00000 1
+-00011 1
+-00101 1
+-00110 1
+01-001 1
+01-010 1
+01-100 1
+01-111 1
+1-0000 1
+1-0011 1
+1-0101 1
+1-0110 1
+.names n1597 n1605_1 top^nop7_q~2 n1505_1 n1598 top^nop7_q~3 n1628
+-00011 1
+-11001 1
+0-0011 1
+00-011 1
+1-1001 1
+11-001 1
+.names n1597 n1598 n1605_1 n1570_1 n1630 n1631 n1629
+----11 1
+--0000 1
+-0--00 1
+-111-1 1
+0--000 1
+0-0-00 1
+11-1-1 1
+111--1 1
+.names n1599 n1600_1 n1604 n1630
+001 1
+111 1
+.names n1599 n1601 n1602 n1632 n1633 n1634 n1631
+-00001 1
+-00010 1
+-00100 1
+-00111 1
+-11000 1
+-11011 1
+-11101 1
+-11110 1
+0-1000 1
+0-1011 1
+0-1101 1
+0-1110 1
+01-000 1
+01-011 1
+01-101 1
+01-110 1
+1-0001 1
+1-0010 1
+1-0100 1
+1-0111 1
+10-001 1
+10-010 1
+10-100 1
+10-111 1
+.names n1569 top^nop7_q~2 n1632
+01 1
+.names n1603 top^nop7_q~1 n1633
+01 1
+.names n1150_1 n1265_1 top^ctrl_mux2to1_mul_opA_sel_FF_NODE top^nop7_q~0 \
+ n1634
+-001 1
+1-11 1
+.names n1505_1 top^nop7_q~4 n1635
+01 1
+.names n1533 top^nop7_q~3 n1636
+01 1
+.names n1561 n1573 n1607 n1595_1 n1596 n1606 n1637
+--0-01 1
+--0-10 1
+-1-001 1
+-1-010 1
+-100-- 1
+0--001 1
+0--010 1
+0-00-- 1
+.names n1460 top^nop7_q~6 n1638
+01 1
+.names n1443 top^nop7_q~7 n1639
+01 1
+.names n1554 n1576 n1611 n1588 n1591 n1589 n1640
+--0-00 1
+--0-11 1
+-1-000 1
+-1-011 1
+-100-- 1
+0--000 1
+0--011 1
+0-00-- 1
+.names n1423 top^nop7_q~9 n1641
+01 1
+.names n1612 n1387 top^nop7_q~10 n1584 n1587 n1642
+-0101 0
+-0110 0
+0--01 0
+0--10 0
+001-- 0
+.names n1422 top^nop7_q~10 n1643
+01 1
+.names n1222 top^nop7_q~13 n1644
+01 1
+.names n1357 top^nop7_q~12 n1645
+01 1
+.names top.hi_reg+hi_reg^q~5_FF_NODE \
+ top.mul+mul.dummy_mult+fake_mult_one^result~13_FF_NODE \
+ top^ctrl_hi_reg_en_FF_NODE top^resetn n625
+-111 1
+1-01 1
+.names n1648 n1650 top^resetn n1651 n1681 n1682 n630
+-10000 1
+-10011 1
+-10101 1
+-10110 1
+000001 1
+000010 1
+000100 1
+000111 1
+1-0000 1
+1-0011 1
+1-0101 1
+1-0110 1
+.names n1644 n1615_1 n1616 n1617 n1645 n1649 n1648
+-00010 1
+-00100 1
+-01000 1
+-01110 1
+-10000 1
+-10110 1
+-11010 1
+-11100 1
+0----0 1
+.names n1357 top^nop7_q~13 n1649
+01 1
+.names n1357 n1615_1 n1616 n1617 top^nop7_q~12 n1644 n1650
+000001 1
+000111 1
+001011 1
+001101 1
+010011 1
+010101 1
+011001 1
+011111 1
+.names n1617 n1616 n1652 n1653 n1679 n1680 n1651
+--1000 1
+--1011 1
+--1101 1
+--1110 1
+-00001 1
+-00010 1
+-00100 1
+-00111 1
+01-000 1
+01-011 1
+01-101 1
+01-110 1
+1-0001 1
+1-0010 1
+1-0100 1
+1-0111 1
+.names n1583 n1357 n1582 n1387 top^nop7_q~11 n1652
+-0101 1
+1-101 1
+10-01 1
+.names n1618 n1642 n1643 n1654 n1677 n1678 n1653
+-01001 1
+-01010 1
+-01100 1
+-01111 1
+-10000 1
+-10011 1
+-10101 1
+-10110 1
+0-1001 1
+0-1010 1
+0-1100 1
+0-1111 1
+00-001 1
+00-010 1
+00-100 1
+00-111 1
+1-0000 1
+1-0011 1
+1-0101 1
+1-0110 1
+11-000 1
+11-011 1
+11-101 1
+11-110 1
+.names n1640 n1620 n1655 n1656 n1675 n1676 n1654
+--1000 1
+--1011 1
+--1101 1
+--1110 1
+-00001 1
+-00010 1
+-00100 1
+-00111 1
+01-000 1
+01-011 1
+01-101 1
+01-110 1
+1-0001 1
+1-0010 1
+1-0100 1
+1-0111 1
+.names n1426 n1621 n1622 n1639 top^nop7_q~8 n1655
+00011 1
+00101 1
+01001 1
+01111 1
+.names n1621 n1622 n1639 n1657 n1673 n1674 n1656
+-01001 1
+-01010 1
+-01100 1
+-01111 1
+-10000 1
+-10011 1
+-10101 1
+-10110 1
+0-1001 1
+0-1010 1
+0-1100 1
+0-1111 1
+00-001 1
+00-010 1
+00-100 1
+00-111 1
+1-0000 1
+1-0011 1
+1-0101 1
+1-0110 1
+11-000 1
+11-011 1
+11-101 1
+11-110 1
+.names n1658 n1626 n1625 n1659 n1671 n1672 n1657
+-00001 1
+-00010 1
+-00100 1
+-00111 1
+-11000 1
+-11011 1
+-11101 1
+-11110 1
+0-1000 1
+0-1011 1
+0-1101 1
+0-1110 1
+01-000 1
+01-011 1
+01-101 1
+01-110 1
+1-0001 1
+1-0010 1
+1-0100 1
+1-0111 1
+10-001 1
+10-010 1
+10-100 1
+10-111 1
+.names n1593 n1594 n1608 n1560_1 n1559 n1658
+--000 1
+-0-00 1
+-00-- 1
+1-0-0 1
+1-00- 1
+10--0 1
+10-0- 1
+.names n1660 n1637 n1635 n1661 n1669 n1670 n1659
+-01000 1
+-01011 1
+-01101 1
+-01110 1
+-10001 1
+-10010 1
+-10100 1
+-10111 1
+0-1000 1
+0-1011 1
+0-1101 1
+0-1110 1
+00-000 1
+00-011 1
+00-101 1
+00-110 1
+1-0001 1
+1-0010 1
+1-0100 1
+1-0111 1
+11-001 1
+11-010 1
+11-100 1
+11-111 1
+.names n1606 n1596 n1628 n1629 n1636 n1660
+--100 1
+--111 1
+-0001 1
+-0010 1
+01-00 1
+01-11 1
+1-001 1
+1-010 1
+.names n1662 n1667 n1632 n1663 n1668 n1661
+-0001 1
+-0010 1
+-1100 1
+-1111 1
+0-100 1
+0-111 1
+01-00 1
+01-11 1
+1-001 1
+1-010 1
+10-01 1
+10-10 1
+.names n1598 n1597 n1605_1 n1570_1 n1630 n1662
+--000 1
+-0-00 1
+-00-0 1
+0---0 1
+.names n1603 top^nop7_q~2 n1664 n1665 n1663
+-000 1
+-011 1
+0101 1
+0110 1
+1-00 1
+1-11 1
+.names n1599 n1633 n1634 n1601 n1602 n1664
+--000 1
+-0-00 1
+-00-- 1
+1-0-0 1
+1-00- 1
+10--0 1
+10-0- 1
+.names n1265_1 n1150_1 top^nop7_q~1 top^ctrl_mux2to1_mul_opA_sel_FF_NODE \
+ n1666 n1665
+--0-1 1
+-0-11 1
+-1110 1
+0-100 1
+1--01 1
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~14_FF_NODE n1264 \
+ top^ctrl_mux2to1_mul_opA_sel_FF_NODE top^nop7_q~0 n1666
+--001 1
+11-11 1
+.names n1599 n1601 n1602 n1633 n1634 n1667
+-0001 1
+-0010 1
+-1100 1
+-1111 1
+0-100 1
+0-111 1
+01-00 1
+01-11 1
+1-001 1
+1-010 1
+10-01 1
+10-10 1
+.names n1569 top^nop7_q~3 n1668
+01 1
+.names n1628 n1606 n1596 n1629 n1636 n1669
+---01 1
+-01-1 1
+-010- 1
+1---1 1
+1--0- 1
+.names n1533 top^nop7_q~4 n1670
+01 1
+.names n1484 top^nop7_q~6 n1671
+01 1
+.names n1505_1 top^nop7_q~5 n1672
+01 1
+.names n1638 n1623 n1609 n1610_1 n1626 n1624 n1673
+--0100 1
+--0111 1
+-1-100 1
+-1-111 1
+-10-00 1
+-10-11 1
+0---00 1
+0---11 1
+0-01-- 1
+01-1-- 1
+010--- 1
+.names n1460 top^nop7_q~7 n1674
+01 1
+.names n1426 top^nop7_q~9 n1675
+01 1
+.names n1443 top^nop7_q~8 n1676
+01 1
+.names n1641 n1619 n1587 n1586 n1620 n1640 n1677
+--0001 1
+--0010 1
+-0-001 1
+-0-010 1
+-00-01 1
+-00-10 1
+0---01 1
+0---10 1
+0-00-- 1
+00-0-- 1
+000--- 1
+.names n1423 top^nop7_q~10 n1678
+01 1
+.names n1387 top^nop7_q~12 n1679
+01 1
+.names n1422 top^nop7_q~11 n1680
+01 1
+.names n1615_1 n1645 n1616 n1617 n1681
+-001 1
+-010 1
+0-01 1
+0-10 1
+00-- 1
+.names n1222 top^nop7_q~14 n1682
+01 1
+.names top.hi_reg+hi_reg^q~6_FF_NODE \
+ top.mul+mul.dummy_mult+fake_mult_one^result~14_FF_NODE \
+ top^ctrl_hi_reg_en_FF_NODE top^resetn n635
+-111 1
+1-01 1
+.names n1710 n1711 top^resetn n1685 n1709 n1713 n640
+-10001 1
+-10010 1
+-10100 1
+-10111 1
+000000 1
+000011 1
+000101 1
+000110 1
+1-0001 1
+1-0010 1
+1-0100 1
+1-0111 1
+.names n1686 n1681 n1679 n1687 n1706 n1708 n1685
+-01001 1
+-01010 1
+-01100 1
+-01111 1
+-10000 1
+-10011 1
+-10101 1
+-10110 1
+0-0000 1
+0-0011 1
+0-0101 1
+0-0110 1
+01-000 1
+01-011 1
+01-101 1
+01-110 1
+1-1001 1
+1-1010 1
+1-1100 1
+1-1111 1
+10-001 1
+10-010 1
+10-100 1
+10-111 1
+.names n1617 n1616 n1652 n1653 n1680 n1686
+--100 1
+--111 1
+-0001 1
+-0010 1
+01-00 1
+01-11 1
+1-001 1
+1-010 1
+.names n1688 n1689 n1699 n1700 n1702 n1705 n1687
+000000 1
+000011 1
+000101 1
+000110 1
+001001 1
+001010 1
+001100 1
+001111 1
+010001 1
+010010 1
+010100 1
+010111 1
+011000 1
+011011 1
+011101 1
+011110 1
+100001 1
+100010 1
+100100 1
+100111 1
+101000 1
+101011 1
+101101 1
+101110 1
+110000 1
+110011 1
+110101 1
+110110 1
+111001 1
+111010 1
+111100 1
+111111 1
+.names n1678 n1618 n1643 n1642 n1654 n1677 n1688
+--0101 1
+--0110 1
+-1-101 1
+-1-110 1
+-10-01 1
+-10-10 1
+0---01 1
+0---10 1
+0-01-- 1
+01-1-- 1
+010--- 1
+.names n1690 n1691 n1692 n1696 n1697 n1698 n1689
+000001 1
+000010 1
+000100 1
+000111 1
+001000 1
+001011 1
+001101 1
+001110 1
+010000 1
+010011 1
+010101 1
+010110 1
+011001 1
+011010 1
+011100 1
+011111 1
+100000 1
+100011 1
+100101 1
+100110 1
+101001 1
+101010 1
+101100 1
+101111 1
+110001 1
+110010 1
+110100 1
+110111 1
+111000 1
+111011 1
+111101 1
+111110 1
+.names n1640 n1620 n1655 n1656 n1676 n1675 n1690
+--1001 1
+--1111 1
+-00011 1
+-00101 1
+01-001 1
+01-111 1
+1-0011 1
+1-0101 1
+.names n1621 n1639 n1622 n1657 n1673 n1674 n1691
+---001 0
+---010 0
+---100 0
+---111 0
+-01--- 0
+1-1--- 0
+10---- 0
+.names n1569 top^nop7_q~4 n1693 n1695 n1692
+-001 1
+-010 1
+0100 1
+0111 1
+1-01 1
+1-10 1
+.names n1265_1 n1150_1 top^nop7_q~2 top^ctrl_mux2to1_mul_opA_sel_FF_NODE \
+ n1694 n1693
+--0-0 1
+-0-10 1
+-1111 1
+0-101 1
+1--00 1
+.names n1670 n1660 n1635 n1637 n1661 n1669 n1694
+--0100 1
+--0111 1
+-1-100 1
+-1-111 1
+-10-00 1
+-10-11 1
+0---00 1
+0---11 1
+0-01-- 1
+01-1-- 1
+010--- 1
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~15_FF_NODE n1273 \
+ top^ctrl_mux2to1_mul_opA_sel_FF_NODE top^nop7_q~0 n1695
+--001 1
+11-11 1
+.names n1265_1 n1150_1 n1664 n1666 top^ctrl_mux2to1_mul_opA_sel_FF_NODE \
+ top^nop7_q~1 n1696
+--01-- 1
+-1-111 1
+-10-11 1
+0--101 1
+0-0-01 1
+.names n1603 n1443 top^nop7_q~3 top^nop7_q~9 n1697
+-001 0
+0-10 0
+011- 0
+10-1 0
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~14_FF_NODE n1264 \
+ top^ctrl_mux2to1_mul_opA_sel_FF_NODE top^nop7_q~1 n1698
+--001 1
+11-11 1
+.names n1620 n1640 n1656 n1676 n1655 n1699
+--00- 1
+-1-00 1
+-10-0 1
+0--00 1
+0-0-0 1
+.names n1673 n1657 n1701 n1700
+-00 1
+1-0 1
+.names n1658 n1626 n1625 n1659 n1672 n1671 n1701
+-00011 1
+-00101 1
+-11001 1
+-11111 1
+0-1001 1
+0-1111 1
+01-001 1
+01-111 1
+1-0011 1
+1-0101 1
+10-011 1
+10-101 1
+.names n1662 n1667 n1632 n1663 n1703 n1704 n1702
+----10 1
+---001 1
+-001-0 1
+-11-01 1
+0-1-01 1
+01--01 1
+1-01-0 1
+10-1-0 1
+.names n1603 top^nop7_q~2 n1664 n1665 n1703
+--00 0
+--11 0
+01-- 0
+.names n1505_1 top^nop7_q~6 n1704
+01 1
+.names n1460 top^nop7_q~8 n1705
+01 1
+.names n1617 n1616 n1652 n1653 n1680 n1707 n1706
+---001 1
+---110 1
+--1-10 1
+--11-0 1
+-00-01 1
+-000-1 1
+01--10 1
+01-1-0 1
+1-0-01 1
+1-00-1 1
+.names n1357 top^nop7_q~14 n1707
+01 1
+.names n1654 n1423 n1677 top^nop7_q~11 n1708
+-011 0
+00-1 0
+1-00 0
+110- 0
+.names n1650 n1651 n1681 n1648 n1709
+-000 1
+-110 1
+1--0 1
+.names n1648 n1650 n1651 n1681 n1682 top^nop7_q~15 n1710
+-10011 1
+-11111 1
+000111 1
+001011 1
+1-0011 1
+1-1111 1
+.names n1682 n1648 n1650 n1651 n1681 n1712 n1711
+--1010 1
+--1100 1
+-00000 1
+-00110 1
+-1-010 1
+-1-100 1
+0----0 1
+.names n1222 top^nop7_q~15 n1712
+01 1
+.names n1505_1 top^nop7_q~5 n1659 n1533 n1714 n1713
+--010 1
+-0--0 1
+-1001 1
+0-100 1
+01111 1
+1--10 1
+11-01 1
+.names n1484 top^nop7_q~7 n1715 n1717 n1718 n1719 n1714
+-00001 1
+-00010 1
+-00100 1
+-00111 1
+-01000 1
+-01011 1
+-01101 1
+-01110 1
+010000 1
+010011 1
+010101 1
+010110 1
+011001 1
+011010 1
+011100 1
+011111 1
+1-0001 1
+1-0010 1
+1-0100 1
+1-0111 1
+1-1000 1
+1-1011 1
+1-1101 1
+1-1110 1
+.names n1422 n1426 top^nop7_q~12 top^nop7_q~10 n1716 n1715
+--000 1
+-0011 1
+-10-0 1
+0-101 1
+00110 1
+011-1 1
+1--00 1
+10-11 1
+11--0 1
+.names n1657 n1673 n1674 n1716
+001 1
+111 1
+.names n1658 n1626 n1625 n1659 n1672 n1717
+---00 0
+---11 0
+-00-- 0
+1-0-- 0
+10--- 0
+.names n1669 n1668 n1662 n1667 n1632 n1663 n1718
+-1-001 1
+-1-110 1
+-10-10 1
+-101-0 1
+-11-01 1
+-110-1 1
+1--001 1
+1--110 1
+1-0-10 1
+1-01-0 1
+1-1-01 1
+1-10-1 1
+11---- 1
+.names n1387 top^nop7_q~13 n1719
+01 1
+.names top.hi_reg+hi_reg^q~7_FF_NODE \
+ top.mul+mul.dummy_mult+fake_mult_one^result~15_FF_NODE \
+ top^ctrl_hi_reg_en_FF_NODE top^resetn n645
+-111 1
+1-01 1
+.names top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3001 n1722 \
+ top^nop7_q~0 top^boot_ddata~0 n1332 n1226 n650
+---11- 1
+-01--1 1
+1---00 1
+.names n1342 top^ctrl_data_mem_op~1_FF_NODE n1343 \
+ top^ctrl_data_mem_op~0_FF_NODE n1722
+--01 1
+11-1 1
+.names top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3009 n1722 \
+ top^nop7_q~1 top^boot_ddata~1 n1332 n1226 n655
+---11- 1
+-01--1 1
+1---00 1
+.names top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3017 n1722 \
+ top^nop7_q~2 top^boot_ddata~2 n1332 n1226 n660
+---11- 1
+-01--1 1
+1---00 1
+.names top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3025 n1722 \
+ top^nop7_q~3 top^boot_ddata~3 n1332 n1226 n665
+---11- 1
+-01--1 1
+1---00 1
+.names top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3033 n1722 \
+ top^nop7_q~4 top^boot_ddata~4 n1332 n1226 n670
+---11- 1
+-01--1 1
+1---00 1
+.names top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3041 n1722 \
+ top^nop7_q~5 top^boot_ddata~5 n1332 n1226 n675
+---11- 1
+-01--1 1
+1---00 1
+.names top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3049 n1722 \
+ top^nop7_q~6 top^boot_ddata~6 n1332 n1226 n680
+---11- 1
+-01--1 1
+1---00 1
+.names top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3057 n1722 \
+ top^nop7_q~7 top^boot_ddata~7 n1332 n1226 n685
+---11- 1
+-01--1 1
+1---00 1
+.names top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3065 \
+ top^boot_ddata~8 n1731 n1226 n1332 n690
+--01- 1
+-1--1 1
+1--00 1
+.names n1342 top^nop7_q~0 top^nop7_q~8 top^ctrl_data_mem_op~0_FF_NODE \
+ top^ctrl_data_mem_op~1_FF_NODE n1343 n1731
+--1-01 0
+--10-- 0
+11-111 0
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6532 \
+ top^boot_idata~8 n1126 n700
+-11 1
+1-0 1
+.names n1900 top.pipereg_w5+pipereg2^q~2_FF_NODE n1734 top^resetn n705
+--11 1
+01-1 1
+.names n1136 n1900 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6532 n1734
+111 1
+.names n1900 top.pipereg_w32+pipereg^q~8_FF_NODE n1734 top^resetn n710
+--11 1
+01-1 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6540 \
+ top^boot_idata~9 n1126 n720
+-11 1
+1-0 1
+.names n1900 top.pipereg_w5+pipereg2^q~3_FF_NODE n1738 top^resetn n725
+--11 1
+01-1 1
+.names n1136 n1900 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6540 n1738
+111 1
+.names n1900 top.pipereg_w32+pipereg^q~9_FF_NODE n1738 top^resetn n730
+--11 1
+01-1 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6548 \
+ top^boot_idata~10 n1126 n740
+-11 1
+1-0 1
+.names n1900 top.pipereg_w5+pipereg2^q~4_FF_NODE n1742 top^resetn n745
+--11 1
+01-1 1
+.names n1136 n1900 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6548 n1742
+111 1
+.names n1900 top.pipereg_w32+pipereg^q~10_FF_NODE n1742 top^resetn n750
+--11 1
+01-1 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6556 \
+ top^boot_idata~11 n1126 n760
+-11 1
+1-0 1
+.names n1900 top.pipereg_w5+pipereg5^q~0_FF_NODE n1746 top^resetn n765
+--11 1
+01-1 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6596 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6556 \
+ top^ctrl_mux3to1_zeroer4_d_sel~0_FF_NODE n1136 \
+ top^ctrl_mux3to1_zeroer4_d_sel~1_FF_NODE n1747 n1746
+--0-01 1
+--1-11 1
+-1-101 1
+1--111 1
+.names n1900 top^ctrl_zeroer4_en_FF_NODE n1747
+11 1
+.names n1900 top.pipereg_w1+pipereg16^q_FF_NODE n1749 top^resetn n770
+--11 1
+01-1 1
+.names n1758 top.pipereg_w5+pipereg5^q~4_FF_NODE n1753 \
+ top^ctrl_zeroer0_en_FF_NODE n1750_1 n1749
+--111 1
+00--1 1
+.names n1756 top^ctrl_zeroer0_en_FF_NODE \
+ top.pipereg_w5+pipereg5^q~3_FF_NODE n1757 n1754 n1751 n1750_1
+-00111 1
+0-0111 1
+111111 1
+.names top.pipereg_w5+pipereg5^q~4_FF_NODE n1753 \
+ top.pipereg_w5+pipereg5^q~0_FF_NODE n1752 top^ctrl_zeroer0_en_FF_NODE \
+ n1751
+--011 0
+01--1 0
+.names n1136 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6596 \
+ n1752
+11 1
+.names n1136 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6628 \
+ n1753
+11 1
+.names n1752 top^ctrl_zeroer0_en_FF_NODE \
+ top.pipereg_w5+pipereg5^q~0_FF_NODE n1755 n1900 n1754
+--011 1
+11-11 1
+.names top.pipereg_w5+pipereg5^q~1_FF_NODE \
+ top.pipereg_w5+pipereg5^q~2_FF_NODE \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6612 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6604 \
+ top^ctrl_zeroer0_en_FF_NODE n1136 n1755
+--1111 1
+-0-111 1
+0-1-11 1
+00---- 1
+.names n1136 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6620 \
+ n1756
+11 1
+.names top.pipereg_w5+pipereg5^q~2_FF_NODE \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6612 \
+ top.pipereg_w5+pipereg5^q~1_FF_NODE \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6604 n1136 \
+ top^ctrl_zeroer0_en_FF_NODE n1757
+--0111 0
+01--11 0
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6596 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6604 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6620 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6612 \
+ top^ctrl_zeroer0_en_FF_NODE n1136 n1758
+-----0 1
+----0- 1
+0000-- 1
+.names top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3209 \
+ top^boot_ddata~26 n1760 n1226 n1332 n775
+--01- 1
+-1--1 1
+1--00 1
+.names top^ctrl_data_mem_op~0_FF_NODE top^nop7_q~26 n1761 n1343 n1760
+--00 0
+01-- 0
+.names top^nop7_q~2 n1342 top^nop7_q~10 top^ctrl_data_mem_op~1_FF_NODE \
+ top^ctrl_data_mem_op~0_FF_NODE n1761
+--101 0
+11-11 0
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6676 \
+ top^boot_idata~26 n1126 n785
+-11 1
+1-0 1
+.names n1781 n1766 n1764 top^ctrl_mux3to1_zeroer4_d_sel~0_FF_NODE n1780 \
+ n790
+--01- 1
+-0--1 1
+0--11 1
+.names n1372 n1765 n1764
+01 1
+.names n1376 n1374 n1765
+00 1
+.names n1779 n1777 n1767 n1766
+011 1
+.names n1775 n1776 n1768 n1772 n1767
+0011 1
+.names n1382 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6476 \
+ n1769 n1771 n1432 n1770 n1768
+---1-- 0
+--1-01 0
+00--11 0
+.names n1135_1 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6476 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6484 n1769
+111 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6500 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6492 n1136 n1770
+--0 1
+00- 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6468 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6476 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6500 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6492 n1136 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6484 n1771
+000011 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6484 n1773 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6476 n1774 n1770 \
+ n1136 n1772
+---111 0
+011--1 0
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6500 n1432 \
+ n1773
+01 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6468 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6476 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6484 n1774
+011 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6484 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6508 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6476 n1770 n1136 \
+ n1775
+00111 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6468 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6476 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6484 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6508 n1136 n1770 \
+ n1776
+----01 1
+0000-1 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6492 n1382 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6468 n1773 n1778 \
+ n1777
+----1 0
+0111- 0
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6500 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6508 n1769 n1412 \
+ n1778
+0011 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6468 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6492 n1382 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6500 n1432 n1779
+00111 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6684 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6676 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6692 n1136 n1373 \
+ n1780
+---01 1
+000-1 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6476 n1382 \
+ n1432 top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6500 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6492 n1782 n1781
+-----1 0
+01111- 0
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6500 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6508 n1136 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6492 n1774 n1782
+00111 1
+.names n1900 top.pipereg_w5+pipereg5^q~1_FF_NODE n1784 top^resetn n795
+--11 1
+01-1 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6604 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6564 \
+ top^ctrl_mux3to1_zeroer4_d_sel~0_FF_NODE n1136 \
+ top^ctrl_mux3to1_zeroer4_d_sel~1_FF_NODE n1747 n1784
+--0-01 1
+--1-11 1
+-1-101 1
+1--111 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6564 \
+ top^boot_idata~12 n1126 n805
+-11 1
+1-0 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6564 n1136 \
+ top.pipereg_w32+pipereg^q~12_FF_NODE n1900 top^resetn n810
+--101 1
+11-11 1
+.names top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3225 \
+ top^boot_ddata~28 n1788 n1226 n1332 n820
+--01- 1
+-1--1 1
+1--00 1
+.names top^ctrl_data_mem_op~0_FF_NODE top^nop7_q~28 n1789 n1343 n1788
+--00 0
+01-- 0
+.names top^nop7_q~4 n1342 top^nop7_q~12 top^ctrl_data_mem_op~1_FF_NODE \
+ top^ctrl_data_mem_op~0_FF_NODE n1789
+--101 0
+11-11 0
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6692 \
+ top^boot_idata~28 n1126 n830
+-11 1
+1-0 1
+.names n1781 n1780 n1764 n1792 top^ctrl_mux3to1_zeroer4_d_sel~1_FF_NODE \
+ n835
+---0- 1
+--0-1 1
+01--1 1
+.names n1368 n1379 n1793 n1792
+111 1
+.names n1373 n1369 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6692 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6684 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6676 n1136 n1793
+-11111 0
+1-0111 0
+.names n1900 top.pipereg_w5+pipereg5^q~2_FF_NODE n1795 top^resetn n840
+--11 1
+01-1 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6572 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6612 \
+ top^ctrl_mux3to1_zeroer4_d_sel~0_FF_NODE n1136 \
+ top^ctrl_mux3to1_zeroer4_d_sel~1_FF_NODE n1747 n1795
+--0-01 1
+--1-11 1
+-1-111 1
+1--101 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6572 \
+ top^boot_idata~13 n1126 n845
+-11 1
+1-0 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6572 n1136 \
+ top.pipereg_w32+pipereg^q~13_FF_NODE n1900 top^resetn n850
+--101 1
+11-11 1
+.names top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3233 \
+ top^boot_ddata~29 n1799 n1226 n1332 n865
+--01- 1
+-1--1 1
+1--00 1
+.names top^ctrl_data_mem_op~0_FF_NODE top^nop7_q~29 n1800 n1343 n1799
+--00 0
+01-- 0
+.names top^nop7_q~5 n1342 top^nop7_q~13 top^ctrl_data_mem_op~1_FF_NODE \
+ top^ctrl_data_mem_op~0_FF_NODE n1800
+--101 0
+11-11 0
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6700 \
+ top^boot_idata~29 n1126 n875
+-11 1
+1-0 1
+.names n1372 n1792 n1780 n1803 n1765 top^ctrl_zeroer0_en_FF_NODE n880
+----0- 1
+--10-- 1
+-0---1 1
+1----1 1
+.names n1778 n1779 n1782 top^ctrl_zeroer0_en_FF_NODE n1804 n1767 n1803
+---011 1
+000-11 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6476 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6468 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6500 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6492 n1382 n1432 \
+ n1804
+-10011 0
+0-1111 0
+.names top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3217 \
+ top^boot_ddata~27 n1806 n1226 n1332 n895
+--01- 1
+-1--1 1
+1--00 1
+.names top^ctrl_data_mem_op~0_FF_NODE top^nop7_q~27 n1807 n1343 n1806
+--00 0
+01-- 0
+.names top^nop7_q~3 n1342 top^nop7_q~11 top^ctrl_data_mem_op~1_FF_NODE \
+ top^ctrl_data_mem_op~0_FF_NODE n1807
+--101 0
+11-11 0
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6708 \
+ top^boot_idata~30 n1126 n910
+-11 1
+1-0 1
+.names n1781 n1766 n1764 n1792 top^ctrl_zeroer4_en_FF_NODE n1780 n915
+---0-- 1
+--0-1- 1
+-0---1 1
+0---11 1
+.names n1900 top.pipereg_w5+pipereg5^q~3_FF_NODE n1811 top^resetn n920
+--11 1
+01-1 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6580 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6620 \
+ top^ctrl_mux3to1_zeroer4_d_sel~0_FF_NODE n1136 \
+ top^ctrl_mux3to1_zeroer4_d_sel~1_FF_NODE n1747 n1811
+--0-01 1
+--1-11 1
+-1-111 1
+1--101 1
+.names top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3161 \
+ top^boot_ddata~20 n1813 n1226 n1332 n930
+--01- 1
+-1--1 1
+1--00 1
+.names top^ctrl_data_mem_op~0_FF_NODE top^nop7_q~20 n1814 top^nop7_q~4 \
+ n1813
+--11 0
+01-- 0
+.names top^ctrl_data_mem_op~1_FF_NODE n1342 n1343 \
+ top^ctrl_data_mem_op~0_FF_NODE n1814
+-001 1
+0-01 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6628 \
+ top^boot_idata~20 n1126 n940
+-11 1
+1-0 1
+.names n1900 top.pipereg_w5+pipereg5^q~4_FF_NODE n1817 top^resetn n945
+--11 1
+01-1 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6588 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6628 \
+ top^ctrl_mux3to1_zeroer4_d_sel~0_FF_NODE n1136 \
+ top^ctrl_mux3to1_zeroer4_d_sel~1_FF_NODE n1747 n1817
+--0-01 1
+--1-11 1
+-1-111 1
+1--101 1
+.names n1219 top^resetn n950
+11 1
+.names n1820 top^ctrl_branchresolve_en_FF_NODE n1900 n1823 n960
+--11 1
+01-- 1
+.names top.pipereg_w6+pipereg11^q~1_FF_NODE \
+ top.pipereg_w6+pipereg11^q~0_FF_NODE top.pipereg_w6+pipereg11^q~2_FF_NODE \
+ n1821 n1822 n1820
+---01 1
+--1-1 1
+01--1 1
+.names top.pipereg_w6+pipereg11^q~5_FF_NODE \
+ top.pipereg_w6+pipereg11^q~3_FF_NODE top.pipereg_w6+pipereg11^q~4_FF_NODE \
+ n1821
+000 1
+.names top.pipereg_w6+pipereg11^q~0_FF_NODE \
+ top.pipereg_w6+pipereg11^q~4_FF_NODE top.pipereg_w6+pipereg11^q~1_FF_NODE \
+ top.pipereg_w6+pipereg11^q~2_FF_NODE top.pipereg_w6+pipereg11^q~5_FF_NODE \
+ top.pipereg_w6+pipereg11^q~3_FF_NODE n1822
+----00 1
+---011 1
+--11-0 1
+-1---- 1
+0-1-1- 1
+.names top.pipereg_w6+pipereg11^q~1_FF_NODE \
+ top.pipereg_w6+pipereg11^q~0_FF_NODE top.pipereg_w6+pipereg11^q~2_FF_NODE \
+ n1821 n1823
+--11 1
+01-1 1
+.names n1208 n1825 top.ifetch+ifetch.register_1bit+sync_pcs_up^q_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~0_FF_NODE top^resetn n1152 n965
+---100 1
+--010- 1
+--1111 1
+-00011 1
+-101-1 1
+1-1-01 1
+.names top^ctrl_ifetch_we_FF_NODE top^ctrl_ifetch_en_FF_NODE n1825
+00 1
+.names n1204 n1827 top.ifetch+ifetch.register_1bit+sync_pcs_up^q_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~1_FF_NODE top^resetn n1152 n970
+---100 1
+--010- 1
+--1111 1
+-001-1 1
+-10011 1
+0-1-01 1
+.names n1825 top.ifetch+ifetch.dummy_counter+pc_reg^q~0_FF_NODE n1827
+01 1
+.names n1210_1 n1829 top.ifetch+ifetch.dummy_counter+pc_reg^q~2_FF_NODE \
+ top.ifetch+ifetch.register_1bit+sync_pcs_up^q_FF_NODE top^resetn n1152 \
+ n975
+--1-00 1
+--100- 1
+--1111 1
+-010-1 1
+-10011 1
+0--101 1
+.names n1827 top.ifetch+ifetch.dummy_counter+pc_reg^q~1_FF_NODE n1829
+11 1
+.names n1206 n1831 top.ifetch+ifetch.dummy_counter+pc_reg^q~3_FF_NODE \
+ top.ifetch+ifetch.register_1bit+sync_pcs_up^q_FF_NODE top^resetn n1152 \
+ n980
+--1-00 1
+--100- 1
+--1111 1
+-010-1 1
+-10011 1
+0--101 1
+.names n1829 top.ifetch+ifetch.dummy_counter+pc_reg^q~2_FF_NODE n1831
+11 1
+.names n1201 n1833 top.ifetch+ifetch.dummy_counter+pc_reg^q~4_FF_NODE \
+ top.ifetch+ifetch.register_1bit+sync_pcs_up^q_FF_NODE top^resetn n1152 \
+ n985
+--1-00 1
+--100- 1
+--1111 1
+-010-1 1
+-10011 1
+0--101 1
+.names n1831 top.ifetch+ifetch.dummy_counter+pc_reg^q~3_FF_NODE n1833
+11 1
+.names n1199 n1835 top.ifetch+ifetch.dummy_counter+pc_reg^q~5_FF_NODE \
+ top.ifetch+ifetch.register_1bit+sync_pcs_up^q_FF_NODE top^resetn n1152 \
+ n990
+--1-00 1
+--100- 1
+--1111 1
+-010-1 1
+-10011 1
+0--101 1
+.names n1833 top.ifetch+ifetch.dummy_counter+pc_reg^q~4_FF_NODE n1835
+11 1
+.names n1196 n1837 top.ifetch+ifetch.dummy_counter+pc_reg^q~6_FF_NODE \
+ top.ifetch+ifetch.register_1bit+sync_pcs_up^q_FF_NODE top^resetn n1152 \
+ n995
+--1-00 1
+--100- 1
+--1111 1
+-010-1 1
+-10011 1
+0--101 1
+.names n1835 top.ifetch+ifetch.dummy_counter+pc_reg^q~5_FF_NODE n1837
+11 1
+.names n1841 n1839 n1194 n1842 n1843 \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~7_FF_NODE n1000
+---011 1
+---110 1
+-10--- 1
+1----1 1
+.names top^resetn n1840 n1839
+01 1
+.names n1152 top.ifetch+ifetch.register_1bit+sync_pcs_up^q_FF_NODE n1840
+11 1
+.names n1840 top^resetn n1841
+00 1
+11 1
+.names n1837 top.ifetch+ifetch.dummy_counter+pc_reg^q~6_FF_NODE n1842
+11 1
+.names top.ifetch+ifetch.register_1bit+sync_pcs_up^q_FF_NODE top^resetn \
+ n1152 n1843
+011 1
+.names n1841 n1839 n1192 n1845 n1843 \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~8_FF_NODE n1005
+---011 1
+---110 1
+-10--- 1
+1----1 1
+.names n1842 top.ifetch+ifetch.dummy_counter+pc_reg^q~7_FF_NODE n1845
+11 1
+.names n1841 n1839 n1213 n1847 n1843 \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~9_FF_NODE n1010
+---011 1
+---110 1
+-10--- 1
+1----1 1
+.names n1845 top.ifetch+ifetch.dummy_counter+pc_reg^q~8_FF_NODE n1847
+11 1
+.names n1841 n1839 n1189 n1849 n1843 \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~10_FF_NODE n1015
+---011 1
+---110 1
+-10--- 1
+1----1 1
+.names n1847 top.ifetch+ifetch.dummy_counter+pc_reg^q~9_FF_NODE n1849
+11 1
+.names n1149 n1839 n1851 n1020
+--0 1
+01- 1
+.names n1841 n1849 top.ifetch+ifetch.dummy_counter+pc_reg^q~10_FF_NODE \
+ n1843 top.ifetch+ifetch.dummy_counter+pc_reg^q~11_FF_NODE n1851
+--011 0
+-0-11 0
+-1110 0
+1---1 0
+.names n1841 n1839 n1147 n1853 n1843 \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~12_FF_NODE n1025
+---011 1
+---110 1
+-10--- 1
+1----1 1
+.names n1849 top.ifetch+ifetch.dummy_counter+pc_reg^q~10_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~11_FF_NODE n1853
+111 1
+.names n1841 n1839 n1138 n1855 n1843 \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~13_FF_NODE n1030
+---011 1
+---110 1
+-10--- 1
+1----1 1
+.names n1853 top.ifetch+ifetch.dummy_counter+pc_reg^q~12_FF_NODE n1855
+11 1
+.names n1841 n1839 n1858 n1857 n1843 \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~14_FF_NODE n1035
+---011 1
+---110 1
+-10--- 1
+1----1 1
+.names n1847 top.ifetch+ifetch.dummy_counter+pc_reg^q~9_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~10_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~11_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~12_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~13_FF_NODE n1857
+111111 1
+.names top.pipereg_w26+pipereg1^q~14_FF_NODE n1272 \
+ top^ctrl_mux3to1_ifetch_load_data_sel~1_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~0_FF_NODE n1859 n1858
+--100 1
+-0-00 1
+-01-0 1
+0-010 1
+.names n1139 top.pipereg_w32+pipereg^q~13_FF_NODE \
+ top.pipereg_w32+pipereg3^q~15_FF_NODE top.pipereg_w32+pipereg^q~14_FF_NODE \
+ top.pipereg_w32+pipereg3^q~16_FF_NODE n1145_1 n1859
+-00011 1
+-00101 1
+-11001 1
+-11111 1
+0-1001 1
+0-1111 1
+01-001 1
+01-111 1
+1-0011 1
+1-0101 1
+10-011 1
+10-101 1
+.names n1841 n1861 n1857 \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~14_FF_NODE n1843 \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~15_FF_NODE n1040
+---011 1
+--0-11 1
+--1110 1
+-1---- 1
+1----1 1
+.names n1863 n1862 top.pipereg_w32+pipereg^q~15_FF_NODE \
+ top.pipereg_w32+pipereg3^q~17_FF_NODE n1145_1 n1839 n1861
+-00011 1
+-01111 1
+-10111 1
+-11011 1
+1----1 1
+.names n1139 top.pipereg_w32+pipereg^q~14_FF_NODE \
+ top.pipereg_w32+pipereg3^q~16_FF_NODE top.pipereg_w32+pipereg^q~13_FF_NODE \
+ top.pipereg_w32+pipereg3^q~15_FF_NODE n1862
+--000 1
+-0-00 1
+-00-- 1
+1-0-0 1
+1-00- 1
+10--0 1
+10-0- 1
+.names top.pipereg_w26+pipereg1^q~15_FF_NODE \
+ top.pipereg_w32+pipereg14^q~17_FF_NODE top.pipereg_w1+pipereg15^q_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~1_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~0_FF_NODE n1863
+-1100 1
+-1111 1
+1--01 1
+.names n1866 n1839 n1865 n1045
+--0 1
+01- 1
+.names n1841 n1857 top.ifetch+ifetch.dummy_counter+pc_reg^q~14_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~15_FF_NODE n1843 \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~16_FF_NODE n1865
+---011 0
+--0-11 0
+-0--11 0
+-11110 0
+1----1 0
+.names top.pipereg_w26+pipereg1^q~16_FF_NODE n1278 \
+ top^ctrl_mux3to1_ifetch_load_data_sel~1_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~0_FF_NODE n1867 n1866
+--100 1
+-0-00 1
+-01-0 1
+0-010 1
+.names n1862 top.pipereg_w32+pipereg^q~15_FF_NODE \
+ top.pipereg_w32+pipereg3^q~17_FF_NODE top.pipereg_w32+pipereg^q~16_FF_NODE \
+ top.pipereg_w32+pipereg3^q~18_FF_NODE n1145_1 n1867
+-00011 1
+-00101 1
+-11001 1
+-11111 1
+0-1001 1
+0-1111 1
+01-001 1
+01-111 1
+1-0011 1
+1-0101 1
+10-011 1
+10-101 1
+.names n1841 n1870_1 n1869 n1843 \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~17_FF_NODE n1050
+--011 1
+--110 1
+-1--- 1
+1---1 1
+.names n1857 top.ifetch+ifetch.dummy_counter+pc_reg^q~14_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~15_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~16_FF_NODE n1869
+1111 1
+.names n1872 n1871 top.pipereg_w32+pipereg^q~17_FF_NODE \
+ top.pipereg_w32+pipereg3^q~19_FF_NODE n1145_1 n1839 n1870_1
+-00011 1
+-01111 1
+-10111 1
+-11011 1
+1----1 1
+.names n1862 top.pipereg_w32+pipereg^q~16_FF_NODE \
+ top.pipereg_w32+pipereg3^q~18_FF_NODE top.pipereg_w32+pipereg^q~15_FF_NODE \
+ top.pipereg_w32+pipereg3^q~17_FF_NODE n1871
+--000 1
+-0-00 1
+-00-- 1
+1-0-0 1
+1-00- 1
+10--0 1
+10-0- 1
+.names top.pipereg_w26+pipereg1^q~17_FF_NODE \
+ top.pipereg_w1+pipereg15^q_FF_NODE top.pipereg_w32+pipereg14^q~19_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~1_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~0_FF_NODE n1872
+-1100 1
+-1111 1
+1--01 1
+.names n1841 n1874 n1869 \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~17_FF_NODE n1843 \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~18_FF_NODE n1055
+---011 1
+--0-11 1
+--1110 1
+-1---- 1
+1----1 1
+.names n1876 n1875_1 top.pipereg_w32+pipereg^q~18_FF_NODE \
+ top.pipereg_w32+pipereg3^q~20_FF_NODE n1145_1 n1839 n1874
+-00011 1
+-01111 1
+-10111 1
+-11011 1
+1----1 1
+.names n1871 top.pipereg_w32+pipereg^q~17_FF_NODE \
+ top.pipereg_w32+pipereg3^q~19_FF_NODE n1875_1
+-00 1
+1-0 1
+10- 1
+.names top.pipereg_w26+pipereg1^q~18_FF_NODE n1283 \
+ top^ctrl_mux3to1_ifetch_load_data_sel~1_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~0_FF_NODE n1876
+-100 1
+-111 1
+1-01 1
+.names n1841 n1839 n1879 n1878 n1843 \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~19_FF_NODE n1060
+---011 1
+---110 1
+-10--- 1
+1----1 1
+.names n1857 top.ifetch+ifetch.dummy_counter+pc_reg^q~14_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~15_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~16_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~17_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~18_FF_NODE n1878
+111111 1
+.names top.pipereg_w26+pipereg1^q~19_FF_NODE n1880_1 \
+ top.pipereg_w1+pipereg15^q_FF_NODE top.pipereg_w32+pipereg14^q~21_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~1_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~0_FF_NODE n1879
+--1100 0
+--1111 0
+-1---- 0
+1---01 0
+.names n1875_1 top.pipereg_w32+pipereg^q~18_FF_NODE \
+ top.pipereg_w32+pipereg3^q~20_FF_NODE top.pipereg_w32+pipereg^q~19_FF_NODE \
+ top.pipereg_w32+pipereg3^q~21_FF_NODE n1145_1 n1880_1
+-00011 1
+-00101 1
+-11001 1
+-11111 1
+0-1001 1
+0-1111 1
+01-001 1
+01-111 1
+1-0011 1
+1-0101 1
+10-011 1
+10-101 1
+.names n1841 n1839 n1883 n1882 n1843 \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~20_FF_NODE n1065
+---011 1
+---110 1
+-10--- 1
+1----1 1
+.names n1878 top.ifetch+ifetch.dummy_counter+pc_reg^q~19_FF_NODE n1882
+11 1
+.names n1145_1 n1884 top.pipereg_w32+pipereg^q~20_FF_NODE \
+ top.pipereg_w32+pipereg3^q~22_FF_NODE n1885_1 n1883
+-0010 1
+-0100 1
+-1000 1
+-1110 1
+0---0 1
+.names n1875_1 top.pipereg_w32+pipereg^q~19_FF_NODE \
+ top.pipereg_w32+pipereg3^q~21_FF_NODE top.pipereg_w32+pipereg^q~18_FF_NODE \
+ top.pipereg_w32+pipereg3^q~20_FF_NODE n1884
+--000 1
+-0-00 1
+-00-- 1
+1-0-0 1
+1-00- 1
+10--0 1
+10-0- 1
+.names top.pipereg_w26+pipereg1^q~20_FF_NODE \
+ top.pipereg_w32+pipereg14^q~22_FF_NODE top.pipereg_w1+pipereg15^q_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~1_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~0_FF_NODE n1885_1
+-1100 1
+-1111 1
+1--01 1
+.names n1841 n1839 n1888 n1887 n1843 \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~21_FF_NODE n1070
+---011 1
+---110 1
+-10--- 1
+1----1 1
+.names n1882 top.ifetch+ifetch.dummy_counter+pc_reg^q~20_FF_NODE n1887
+11 1
+.names top.pipereg_w26+pipereg1^q~21_FF_NODE n1889 \
+ top.pipereg_w1+pipereg15^q_FF_NODE top.pipereg_w32+pipereg14^q~23_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~1_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~0_FF_NODE n1888
+--1100 0
+--1111 0
+-1---- 0
+1---01 0
+.names n1884 top.pipereg_w32+pipereg^q~20_FF_NODE \
+ top.pipereg_w32+pipereg3^q~22_FF_NODE top.pipereg_w32+pipereg^q~21_FF_NODE \
+ top.pipereg_w32+pipereg3^q~23_FF_NODE n1145_1 n1889
+-00011 1
+-00101 1
+-11001 1
+-11111 1
+0-1001 1
+0-1111 1
+01-001 1
+01-111 1
+1-0011 1
+1-0101 1
+10-011 1
+10-101 1
+.names n1841 n1891 n1887 \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~21_FF_NODE n1843 \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~22_FF_NODE n1075
+---011 1
+--0-11 1
+--1110 1
+-1---- 1
+1----1 1
+.names n1893 n1892 top.pipereg_w32+pipereg^q~22_FF_NODE \
+ top.pipereg_w32+pipereg3^q~24_FF_NODE n1145_1 n1839 n1891
+-00011 1
+-01111 1
+-10111 1
+-11011 1
+1----1 1
+.names n1884 top.pipereg_w32+pipereg^q~21_FF_NODE \
+ top.pipereg_w32+pipereg3^q~23_FF_NODE top.pipereg_w32+pipereg^q~20_FF_NODE \
+ top.pipereg_w32+pipereg3^q~22_FF_NODE n1892
+--000 1
+-0-00 1
+-00-- 1
+1-0-0 1
+1-00- 1
+10--0 1
+10-0- 1
+.names top.pipereg_w26+pipereg1^q~22_FF_NODE \
+ top.pipereg_w1+pipereg15^q_FF_NODE top.pipereg_w32+pipereg14^q~24_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~1_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~0_FF_NODE n1893
+-1100 1
+-1111 1
+1--01 1
+.names n1841 n1839 n1896 n1895 n1843 \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~23_FF_NODE n1080
+---011 1
+---110 1
+-10--- 1
+1----1 1
+.names n1887 top.ifetch+ifetch.dummy_counter+pc_reg^q~21_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~22_FF_NODE n1895
+111 1
+.names n1145_1 n1897 top.pipereg_w32+pipereg^q~23_FF_NODE \
+ top.pipereg_w32+pipereg3^q~25_FF_NODE n1898 n1896
+-0010 1
+-0100 1
+-1000 1
+-1110 1
+0---0 1
+.names n1892 top.pipereg_w32+pipereg^q~22_FF_NODE \
+ top.pipereg_w32+pipereg3^q~24_FF_NODE n1897
+-00 1
+1-0 1
+10- 1
+.names top.pipereg_w26+pipereg1^q~23_FF_NODE \
+ top.pipereg_w1+pipereg15^q_FF_NODE top.pipereg_w32+pipereg14^q~25_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~1_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~0_FF_NODE n1898
+-1100 1
+-1111 1
+1--01 1
+.names n1841 n1839 n1901 n1900_1 n1843 \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~24_FF_NODE n1085
+---011 1
+---110 1
+-10--- 1
+1----1 1
+.names n1895 top.ifetch+ifetch.dummy_counter+pc_reg^q~23_FF_NODE n1900_1
+11 1
+.names top.pipereg_w26+pipereg1^q~24_FF_NODE n1902 \
+ top.pipereg_w1+pipereg15^q_FF_NODE top.pipereg_w32+pipereg14^q~26_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~1_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~0_FF_NODE n1901
+--1100 0
+--1111 0
+-1---- 0
+1---01 0
+.names n1897 top.pipereg_w32+pipereg^q~23_FF_NODE \
+ top.pipereg_w32+pipereg3^q~25_FF_NODE top.pipereg_w32+pipereg^q~24_FF_NODE \
+ top.pipereg_w32+pipereg3^q~26_FF_NODE n1145_1 n1902
+-00011 1
+-00101 1
+-11001 1
+-11111 1
+0-1001 1
+0-1111 1
+01-001 1
+01-111 1
+1-0011 1
+1-0101 1
+10-011 1
+10-101 1
+.names n1841 n1904 n1900_1 \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~24_FF_NODE n1843 \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~25_FF_NODE n1090
+---011 1
+--0-11 1
+--1110 1
+-1---- 1
+1----1 1
+.names n1906 n1905_1 top.pipereg_w32+pipereg^q~25_FF_NODE \
+ top.pipereg_w32+pipereg3^q~27_FF_NODE n1145_1 n1839 n1904
+-00011 1
+-01111 1
+-10111 1
+-11011 1
+1----1 1
+.names n1897 top.pipereg_w32+pipereg^q~24_FF_NODE \
+ top.pipereg_w32+pipereg3^q~26_FF_NODE top.pipereg_w32+pipereg^q~23_FF_NODE \
+ top.pipereg_w32+pipereg3^q~25_FF_NODE n1905_1
+--000 1
+-0-00 1
+-00-- 1
+1-0-0 1
+1-00- 1
+10--0 1
+10-0- 1
+.names top.pipereg_w26+pipereg1^q~25_FF_NODE \
+ top.pipereg_w1+pipereg15^q_FF_NODE top.pipereg_w32+pipereg14^q~27_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~1_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~0_FF_NODE n1906
+-1100 1
+-1111 1
+1--01 1
+.names n1841 n1839 n1909 n1908 n1843 \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~26_FF_NODE n1095
+---011 1
+---110 1
+-10--- 1
+1----1 1
+.names n1887 top.ifetch+ifetch.dummy_counter+pc_reg^q~21_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~22_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~23_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~24_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~25_FF_NODE n1908
+111111 1
+.names top.pipereg_w32+pipereg3^q~28_FF_NODE n1910_1 \
+ top.pipereg_w1+pipereg15^q_FF_NODE top.pipereg_w32+pipereg14^q~28_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~1_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~0_FF_NODE n1909
+--1100 0
+--1111 0
+-1---- 0
+1---01 0
+.names n1905_1 top.pipereg_w32+pipereg^q~25_FF_NODE \
+ top.pipereg_w32+pipereg3^q~27_FF_NODE top.pipereg_w32+pipereg^q~26_FF_NODE \
+ top.pipereg_w32+pipereg3^q~28_FF_NODE n1145_1 n1910_1
+-00011 1
+-00101 1
+-11001 1
+-11111 1
+0-1001 1
+0-1111 1
+01-001 1
+01-111 1
+1-0011 1
+1-0101 1
+10-011 1
+10-101 1
+.names n1841 n1912 n1908 \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~26_FF_NODE n1843 \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~27_FF_NODE n1100
+---011 1
+--0-11 1
+--1110 1
+-1---- 1
+1----1 1
+.names n1914 n1913 top.pipereg_w32+pipereg^q~27_FF_NODE \
+ top.pipereg_w32+pipereg3^q~29_FF_NODE n1145_1 n1839 n1912
+-00011 1
+-01111 1
+-10111 1
+-11011 1
+1----1 1
+.names n1905_1 top.pipereg_w32+pipereg^q~26_FF_NODE \
+ top.pipereg_w32+pipereg3^q~28_FF_NODE top.pipereg_w32+pipereg^q~25_FF_NODE \
+ top.pipereg_w32+pipereg3^q~27_FF_NODE n1913
+--000 1
+-0-00 1
+-00-- 1
+1-0-0 1
+1-00- 1
+10--0 1
+10-0- 1
+.names top.pipereg_w32+pipereg3^q~29_FF_NODE \
+ top.pipereg_w1+pipereg15^q_FF_NODE top.pipereg_w32+pipereg14^q~29_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~1_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~0_FF_NODE n1914
+-1100 1
+-1111 1
+1--01 1
+.names n1916 n1839 n1918 n1105
+--0 1
+01- 1
+.names n1331 n1917 top.pipereg_w32+pipereg^q~28_FF_NODE \
+ top.pipereg_w32+pipereg3^q~30_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~0_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~1_FF_NODE n1916
+---010 1
+-00101 1
+-01001 1
+-10001 1
+-11101 1
+0---00 1
+0---11 1
+.names n1913 top.pipereg_w32+pipereg^q~27_FF_NODE \
+ top.pipereg_w32+pipereg3^q~29_FF_NODE n1917
+-00 1
+1-0 1
+10- 1
+.names n1841 n1908 top.ifetch+ifetch.dummy_counter+pc_reg^q~26_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~27_FF_NODE n1843 \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~28_FF_NODE n1918
+---011 0
+--0-11 0
+-0--11 0
+-11110 0
+1----1 0
+.names n1841 n1839 n1921 n1920_1 n1843 \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~29_FF_NODE n1110
+---011 1
+---110 1
+-10--- 1
+1----1 1
+.names n1908 top.ifetch+ifetch.dummy_counter+pc_reg^q~26_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~27_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~28_FF_NODE n1920_1
+1111 1
+.names n1145_1 n1917 top.pipereg_w32+pipereg^q~28_FF_NODE \
+ top.pipereg_w32+pipereg3^q~30_FF_NODE n1923 n1922 n1921
+--0000 1
+--1110 1
+-0-110 1
+-01-10 1
+-1-000 1
+-10-00 1
+0----0 1
+.names top.pipereg_w32+pipereg3^q~31_FF_NODE n1166 \
+ top^ctrl_mux3to1_ifetch_load_data_sel~1_FF_NODE \
+ top^ctrl_mux3to1_ifetch_load_data_sel~0_FF_NODE n1922
+-100 1
+-111 1
+1-01 1
+.names top.pipereg_w32+pipereg3^q~31_FF_NODE \
+ top.pipereg_w32+pipereg^q~29_FF_NODE n1923
+01 1
+10 1
+.names top.pipereg_w32+pipereg3^q~31_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~29_FF_NODE n1900 top^resetn n1115
+-111 1
+1-01 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6716 \
+ top^boot_idata~31 n1126 n1120
+-11 1
+1-0 1
+.names n1793 top^ctrl_zeroer_en_FF_NODE n1927 n1780 n1375 n1367 n1125
+-----0 1
+----0- 1
+--01-- 1
+01---- 1
+.names n1775 n1776 n1779 top^ctrl_zeroer_en_FF_NODE n1768 n1928 n1927
+---011 1
+000-11 1
+.names n1777 n1772 n1781 n1928
+111 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6716 n1136 \
+ top.pipereg_w6+pipereg11^q~5_FF_NODE n1900 top^resetn n1130
+--101 1
+11-11 1
+.names n1935_1 n1936 n1934 n1937 n1931 top^ctrl_addersub_op~0_FF_NODE n1135
+---0-- 1
+--0-1- 1
+-0---1 1
+0---11 1
+.names n1932 n1821 n1931
+11 1
+.names top.pipereg_w6+pipereg11^q~2_FF_NODE n1933 n1932
+01 1
+.names top.pipereg_w6+pipereg11^q~0_FF_NODE \
+ top.pipereg_w6+pipereg11^q~1_FF_NODE n1933
+00 1
+.names top.pipereg_w6+pipereg12^q~0_FF_NODE \
+ top.pipereg_w6+pipereg12^q~4_FF_NODE top.pipereg_w6+pipereg12^q~5_FF_NODE \
+ top.pipereg_w6+pipereg12^q~3_FF_NODE top.pipereg_w6+pipereg12^q~1_FF_NODE \
+ top.pipereg_w6+pipereg12^q~2_FF_NODE n1934
+-01000 0
+100111 0
+.names top.pipereg_w6+pipereg12^q~0_FF_NODE \
+ top.pipereg_w6+pipereg12^q~1_FF_NODE top.pipereg_w6+pipereg12^q~2_FF_NODE \
+ top.pipereg_w6+pipereg12^q~3_FF_NODE top.pipereg_w6+pipereg12^q~4_FF_NODE \
+ top.pipereg_w6+pipereg12^q~5_FF_NODE n1935_1
+--1001 0
+-01111 0
+-1-000 0
+0--000 0
+0-10-1 0
+011-00 0
+.names top.pipereg_w6+pipereg11^q~2_FF_NODE \
+ top.pipereg_w6+pipereg11^q~3_FF_NODE top.pipereg_w6+pipereg11^q~0_FF_NODE \
+ top.pipereg_w6+pipereg11^q~1_FF_NODE top.pipereg_w6+pipereg11^q~5_FF_NODE \
+ top.pipereg_w6+pipereg11^q~4_FF_NODE n1936
+-00100 0
+-01000 0
+1---00 0
+.names top.pipereg_w6+pipereg11^q~0_FF_NODE \
+ top.pipereg_w6+pipereg11^q~1_FF_NODE top.pipereg_w6+pipereg11^q~5_FF_NODE \
+ top.pipereg_w6+pipereg11^q~2_FF_NODE top.pipereg_w6+pipereg11^q~3_FF_NODE \
+ top.pipereg_w6+pipereg11^q~4_FF_NODE n1937
+-00010 0
+-01-00 0
+-011-0 0
+0-0010 0
+1-1110 0
+11-000 0
+.names top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3081 \
+ top^boot_ddata~10 n1939 n1226 n1332 n1140
+--01- 1
+-1--1 1
+1--00 1
+.names n1342 top^nop7_q~2 top^nop7_q~10 top^ctrl_data_mem_op~0_FF_NODE \
+ top^ctrl_data_mem_op~1_FF_NODE n1343 n1939
+--1-01 0
+--10-- 0
+11-111 0
+.names top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3089 \
+ top^boot_ddata~11 n1941 n1226 n1332 n1145
+--01- 1
+-1--1 1
+1--00 1
+.names n1342 top^nop7_q~3 top^nop7_q~11 top^ctrl_data_mem_op~0_FF_NODE \
+ top^ctrl_data_mem_op~1_FF_NODE n1343 n1941
+--1-01 0
+--10-- 0
+11-111 0
+.names top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3097 \
+ top^boot_ddata~12 n1943 n1226 n1332 n1150
+--01- 1
+-1--1 1
+1--00 1
+.names n1342 top^nop7_q~4 top^nop7_q~12 top^ctrl_data_mem_op~0_FF_NODE \
+ top^ctrl_data_mem_op~1_FF_NODE n1343 n1943
+--1-01 0
+--10-- 0
+11-111 0
+.names top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3105 \
+ top^boot_ddata~13 n1945_1 n1226 n1332 n1155
+--01- 1
+-1--1 1
+1--00 1
+.names n1342 top^nop7_q~5 top^nop7_q~13 top^ctrl_data_mem_op~0_FF_NODE \
+ top^ctrl_data_mem_op~1_FF_NODE n1343 n1945_1
+--1-01 0
+--10-- 0
+11-111 0
+.names top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3113 \
+ top^boot_ddata~14 n1947 n1226 n1332 n1160
+--01- 1
+-1--1 1
+1--00 1
+.names n1342 top^nop7_q~6 top^nop7_q~14 top^ctrl_data_mem_op~0_FF_NODE \
+ top^ctrl_data_mem_op~1_FF_NODE n1343 n1947
+--1-01 0
+--10-- 0
+11-111 0
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6580 \
+ top^boot_idata~14 n1126 n1170
+-11 1
+1-0 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6580 n1136 \
+ top.pipereg_w32+pipereg^q~14_FF_NODE n1900 top^resetn n1175
+--101 1
+11-11 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6588 \
+ top^boot_idata~15 n1126 n1185
+-11 1
+1-0 1
+.names n1900 top.pipereg_w32+pipereg^q~15_FF_NODE n1952 top^resetn n1190
+--11 1
+01-1 1
+.names n1136 n1900 \
+ top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6588 n1952
+111 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6596 \
+ top^boot_idata~16 n1126 n1200
+-11 1
+1-0 1
+.names top.pipereg_w5+pipereg13^q~0_FF_NODE n1752 n1900 top^resetn n1205
+-111 1
+1-01 1
+.names n1958 n1822 n1957 n1956 n1931 top^ctrl_ifetch_op_FF_NODE n1210
+---1-- 1
+--0-1- 1
+-0---1 1
+0---11 1
+.names top.pipereg_w6+pipereg11^q~2_FF_NODE \
+ top.pipereg_w6+pipereg11^q~1_FF_NODE n1821 n1956
+011 1
+.names top.pipereg_w6+pipereg12^q~4_FF_NODE \
+ top.pipereg_w6+pipereg12^q~5_FF_NODE top.pipereg_w6+pipereg12^q~3_FF_NODE \
+ top.pipereg_w6+pipereg12^q~1_FF_NODE top.pipereg_w6+pipereg12^q~2_FF_NODE \
+ top.pipereg_w6+pipereg12^q~0_FF_NODE n1957
+00111- 0
+.names top.pipereg_w6+pipereg12^q~0_FF_NODE \
+ top.pipereg_w6+pipereg12^q~1_FF_NODE top.pipereg_w6+pipereg12^q~2_FF_NODE \
+ top.pipereg_w6+pipereg12^q~5_FF_NODE top.pipereg_w6+pipereg12^q~3_FF_NODE \
+ top.pipereg_w6+pipereg12^q~4_FF_NODE n1958
+---100 0
+-01111 0
+-1--00 0
+-101-0 0
+0---00 0
+0-110- 0
+.names n1960_1 top^ctrl_mux3to1_ifetch_load_data_sel~0_FF_NODE n1956 n1215
+--1 1
+01- 1
+.names n1958 n1931 n1822 n1960_1
+-01 1
+1-1 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6604 \
+ top^boot_idata~17 n1126 n1220
+-11 1
+1-0 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6604 n1136 \
+ top.pipereg_w26+pipereg1^q~17_FF_NODE n1900 top^resetn n1225
+--101 1
+11-11 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6620 \
+ top^boot_idata~19 n1126 n1230
+-11 1
+1-0 1
+.names top.pipereg_w26+pipereg1^q~19_FF_NODE n1756 n1900 top^resetn n1235
+-111 1
+1-01 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6636 \
+ top^boot_idata~21 n1126 n1240
+-11 1
+1-0 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6636 n1136 \
+ top.pipereg_w26+pipereg1^q~21_FF_NODE n1900 top^resetn n1245
+--101 1
+11-11 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6652 \
+ top^boot_idata~23 n1126 n1250
+-11 1
+1-0 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6652 n1136 \
+ top.pipereg_w26+pipereg1^q~23_FF_NODE n1900 top^resetn n1255
+--101 1
+11-11 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6612 \
+ top^boot_idata~18 n1126 n1260
+-11 1
+1-0 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6612 n1136 \
+ top.pipereg_w26+pipereg1^q~18_FF_NODE n1900 top^resetn n1265
+--101 1
+11-11 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6644 \
+ top^boot_idata~22 n1126 n1270
+-11 1
+1-0 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6644 n1136 \
+ top.pipereg_w26+pipereg1^q~22_FF_NODE n1900 top^resetn n1275
+--101 1
+11-11 1
+.names n1960_1 top^ctrl_mux3to1_ifetch_load_data_sel~1_FF_NODE n1823 n1280
+--1 1
+01- 1
+.names n1820 top^ctrl_mux6to1_ifetch_load_sel~0_FF_NODE n1975_1 n1285
+--0 1
+01- 1
+.names top.pipereg_w6+pipereg11^q~1_FF_NODE \
+ top.pipereg_w5+pipereg13^q~0_FF_NODE top.pipereg_w6+pipereg11^q~2_FF_NODE \
+ top.pipereg_w6+pipereg11^q~0_FF_NODE n1821 n1975_1
+--101 0
+01011 0
+.names n1820 top^ctrl_mux6to1_ifetch_load_sel~1_FF_NODE n1977 n1290
+--0 1
+01- 1
+.names top.pipereg_w5+pipereg13^q~0_FF_NODE \
+ top.pipereg_w6+pipereg11^q~1_FF_NODE top.pipereg_w6+pipereg11^q~2_FF_NODE \
+ top.pipereg_w6+pipereg11^q~0_FF_NODE n1821 n1977
+-1101 0
+00011 0
+.names top.pipereg_w6+pipereg11^q~1_FF_NODE n1821 \
+ top.pipereg_w6+pipereg11^q~2_FF_NODE \
+ top^ctrl_mux6to1_ifetch_load_sel~2_FF_NODE n1820 n1295
+---10 1
+011-- 1
+.names n1957 n1932 top^ctrl_ifetch_we_FF_NODE n1960_1 n1821 n1900 n1300
+--10-- 1
+-0--11 1
+0---11 1
+.names top.ifetch+ifetch.register_1bit+sync_pcs_up^q_FF_NODE \
+ top^ctrl_ifetch_we_FF_NODE top^ctrl_ifetch_en_FF_NODE top^resetn n1305
+-101 1
+1-01 1
+.names top.pipereg_w26+pipereg1^q~16_FF_NODE n1752 n1900 top^resetn n1310
+-111 1
+1-01 1
+.names top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3185 \
+ top^boot_ddata~23 n1983 n1226 n1332 n1350
+--01- 1
+-1--1 1
+1--00 1
+.names top^ctrl_data_mem_op~0_FF_NODE top^nop7_q~23 n1814 top^nop7_q~7 \
+ n1983
+--11 0
+01-- 0
+.names top.pipereg_w32+pipereg14^q~23_FF_NODE n1987 n1985_1 n1900 \
+ top^resetn n1355
+--111 1
+-1-11 1
+1--01 1
+.names n1230_1 n1290_1 n1291 n1986 n1985_1
+0001 1
+0111 1
+1011 1
+1101 1
+.names top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE n1986
+011 1
+.names n1305_1 \
+ top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3185 \
+ top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE n1988 \
+ top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE n1987
+---100 1
+---111 1
+--01-- 1
+110-01 1
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~23_FF_NODE top^ctrl_logic_unit_op~0_FF_NODE \
+ n1290_1 top^ctrl_logic_unit_op~1_FF_NODE n1989 n1988
+--1001 1
+-00011 1
+-01111 1
+0-0011 1
+0-1111 1
+11-001 1
+110111 1
+111-01 1
+.names top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE n1989
+001 1
+.names top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3177 \
+ top^boot_ddata~22 n1991 n1226 n1332 n1365
+--01- 1
+-1--1 1
+1--00 1
+.names top^ctrl_data_mem_op~0_FF_NODE top^nop7_q~22 n1814 top^nop7_q~6 \
+ n1991
+--11 0
+01-- 0
+.names top.pipereg_w32+pipereg14^q~22_FF_NODE n1994 n1993 n1900 top^resetn \
+ n1370
+--111 1
+-1-11 1
+1--01 1
+.names n1231 n1286 n1287 n1285_1 n1288 n1986 n1993
+-00001 1
+-00111 1
+-11011 1
+-11101 1
+0-0001 1
+0-0111 1
+00-001 1
+00-111 1
+1-1011 1
+1-1101 1
+11-011 1
+11-101 1
+.names n1305_1 \
+ top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3177 \
+ top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE n1995_1 \
+ top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE n1994
+---100 1
+---111 1
+--01-- 1
+110-01 1
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~22_FF_NODE top^ctrl_logic_unit_op~0_FF_NODE \
+ n1285_1 top^ctrl_logic_unit_op~1_FF_NODE n1989 n1995_1
+--1001 1
+-00011 1
+-01111 1
+0-0011 1
+0-1111 1
+11-001 1
+110111 1
+111-01 1
+.names top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3169 \
+ top^boot_ddata~21 n1997 n1226 n1332 n1380
+--01- 1
+-1--1 1
+1--00 1
+.names top^ctrl_data_mem_op~0_FF_NODE top^nop7_q~21 n1814 top^nop7_q~5 \
+ n1997
+--11 0
+01-- 0
+.names top.pipereg_w32+pipereg14^q~21_FF_NODE n2000_1 n1999 n1900 \
+ top^resetn n1385
+--111 1
+-1-11 1
+1--01 1
+.names n1231 n1286 n1287 n1986 n1999
+0001 1
+0111 1
+1011 1
+1101 1
+.names n1305_1 \
+ top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3169 \
+ top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE n2001 \
+ top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE n2000_1
+---100 1
+---111 1
+--01-- 1
+110-01 1
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~21_FF_NODE top^ctrl_logic_unit_op~0_FF_NODE \
+ n1286 top^ctrl_logic_unit_op~1_FF_NODE n1989 n2001
+--1001 1
+-00011 1
+-01111 1
+0-0011 1
+0-1111 1
+11-001 1
+110111 1
+111-01 1
+.names top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3153 \
+ top^boot_ddata~19 n2003 n1226 n1332 n1395
+--01- 1
+-1--1 1
+1--00 1
+.names top^ctrl_data_mem_op~0_FF_NODE top^nop7_q~19 n1814 top^nop7_q~3 \
+ n2003
+--11 0
+01-- 0
+.names top.pipereg_w32+pipereg14^q~19_FF_NODE n2007 n2005_1 n1900 \
+ top^resetn n1400
+--111 1
+-1-11 1
+1--01 1
+.names n1305_1 \
+ top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3153 \
+ top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE n2006 \
+ top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE n2005_1
+---100 1
+---111 1
+--01-- 1
+110-01 1
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~19_FF_NODE top^ctrl_logic_unit_op~0_FF_NODE \
+ n1281 top^ctrl_logic_unit_op~1_FF_NODE n1989 n2006
+--1001 1
+-00011 1
+-01111 1
+0-0011 1
+0-1111 1
+11-001 1
+110111 1
+111-01 1
+.names n1232 n1281 n1284 n1986 n2007
+0001 1
+0111 1
+1011 1
+1101 1
+.names top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3145 \
+ top^boot_ddata~18 n2009 n1226 n1332 n1410
+--01- 1
+-1--1 1
+1--00 1
+.names top^ctrl_data_mem_op~0_FF_NODE top^nop7_q~18 n1814 top^nop7_q~2 \
+ n2009
+--11 0
+01-- 0
+.names top.pipereg_w32+pipereg14^q~18_FF_NODE n2013 n2011 n1900 top^resetn \
+ n1415
+--111 1
+-1-11 1
+1--01 1
+.names n1305_1 \
+ top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3145 \
+ top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE n2012 \
+ top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE n2011
+---100 1
+---111 1
+--01-- 1
+110-01 1
+.names n1278 top^ctrl_logic_unit_op~0_FF_NODE n1275_1 \
+ top^ctrl_logic_unit_op~1_FF_NODE n1989 n2012
+-1001 1
+00011 1
+01111 1
+1-001 1
+10111 1
+11-01 1
+.names n1233 n1276 n1279 n1275_1 n1277 n1986 n2013
+-00001 1
+-00111 1
+-11011 1
+-11101 1
+0-0001 1
+0-0111 1
+00-001 1
+00-111 1
+1-1011 1
+1-1101 1
+11-011 1
+11-101 1
+.names top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3137 \
+ top^boot_ddata~17 n2015_1 n1226 n1332 n1425
+--01- 1
+-1--1 1
+1--00 1
+.names top^ctrl_data_mem_op~0_FF_NODE top^nop7_q~17 n1814 top^nop7_q~1 \
+ n2015_1
+--11 0
+01-- 0
+.names top.pipereg_w32+pipereg14^q~17_FF_NODE n2019 n2017 n1900 top^resetn \
+ n1430
+--111 1
+-1-11 1
+1--01 1
+.names n1305_1 \
+ top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3137 \
+ top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE n2018 \
+ top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE n2017
+---100 1
+---111 1
+--01-- 1
+110-01 1
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~17_FF_NODE top^ctrl_logic_unit_op~0_FF_NODE \
+ n1276 top^ctrl_logic_unit_op~1_FF_NODE n1989 n2018
+--1001 1
+-00011 1
+-01111 1
+0-0011 1
+0-1111 1
+11-001 1
+110111 1
+111-01 1
+.names n1233 n1276 n1279 n1986 n2019
+0001 1
+0111 1
+1011 1
+1101 1
+.names top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3129 \
+ top^boot_ddata~16 n2021 n1226 n1332 n1440
+--01- 1
+-1--1 1
+1--00 1
+.names top^ctrl_data_mem_op~0_FF_NODE top^nop7_q~16 n1814 top^nop7_q~0 \
+ n2021
+--11 0
+01-- 0
+.names n1986 n1306 top.pipereg_w32+pipereg14^q~16_FF_NODE n2023 n1900 \
+ top^resetn n1445
+---111 1
+--1-01 1
+11--11 1
+.names n1305_1 \
+ top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3129 \
+ top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE n2024 \
+ top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE n2023
+---100 1
+---111 1
+--01-- 1
+110-01 1
+.names n1272 top^ctrl_logic_unit_op~0_FF_NODE n1270_1 \
+ top^ctrl_logic_unit_op~1_FF_NODE n1989 n2024
+-1001 1
+00011 1
+01111 1
+1-001 1
+10111 1
+11-01 1
+.names n1900 top.pipereg_w32+pipereg^q~30_FF_NODE n2026 top^resetn n1450
+--11 1
+01-1 1
+.names top^ctrl_mux2to1_pipereg_d_sel_FF_NODE n1952 n2026
+01 1
+.names top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3249 \
+ top^boot_ddata~31 n2028 n1226 n1332 n1465
+--01- 1
+-1--1 1
+1--00 1
+.names n1343 top^ctrl_data_mem_op~1_FF_NODE top^ctrl_data_mem_op~0_FF_NODE \
+ top^nop7_q~15 n2029 n2028
+----0 0
+0011- 0
+.names n1343 top^nop7_q~7 n1342 top^ctrl_data_mem_op~1_FF_NODE \
+ top^nop7_q~31 top^ctrl_data_mem_op~0_FF_NODE n2029
+----10 0
+0111-1 0
+.names n1986 n2031 top.pipereg_w32+pipereg14^q~31_FF_NODE n2032 n1900 \
+ top^resetn n1470
+---111 1
+--1-01 1
+11--11 1
+.names n1227 n1329 n1330 n1325 n2031
+-000 1
+-111 1
+0-00 1
+00-0 1
+1-11 1
+11-1 1
+.names n1305_1 \
+ top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3249 \
+ top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE n2033 \
+ top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE n2032
+---100 1
+---111 1
+--01-- 1
+110-01 1
+.names n1166 top^ctrl_logic_unit_op~0_FF_NODE n1327 \
+ top^ctrl_logic_unit_op~1_FF_NODE n1989 n2033
+-1001 1
+00011 1
+01111 1
+1-001 1
+10111 1
+11-01 1
+.names n1900 top.pipereg_w32+pipereg^q~31_FF_NODE n2026 top^resetn n1475
+--11 1
+01-1 1
+.names n1900 top.pipereg_w32+pipereg^q~29_FF_NODE n2026 top^resetn n1480
+--11 1
+01-1 1
+.names n1900 top.pipereg_w32+pipereg^q~28_FF_NODE n2026 top^resetn n1485
+--11 1
+01-1 1
+.names n1900 top.pipereg_w32+pipereg^q~27_FF_NODE n2026 top^resetn n1490
+--11 1
+01-1 1
+.names n1900 top.pipereg_w32+pipereg^q~26_FF_NODE n2026 top^resetn n1495
+--11 1
+01-1 1
+.names n1900 top.pipereg_w32+pipereg^q~25_FF_NODE n2026 top^resetn n1500
+--11 1
+01-1 1
+.names n1900 top.pipereg_w32+pipereg^q~24_FF_NODE n2026 top^resetn n1505
+--11 1
+01-1 1
+.names n1900 top.pipereg_w32+pipereg^q~23_FF_NODE n2026 top^resetn n1510
+--11 1
+01-1 1
+.names n1900 top.pipereg_w32+pipereg^q~22_FF_NODE n2026 top^resetn n1515
+--11 1
+01-1 1
+.names n1900 top.pipereg_w32+pipereg^q~21_FF_NODE n2026 top^resetn n1520
+--11 1
+01-1 1
+.names n1900 top.pipereg_w32+pipereg^q~20_FF_NODE n2026 top^resetn n1525
+--11 1
+01-1 1
+.names n1900 top.pipereg_w32+pipereg^q~19_FF_NODE n2026 top^resetn n1530
+--11 1
+01-1 1
+.names n1900 top.pipereg_w32+pipereg^q~18_FF_NODE n2026 top^resetn n1535
+--11 1
+01-1 1
+.names n1900 top.pipereg_w32+pipereg^q~17_FF_NODE n2026 top^resetn n1540
+--11 1
+01-1 1
+.names n1900 top.pipereg_w32+pipereg^q~16_FF_NODE n2026 top^resetn n1545
+--11 1
+01-1 1
+.names n1900 top.pipereg_w26+pipereg1^q~15_FF_NODE n1952 top^resetn n1550
+--11 1
+01-1 1
+.names top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3121 \
+ top^boot_ddata~15 n2051 n1226 n1332 n1560
+--01- 1
+-1--1 1
+1--00 1
+.names n1342 top^nop7_q~7 top^nop7_q~15 top^ctrl_data_mem_op~0_FF_NODE \
+ top^ctrl_data_mem_op~1_FF_NODE n1343 n2051
+--1-01 0
+--10-- 0
+11-111 0
+.names n1986 n1308 top.pipereg_w32+pipereg14^q~15_FF_NODE n2053 n1900 \
+ top^resetn n1565
+---111 1
+--1-01 1
+11--11 1
+.names n1305_1 \
+ top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3121 \
+ top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE n2054 \
+ top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE n2053
+---100 1
+---111 1
+--01-- 1
+110-01 1
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~15_FF_NODE top^ctrl_logic_unit_op~0_FF_NODE \
+ n1273 top^ctrl_logic_unit_op~1_FF_NODE n1989 n2054
+--1001 1
+-00011 1
+-01111 1
+0-0011 1
+0-1111 1
+11-001 1
+110111 1
+111-01 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6580 n1136 \
+ top.pipereg_w26+pipereg1^q~14_FF_NODE n1900 top^resetn n1570
+--101 1
+11-11 1
+.names top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3241 \
+ top^boot_ddata~30 n2057 n1226 n1332 n1580
+--01- 1
+-1--1 1
+1--00 1
+.names n1343 top^ctrl_data_mem_op~1_FF_NODE top^ctrl_data_mem_op~0_FF_NODE \
+ top^nop7_q~14 n2058 n2057
+----0 0
+0011- 0
+.names n1343 top^nop7_q~6 n1342 top^ctrl_data_mem_op~1_FF_NODE \
+ top^nop7_q~30 top^ctrl_data_mem_op~0_FF_NODE n2058
+----10 0
+0111-1 0
+.names n1986 n1309 top.pipereg_w32+pipereg14^q~14_FF_NODE n2060_1 n1900 \
+ top^resetn n1585
+---111 1
+--1-01 1
+11--11 1
+.names n1305_1 \
+ top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3113 \
+ top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE n2061 \
+ top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE n2060_1
+---100 1
+---111 1
+--01-- 1
+110-01 1
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~14_FF_NODE top^ctrl_logic_unit_op~0_FF_NODE \
+ n1264 top^ctrl_logic_unit_op~1_FF_NODE n1989 n2061
+--1001 1
+-00011 1
+-01111 1
+0-0011 1
+0-1111 1
+11-001 1
+110111 1
+111-01 1
+.names top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3073 \
+ top^boot_ddata~9 n2063 n1226 n1332 n1590
+--01- 1
+-1--1 1
+1--00 1
+.names n1342 top^nop7_q~1 top^nop7_q~9 top^ctrl_data_mem_op~0_FF_NODE \
+ top^ctrl_data_mem_op~1_FF_NODE n1343 n2063
+--1-01 0
+--10-- 0
+11-111 0
+.names top.pipereg_w6+pipereg11^q~3_FF_NODE \
+ top.pipereg_w6+pipereg11^q~2_FF_NODE top^ctrl_data_mem_op~0_FF_NODE \
+ top.pipereg_w6+pipereg11^q~1_FF_NODE top.pipereg_w6+pipereg11^q~4_FF_NODE \
+ top.pipereg_w6+pipereg11^q~5_FF_NODE n1595
+--1-00 1
+-1-001 1
+0--001 1
+.names top.pipereg_w6+pipereg11^q~3_FF_NODE \
+ top.pipereg_w6+pipereg11^q~2_FF_NODE top^ctrl_data_mem_op~1_FF_NODE n1933 \
+ top.pipereg_w6+pipereg11^q~4_FF_NODE top.pipereg_w6+pipereg11^q~5_FF_NODE \
+ n1600
+--1-00 1
+-1-101 1
+0--101 1
+.names top.pipereg_w6+pipereg11^q~0_FF_NODE \
+ top.pipereg_w6+pipereg11^q~2_FF_NODE top.pipereg_w6+pipereg11^q~3_FF_NODE \
+ top^ctrl_data_mem_op~3_FF_NODE top.pipereg_w6+pipereg11^q~4_FF_NODE \
+ top.pipereg_w6+pipereg11^q~5_FF_NODE n1605
+---100 1
+111-01 1
+.names top^ctrl_data_mem_op~3_FF_NODE \
+ top.data_mem+data_mem.onecyclestall+staller^T_FF_NODE top^resetn n1610
+001 1
+.names n2072 n2071 n1900 n2069 top^ctrl_hi_reg_en_FF_NODE n1931 n1615
+---01- 1
+-01--1 1
+0---11 1
+.names top.pipereg_w6+pipereg11^q~5_FF_NODE \
+ top.pipereg_w6+pipereg11^q~4_FF_NODE top.pipereg_w6+pipereg11^q~3_FF_NODE \
+ n2070_1 n2069
+---0 0
+001- 0
+.names top.pipereg_w6+pipereg11^q~4_FF_NODE \
+ top.pipereg_w6+pipereg11^q~0_FF_NODE top.pipereg_w6+pipereg11^q~3_FF_NODE \
+ top.pipereg_w6+pipereg11^q~1_FF_NODE top.pipereg_w6+pipereg11^q~2_FF_NODE \
+ top.pipereg_w6+pipereg11^q~5_FF_NODE n2070_1
+--0111 1
+--1-01 1
+-0-1-1 1
+-00000 1
+-11110 1
+1----- 1
+.names top.pipereg_w6+pipereg12^q~1_FF_NODE \
+ top.pipereg_w6+pipereg12^q~2_FF_NODE top.pipereg_w6+pipereg12^q~3_FF_NODE \
+ top.pipereg_w6+pipereg12^q~4_FF_NODE top.pipereg_w6+pipereg12^q~5_FF_NODE \
+ top.pipereg_w6+pipereg12^q~0_FF_NODE n2071
+01111- 0
+.names top.pipereg_w6+pipereg12^q~0_FF_NODE \
+ top.pipereg_w6+pipereg12^q~2_FF_NODE top.pipereg_w6+pipereg12^q~1_FF_NODE \
+ top.pipereg_w6+pipereg12^q~3_FF_NODE top.pipereg_w6+pipereg12^q~5_FF_NODE \
+ top.pipereg_w6+pipereg12^q~4_FF_NODE n2072
+---010 0
+--10-0 0
+-01-10 0
+-11-00 0
+0--0-0 0
+01-01- 0
+.names n2072 n2071 n1900 n2069 top^ctrl_lo_reg_en_FF_NODE n1931 n1740
+---01- 1
+-01--1 1
+0---11 1
+.names top.lo_reg+lo_reg^q~0_FF_NODE \
+ top.mul+mul.dummy_mult+fake_mult_one^result~0_FF_NODE \
+ top^ctrl_lo_reg_en_FF_NODE top^resetn n1745
+-111 1
+1-01 1
+.names top.lo_reg+lo_reg^q~1_FF_NODE \
+ top.mul+mul.dummy_mult+fake_mult_one^result~1_FF_NODE \
+ top^ctrl_lo_reg_en_FF_NODE top^resetn n1750
+-111 1
+1-01 1
+.names top.lo_reg+lo_reg^q~2_FF_NODE \
+ top.mul+mul.dummy_mult+fake_mult_one^result~2_FF_NODE \
+ top^ctrl_lo_reg_en_FF_NODE top^resetn n1805
+-111 1
+1-01 1
+.names top.lo_reg+lo_reg^q~4_FF_NODE \
+ top.mul+mul.dummy_mult+fake_mult_one^result~4_FF_NODE \
+ top^ctrl_lo_reg_en_FF_NODE top^resetn n1870
+-111 1
+1-01 1
+.names top.lo_reg+lo_reg^q~5_FF_NODE \
+ top.mul+mul.dummy_mult+fake_mult_one^result~5_FF_NODE \
+ top^ctrl_lo_reg_en_FF_NODE top^resetn n1875
+-111 1
+1-01 1
+.names top.lo_reg+lo_reg^q~6_FF_NODE \
+ top.mul+mul.dummy_mult+fake_mult_one^result~6_FF_NODE \
+ top^ctrl_lo_reg_en_FF_NODE top^resetn n1880
+-111 1
+1-01 1
+.names top.lo_reg+lo_reg^q~7_FF_NODE \
+ top.mul+mul.dummy_mult+fake_mult_one^result~7_FF_NODE \
+ top^ctrl_lo_reg_en_FF_NODE top^resetn n1885
+-111 1
+1-01 1
+.names top.pipereg_w6+pipereg12^q~0_FF_NODE n1135_1 n1900 top^resetn n1905
+-111 1
+1-01 1
+.names n2085_1 n2083 n2086 n2087 n1931 top^ctrl_logic_unit_op~0_FF_NODE \
+ n1910
+---1-- 1
+--0-1- 1
+-0---1 1
+0---11 1
+.names n1821 n1932 n2084 n1937 n2083
+-101 1
+0-01 1
+.names top.pipereg_w6+pipereg11^q~2_FF_NODE \
+ top.pipereg_w6+pipereg11^q~0_FF_NODE top.pipereg_w6+pipereg11^q~5_FF_NODE \
+ top.pipereg_w6+pipereg11^q~4_FF_NODE top.pipereg_w6+pipereg11^q~3_FF_NODE \
+ top.pipereg_w6+pipereg11^q~1_FF_NODE n2084
+-10011 1
+0-0011 1
+.names top.pipereg_w6+pipereg12^q~0_FF_NODE \
+ top.pipereg_w6+pipereg12^q~1_FF_NODE top.pipereg_w6+pipereg12^q~3_FF_NODE \
+ top.pipereg_w6+pipereg12^q~2_FF_NODE top.pipereg_w6+pipereg12^q~4_FF_NODE \
+ top.pipereg_w6+pipereg12^q~5_FF_NODE n2085_1
+--0001 0
+-01111 0
+-1-001 0
+-1-100 0
+-10-00 0
+0-0-00 0
+0-0111 0
+.names top.pipereg_w6+pipereg12^q~3_FF_NODE \
+ top.pipereg_w6+pipereg12^q~4_FF_NODE top.pipereg_w6+pipereg12^q~0_FF_NODE \
+ top.pipereg_w6+pipereg12^q~2_FF_NODE top.pipereg_w6+pipereg12^q~5_FF_NODE \
+ top.pipereg_w6+pipereg12^q~1_FF_NODE n2086
+00111- 0
+.names top.pipereg_w6+pipereg11^q~5_FF_NODE \
+ top.pipereg_w6+pipereg11^q~1_FF_NODE top.pipereg_w6+pipereg11^q~4_FF_NODE \
+ top.pipereg_w6+pipereg11^q~2_FF_NODE top.pipereg_w6+pipereg11^q~3_FF_NODE \
+ top.pipereg_w6+pipereg11^q~0_FF_NODE n2087
+000111 1
+.names n2089 n2083 n2090_1 n2091 n1931 top^ctrl_logic_unit_op~1_FF_NODE \
+ n1915
+---1-- 1
+--0-1- 1
+-0---1 1
+0---11 1
+.names top.pipereg_w6+pipereg12^q~0_FF_NODE \
+ top.pipereg_w6+pipereg12^q~1_FF_NODE top.pipereg_w6+pipereg12^q~3_FF_NODE \
+ top.pipereg_w6+pipereg12^q~2_FF_NODE top.pipereg_w6+pipereg12^q~4_FF_NODE \
+ top.pipereg_w6+pipereg12^q~5_FF_NODE n2089
+--0001 0
+-01111 0
+-1-001 0
+-1-100 0
+-10-00 0
+0-0-00 0
+0-0111 0
+.names top.pipereg_w6+pipereg12^q~3_FF_NODE \
+ top.pipereg_w6+pipereg12^q~4_FF_NODE top.pipereg_w6+pipereg12^q~1_FF_NODE \
+ top.pipereg_w6+pipereg12^q~2_FF_NODE top.pipereg_w6+pipereg12^q~5_FF_NODE \
+ top.pipereg_w6+pipereg12^q~0_FF_NODE n2090_1
+00111- 0
+.names top.pipereg_w6+pipereg11^q~5_FF_NODE \
+ top.pipereg_w6+pipereg11^q~0_FF_NODE top.pipereg_w6+pipereg11^q~4_FF_NODE \
+ top.pipereg_w6+pipereg11^q~2_FF_NODE top.pipereg_w6+pipereg11^q~3_FF_NODE \
+ top.pipereg_w6+pipereg11^q~1_FF_NODE n2091
+000111 1
+.names n2093 n2070_1 n2096 n1931 top^ctrl_mul_op~0_FF_NODE n1920
+--11- 1
+-0--1 1
+0--11 1
+.names top.pipereg_w6+pipereg12^q~5_FF_NODE n2094 n2095_1 n2093
+-01 1
+0-1 1
+.names top.pipereg_w6+pipereg12^q~0_FF_NODE \
+ top.pipereg_w6+pipereg12^q~3_FF_NODE top.pipereg_w6+pipereg12^q~4_FF_NODE \
+ top.pipereg_w6+pipereg12^q~2_FF_NODE top.pipereg_w6+pipereg12^q~1_FF_NODE \
+ n2094
+0001- 1
+.names top.pipereg_w6+pipereg12^q~0_FF_NODE \
+ top.pipereg_w6+pipereg12^q~1_FF_NODE top.pipereg_w6+pipereg12^q~3_FF_NODE \
+ top.pipereg_w6+pipereg12^q~2_FF_NODE top.pipereg_w6+pipereg12^q~4_FF_NODE \
+ top.pipereg_w6+pipereg12^q~5_FF_NODE n2095_1
+--0001 0
+-1-001 0
+-11100 0
+0-0111 0
+1-0-01 0
+.names top.pipereg_w6+pipereg12^q~3_FF_NODE \
+ top.pipereg_w6+pipereg12^q~4_FF_NODE top.pipereg_w6+pipereg12^q~5_FF_NODE \
+ top.pipereg_w6+pipereg12^q~1_FF_NODE n2096
+0001 1
+.names n2093 n2070_1 n2071 n1931 top^ctrl_mul_op~2_FF_NODE n1925
+--01- 1
+-0--1 1
+0--11 1
+.names n1935_1 n1936 n2100_1 n2099 n1931 \
+ top^ctrl_mux2to1_addersub_opA_sel_FF_NODE n1930
+---1-- 1
+--1-1- 1
+-0---1 1
+0---11 1
+.names n1956 top.pipereg_w6+pipereg11^q~0_FF_NODE n2099
+11 1
+.names top.pipereg_w6+pipereg12^q~4_FF_NODE \
+ top.pipereg_w6+pipereg12^q~5_FF_NODE top.pipereg_w6+pipereg12^q~2_FF_NODE \
+ top.pipereg_w6+pipereg12^q~3_FF_NODE top.pipereg_w6+pipereg12^q~0_FF_NODE \
+ top.pipereg_w6+pipereg12^q~1_FF_NODE n2100_1
+001111 1
+.names n2093 n2070_1 n2071 n1931 top^ctrl_mux2to1_mul_opA_sel_FF_NODE n1935
+--01- 1
+-0--1 1
+0--11 1
+.names n2071 n2093 n1931 top^ctrl_mux3to1_mul_sa_sel~0_FF_NODE n2070_1 \
+ n2103 n1940
+---0-0 0
+--0-10 0
+11--10 0
+.names top.pipereg_w6+pipereg11^q~5_FF_NODE \
+ top.pipereg_w6+pipereg11^q~4_FF_NODE top.pipereg_w6+pipereg11^q~1_FF_NODE \
+ top.pipereg_w6+pipereg11^q~2_FF_NODE top.pipereg_w6+pipereg11^q~3_FF_NODE \
+ top.pipereg_w6+pipereg11^q~0_FF_NODE n2103
+001111 1
+.names n2071 n2093 n2070_1 n2105 n1931 \
+ top^ctrl_mux3to1_mul_sa_sel~1_FF_NODE n1945
+---01- 1
+--0--1 1
+-0--11 1
+0---11 1
+.names top.pipereg_w6+pipereg12^q~1_FF_NODE \
+ top.pipereg_w6+pipereg12^q~0_FF_NODE top.pipereg_w6+pipereg12^q~3_FF_NODE \
+ top.pipereg_w6+pipereg12^q~4_FF_NODE top.pipereg_w6+pipereg12^q~5_FF_NODE \
+ top.pipereg_w6+pipereg12^q~2_FF_NODE n2105
+-00001 0
+1-0001 0
+.names n2109 n2108 n2107 top^ctrl_mux3to1_nop6_d_sel~0_FF_NODE n1932 n1821 \
+ n1950
+---101 1
+--0-11 1
+-0--11 1
+0--1-1 1
+.names top.pipereg_w6+pipereg12^q~0_FF_NODE \
+ top.pipereg_w6+pipereg12^q~1_FF_NODE top.pipereg_w6+pipereg12^q~5_FF_NODE \
+ top.pipereg_w6+pipereg12^q~4_FF_NODE top.pipereg_w6+pipereg12^q~3_FF_NODE \
+ n2107
+--100 0
+01-00 0
+.names top.pipereg_w6+pipereg12^q~2_FF_NODE \
+ top.pipereg_w6+pipereg12^q~0_FF_NODE top.pipereg_w6+pipereg12^q~4_FF_NODE \
+ top.pipereg_w6+pipereg12^q~3_FF_NODE top.pipereg_w6+pipereg12^q~5_FF_NODE \
+ top.pipereg_w6+pipereg12^q~1_FF_NODE n2108
+-00000 0
+-10001 0
+0-0111 0
+.names top.pipereg_w6+pipereg12^q~0_FF_NODE \
+ top.pipereg_w6+pipereg12^q~1_FF_NODE top.pipereg_w6+pipereg12^q~4_FF_NODE \
+ top.pipereg_w6+pipereg12^q~5_FF_NODE top.pipereg_w6+pipereg12^q~3_FF_NODE \
+ top.pipereg_w6+pipereg12^q~2_FF_NODE n2109
+-01111 0
+-10011 0
+0-1101 0
+.names n2109 n1932 n1822 n1821 top^ctrl_mux3to1_nop6_d_sel~1_FF_NODE n1955
+--0-- 1
+-0-11 1
+0--11 1
+.names n2113 n2112 n2114 n2084 n1931 top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE \
+ n1960
+---1-- 1
+--0-1- 1
+-0---1 1
+0---11 1
+.names top.pipereg_w6+pipereg11^q~2_FF_NODE \
+ top.pipereg_w6+pipereg11^q~0_FF_NODE top.pipereg_w6+pipereg11^q~1_FF_NODE \
+ top.pipereg_w6+pipereg11^q~4_FF_NODE top.pipereg_w6+pipereg11^q~3_FF_NODE \
+ top.pipereg_w6+pipereg11^q~5_FF_NODE n2112
+-01000 0
+-10000 0
+1--000 0
+1-0011 0
+11-011 0
+.names top.pipereg_w6+pipereg12^q~0_FF_NODE \
+ top.pipereg_w6+pipereg12^q~4_FF_NODE top.pipereg_w6+pipereg12^q~5_FF_NODE \
+ top.pipereg_w6+pipereg12^q~1_FF_NODE top.pipereg_w6+pipereg12^q~3_FF_NODE \
+ top.pipereg_w6+pipereg12^q~2_FF_NODE n2113
+-11011 0
+000111 0
+.names top.pipereg_w6+pipereg12^q~0_FF_NODE \
+ top.pipereg_w6+pipereg12^q~2_FF_NODE top.pipereg_w6+pipereg12^q~1_FF_NODE \
+ top.pipereg_w6+pipereg12^q~3_FF_NODE top.pipereg_w6+pipereg12^q~4_FF_NODE \
+ top.pipereg_w6+pipereg12^q~5_FF_NODE n2114
+--1000 0
+-01101 0
+0--000 0
+010011 0
+.names top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE n2112 n2103 n2116 n2119 n1965
+-1001 0
+0-001 0
+.names n2113 top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE n2118 n2117 n1931 n2116
+---11 1
+--0-1 1
+01--1 1
+.names top.pipereg_w6+pipereg12^q~2_FF_NODE \
+ top.pipereg_w6+pipereg12^q~3_FF_NODE top.pipereg_w6+pipereg12^q~4_FF_NODE \
+ top.pipereg_w6+pipereg12^q~5_FF_NODE top.pipereg_w6+pipereg12^q~0_FF_NODE \
+ top.pipereg_w6+pipereg12^q~1_FF_NODE n2117
+-00000 1
+-00011 1
+.names top.pipereg_w6+pipereg12^q~2_FF_NODE \
+ top.pipereg_w6+pipereg12^q~0_FF_NODE top.pipereg_w6+pipereg12^q~1_FF_NODE \
+ top.pipereg_w6+pipereg12^q~4_FF_NODE top.pipereg_w6+pipereg12^q~5_FF_NODE \
+ top.pipereg_w6+pipereg12^q~3_FF_NODE n2118
+-01000 0
+0--010 0
+111001 0
+.names top.pipereg_w6+pipereg11^q~0_FF_NODE \
+ top.pipereg_w6+pipereg11^q~5_FF_NODE top.pipereg_w6+pipereg11^q~2_FF_NODE \
+ top.pipereg_w6+pipereg11^q~4_FF_NODE top.pipereg_w6+pipereg11^q~3_FF_NODE \
+ top.pipereg_w6+pipereg11^q~1_FF_NODE n2119
+-00010 0
+-1-000 0
+1-0001 0
+.names n2113 n2112 n2122 n2121 n1931 top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE \
+ n1970
+---0-- 1
+--0-1- 1
+-0---1 1
+0---11 1
+.names n2103 top.pipereg_w6+pipereg11^q~5_FF_NODE \
+ top.pipereg_w6+pipereg11^q~4_FF_NODE top.pipereg_w6+pipereg11^q~3_FF_NODE \
+ n2099 n2121
+----1 0
+0001- 0
+.names top.pipereg_w6+pipereg12^q~0_FF_NODE \
+ top.pipereg_w6+pipereg12^q~3_FF_NODE top.pipereg_w6+pipereg12^q~2_FF_NODE \
+ top.pipereg_w6+pipereg12^q~1_FF_NODE top.pipereg_w6+pipereg12^q~4_FF_NODE \
+ top.pipereg_w6+pipereg12^q~5_FF_NODE n2122
+--0101 0
+-0--01 0
+111100 0
+.names n2095_1 n2070_1 n2124 n2103 n1931 top^ctrl_mul_start_FF_NODE n1975
+---1-- 1
+--0-1- 1
+-0---1 1
+0---11 1
+.names top^ctrl_mul_start_FF_NODE top.pipereg_w6+pipereg12^q~5_FF_NODE \
+ n2094 n2071 n2125_1 n2124
+--011 1
+01-11 1
+.names top.pipereg_w6+pipereg12^q~2_FF_NODE \
+ top.pipereg_w6+pipereg12^q~1_FF_NODE top.pipereg_w6+pipereg12^q~3_FF_NODE \
+ top.pipereg_w6+pipereg12^q~4_FF_NODE top.pipereg_w6+pipereg12^q~5_FF_NODE \
+ top.pipereg_w6+pipereg12^q~0_FF_NODE n2125_1
+-10001 0
+0-0000 0
+.names n1900 top.pipereg_w6+pipereg12^q~1_FF_NODE n1355_1 top^resetn n1980
+--11 1
+01-1 1
+.names top.pipereg_w6+pipereg12^q~2_FF_NODE n1382 n1900 top^resetn n1985
+-111 1
+1-01 1
+.names top.pipereg_w6+pipereg12^q~3_FF_NODE n1412 n1900 top^resetn n1990
+-111 1
+1-01 1
+.names n1900 top.pipereg_w6+pipereg12^q~4_FF_NODE n1392 top^resetn n1995
+--11 1
+01-1 1
+.names top.pipereg_w6+pipereg12^q~5_FF_NODE n1432 n1900 top^resetn n2000
+-111 1
+1-01 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6676 n1136 \
+ top.pipereg_w6+pipereg11^q~0_FF_NODE n1900 top^resetn n2005
+--101 1
+11-11 1
+.names top.pipereg_w6+pipereg11^q~1_FF_NODE n1378 n1900 top^resetn n2010
+-111 1
+1-01 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6692 n1136 \
+ top.pipereg_w6+pipereg11^q~2_FF_NODE n1900 top^resetn n2015
+--101 1
+11-11 1
+.names top.pipereg_w6+pipereg11^q~3_FF_NODE n1370_1 n1900 top^resetn n2020
+-111 1
+1-01 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6708 n1136 \
+ top.pipereg_w6+pipereg11^q~4_FF_NODE n1900 top^resetn n2025
+--101 1
+11-11 1
+.names top.pipereg_w26+pipereg1^q~0_FF_NODE n1135_1 n1900 top^resetn n2030
+-111 1
+1-01 1
+.names n1900 top.pipereg_w26+pipereg1^q~1_FF_NODE n1355_1 top^resetn n2035
+--11 1
+01-1 1
+.names n1900 top.pipereg_w26+pipereg1^q~10_FF_NODE n1742 top^resetn n2040
+--11 1
+01-1 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6556 n1136 \
+ top.pipereg_w26+pipereg1^q~11_FF_NODE n1900 top^resetn n2045
+--101 1
+11-11 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6564 n1136 \
+ top.pipereg_w26+pipereg1^q~12_FF_NODE n1900 top^resetn n2050
+--101 1
+11-11 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6572 n1136 \
+ top.pipereg_w26+pipereg1^q~13_FF_NODE n1900 top^resetn n2055
+--101 1
+11-11 1
+.names top.pipereg_w26+pipereg1^q~20_FF_NODE n1753 n1900 top^resetn n2060
+-111 1
+1-01 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6660 n1136 \
+ top.pipereg_w26+pipereg1^q~24_FF_NODE n1900 top^resetn n2065
+--101 1
+11-11 1
+.names top.pipereg_w26+pipereg1^q~3_FF_NODE n1412 n1900 top^resetn n2070
+-111 1
+1-01 1
+.names n1900 top.pipereg_w26+pipereg1^q~4_FF_NODE n1392 top^resetn n2075
+--11 1
+01-1 1
+.names top.pipereg_w26+pipereg1^q~5_FF_NODE n1432 n1900 top^resetn n2080
+-111 1
+1-01 1
+.names n1900 top.pipereg_w26+pipereg1^q~6_FF_NODE n1448 top^resetn n2085
+--11 1
+01-1 1
+.names n1900 top.pipereg_w26+pipereg1^q~7_FF_NODE n1471 top^resetn n2090
+--11 1
+01-1 1
+.names n1900 top.pipereg_w26+pipereg1^q~8_FF_NODE n1734 top^resetn n2095
+--11 1
+01-1 1
+.names n1900 top.pipereg_w26+pipereg1^q~9_FF_NODE n1738 top^resetn n2100
+--11 1
+01-1 1
+.names top.pipereg_w32+pipereg3^q~10_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~8_FF_NODE n1900 top^resetn n2115
+-111 1
+1-01 1
+.names top.pipereg_w32+pipereg3^q~11_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~9_FF_NODE n1900 top^resetn n2120
+-111 1
+1-01 1
+.names top.pipereg_w32+pipereg3^q~12_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~10_FF_NODE n1900 top^resetn n2125
+-111 1
+1-01 1
+.names top.pipereg_w32+pipereg3^q~13_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~11_FF_NODE n1900 top^resetn n2130
+-111 1
+1-01 1
+.names top.pipereg_w32+pipereg3^q~14_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~12_FF_NODE n1900 top^resetn n2135
+-111 1
+1-01 1
+.names top.pipereg_w32+pipereg3^q~15_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~13_FF_NODE n1900 top^resetn n2140
+-111 1
+1-01 1
+.names top.pipereg_w32+pipereg3^q~16_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~14_FF_NODE n1900 top^resetn n2145
+-111 1
+1-01 1
+.names top.pipereg_w32+pipereg3^q~17_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~15_FF_NODE n1900 top^resetn n2150
+-111 1
+1-01 1
+.names top.pipereg_w32+pipereg3^q~18_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~16_FF_NODE n1900 top^resetn n2155
+-111 1
+1-01 1
+.names top.pipereg_w32+pipereg3^q~19_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~17_FF_NODE n1900 top^resetn n2160
+-111 1
+1-01 1
+.names top.pipereg_w32+pipereg3^q~2_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~0_FF_NODE n1900 top^resetn n2165
+-111 1
+1-01 1
+.names top.pipereg_w32+pipereg3^q~20_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~18_FF_NODE n1900 top^resetn n2170
+-111 1
+1-01 1
+.names top.pipereg_w32+pipereg3^q~21_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~19_FF_NODE n1900 top^resetn n2175
+-111 1
+1-01 1
+.names top.pipereg_w32+pipereg3^q~22_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~20_FF_NODE n1900 top^resetn n2180
+-111 1
+1-01 1
+.names top.pipereg_w32+pipereg3^q~23_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~21_FF_NODE n1900 top^resetn n2185
+-111 1
+1-01 1
+.names top.pipereg_w32+pipereg3^q~24_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~22_FF_NODE n1900 top^resetn n2190
+-111 1
+1-01 1
+.names top.pipereg_w32+pipereg3^q~25_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~23_FF_NODE n1900 top^resetn n2195
+-111 1
+1-01 1
+.names top.pipereg_w32+pipereg3^q~26_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~24_FF_NODE n1900 top^resetn n2200
+-111 1
+1-01 1
+.names top.pipereg_w32+pipereg3^q~27_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~25_FF_NODE n1900 top^resetn n2205
+-111 1
+1-01 1
+.names top.pipereg_w32+pipereg3^q~28_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~26_FF_NODE n1900 top^resetn n2210
+-111 1
+1-01 1
+.names top.pipereg_w32+pipereg3^q~29_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~27_FF_NODE n1900 top^resetn n2215
+-111 1
+1-01 1
+.names top.pipereg_w32+pipereg3^q~3_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~1_FF_NODE n1900 top^resetn n2220
+-111 1
+1-01 1
+.names top.pipereg_w32+pipereg3^q~30_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~28_FF_NODE n1900 top^resetn n2225
+-111 1
+1-01 1
+.names top.pipereg_w32+pipereg3^q~4_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~2_FF_NODE n1900 top^resetn n2230
+-111 1
+1-01 1
+.names top.pipereg_w32+pipereg3^q~5_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~3_FF_NODE n1900 top^resetn n2235
+-111 1
+1-01 1
+.names top.pipereg_w32+pipereg3^q~6_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~4_FF_NODE n1900 top^resetn n2240
+-111 1
+1-01 1
+.names top.pipereg_w32+pipereg3^q~7_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~5_FF_NODE n1900 top^resetn n2245
+-111 1
+1-01 1
+.names top.pipereg_w32+pipereg3^q~8_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~6_FF_NODE n1900 top^resetn n2250
+-111 1
+1-01 1
+.names top.pipereg_w32+pipereg3^q~9_FF_NODE \
+ top.ifetch+ifetch.dummy_counter+pc_reg^q~7_FF_NODE n1900 top^resetn n2255
+-111 1
+1-01 1
+.names top.ifetch+ifetch.dual_port_ram+imem_replace^FF_NODE~6556 n1136 \
+ top.pipereg_w32+pipereg^q~11_FF_NODE n1900 top^resetn n2395
+--101 1
+11-11 1
+.names n1342 n2182 top.pipereg_w32+pipereg14^q~0_FF_NODE n1986 n1900 \
+ top^resetn n2400
+--1-01 1
+-0-011 1
+0--111 1
+.names n2192 n1227 n1329 n1330 n1326 n2183 n2182
+--1100 1
+-1-100 1
+-11-00 1
+0----0 1
+.names n2191 n2184 top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE n2187 \
+ top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE n2183
+--1-10 0
+--1001 0
+-1-0-1 0
+-1-00- 0
+1----- 0
+.names top.lo_reg+lo_reg^q~0_FF_NODE top.hi_reg+hi_reg^q~0_FF_NODE \
+ top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3001 n1305_1 \
+ n2185_1 n2186 n2184
+--11-1 0
+-1--10 0
+1---00 0
+.names top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE n2185_1
+001 1
+.names top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE n2186
+001 1
+.names top.mul+mul.dummy_mult+fake_mult_one^result~0_FF_NODE \
+ top.mul+mul.dummy_mult+fake_mult_one^result~8_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE n2188 \
+ top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE n2187
+-10111 1
+1-0011 1
+.names n1209 top^ctrl_mux3to1_mul_sa_sel~0_FF_NODE n1156 \
+ top^ctrl_mux3to1_mul_sa_sel~1_FF_NODE n2189 n2188
+----0 0
+0011- 0
+.names top.pipereg_w5+pipereg2^q~2_FF_NODE \
+ top.pipereg_w5+pipereg2^q~3_FF_NODE top.pipereg_w5+pipereg2^q~4_FF_NODE \
+ n2190_1 top^ctrl_mul_op~0_FF_NODE n2189
+----0 0
+0001- 0
+.names top.pipereg_w5+pipereg2^q~0_FF_NODE \
+ top.pipereg_w5+pipereg2^q~1_FF_NODE top^ctrl_mux3to1_mul_sa_sel~0_FF_NODE \
+ top^ctrl_mux3to1_mul_sa_sel~1_FF_NODE n2190_1
+0000 1
+0011 1
+.names n1157 n1243 top^ctrl_logic_unit_op~0_FF_NODE \
+ top^ctrl_logic_unit_op~1_FF_NODE n1989 n2191
+-0111 1
+-1001 1
+0-001 1
+01-01 1
+010-1 1
+1-111 1
+10-11 1
+.names n1328 top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE n2192
+0011 1
+.names n1343 n1986 top.pipereg_w32+pipereg14^q~1_FF_NODE n2194 n1900 \
+ top^resetn n2405
+---111 1
+--1-01 1
+11--11 1
+.names top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE n2197 n2195_1 \
+ top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE n2198 n2194
+-00110 1
+000--0 1
+1--000 1
+.names n2186 n1305_1 \
+ top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3009 n2196 \
+ n2195_1
+---0 0
+111- 0
+.names top.hi_reg+hi_reg^q~1_FF_NODE top.lo_reg+lo_reg^q~1_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE n2196
+--100 1
+-0--0 1
+-0-1- 1
+0-001 1
+.names top.mul+mul.dummy_mult+fake_mult_one^result~1_FF_NODE \
+ top.mul+mul.dummy_mult+fake_mult_one^result~9_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE n2188 \
+ top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE n2197
+-00111 1
+0-0011 1
+.names n1158 n1244 top^ctrl_logic_unit_op~0_FF_NODE \
+ top^ctrl_logic_unit_op~1_FF_NODE n1989 n2198
+-0111 1
+-1001 1
+0-001 1
+01-01 1
+010-1 1
+1-111 1
+10-11 1
+.names n1986 n1315 top.pipereg_w32+pipereg14^q~10_FF_NODE n2200_1 n1900 \
+ top^resetn n2410
+---111 1
+--1-01 1
+11--11 1
+.names n1305_1 \
+ top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3081 \
+ top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE n2201 \
+ top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE n2200_1
+---100 1
+---111 1
+--01-- 1
+110-01 1
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~10_FF_NODE top^ctrl_logic_unit_op~0_FF_NODE \
+ n1260_1 top^ctrl_logic_unit_op~1_FF_NODE n1989 n2201
+--1001 1
+-00011 1
+-01111 1
+0-0011 1
+0-1111 1
+11-001 1
+110111 1
+111-01 1
+.names n1986 n1314 top.pipereg_w32+pipereg14^q~11_FF_NODE n2203 n1900 \
+ top^resetn n2415
+---111 1
+--1-01 1
+11--11 1
+.names n1305_1 \
+ top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3089 \
+ top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE n2204 \
+ top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE n2203
+---100 1
+---111 1
+--01-- 1
+110-01 1
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~11_FF_NODE top^ctrl_logic_unit_op~0_FF_NODE \
+ n1259 top^ctrl_logic_unit_op~1_FF_NODE n1989 n2204
+--1001 1
+-00011 1
+-01111 1
+0-0011 1
+0-1111 1
+11-001 1
+110111 1
+111-01 1
+.names n1986 n1313 top.pipereg_w32+pipereg14^q~12_FF_NODE n2206 n1900 \
+ top^resetn n2420
+---111 1
+--1-01 1
+11--11 1
+.names n1305_1 \
+ top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3097 \
+ top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE n2207 \
+ top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE n2206
+---100 1
+---111 1
+--01-- 1
+110-01 1
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~12_FF_NODE top^ctrl_logic_unit_op~0_FF_NODE \
+ n1266 top^ctrl_logic_unit_op~1_FF_NODE n1989 n2207
+--1001 1
+-00011 1
+-01111 1
+0-0011 1
+0-1111 1
+11-001 1
+110111 1
+111-01 1
+.names n1986 n1311 top.pipereg_w32+pipereg14^q~13_FF_NODE n2209 n1900 \
+ top^resetn n2425
+---111 1
+--1-01 1
+11--11 1
+.names n1305_1 \
+ top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3105 \
+ top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE n2210_1 \
+ top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE n2209
+---100 1
+---111 1
+--01-- 1
+110-01 1
+.names n1150_1 top^ctrl_logic_unit_op~0_FF_NODE n1265_1 \
+ top^ctrl_logic_unit_op~1_FF_NODE n1989 n2210_1
+-1001 1
+00011 1
+01111 1
+1-001 1
+10111 1
+11-01 1
+.names n1324 n1986 top.pipereg_w32+pipereg14^q~2_FF_NODE n2212 n1900 \
+ top^resetn n2430
+---111 1
+--1-01 1
+01--11 1
+.names n2214 n2213 top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE n2215_1 n2212
+--0010 1
+-0-000 1
+-00-00 1
+-01110 1
+1---00 1
+1-11-0 1
+.names top.lo_reg+lo_reg^q~2_FF_NODE top.hi_reg+hi_reg^q~2_FF_NODE \
+ top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3017 n1305_1 \
+ n2185_1 n2186 n2213
+--11-1 0
+-1--10 0
+1---00 0
+.names top.mul+mul.dummy_mult+fake_mult_one^result~2_FF_NODE \
+ top.mul+mul.dummy_mult+fake_mult_one^result~10_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE n2188 \
+ top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE n2214
+-10111 1
+1-0011 1
+.names n1209 n1246 top^ctrl_logic_unit_op~0_FF_NODE \
+ top^ctrl_logic_unit_op~1_FF_NODE n1989 n2215_1
+-0111 1
+-1001 1
+0-001 1
+01-01 1
+010-1 1
+1-111 1
+10-11 1
+.names top.pipereg_w32+pipereg14^q~20_FF_NODE n2219 n2217 n1900 top^resetn \
+ n2435
+--111 1
+-1-11 1
+1--01 1
+.names n1305_1 \
+ top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3161 \
+ top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE n2218 \
+ top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE n2217
+---100 1
+---111 1
+--01-- 1
+110-01 1
+.names n1283 top^ctrl_logic_unit_op~0_FF_NODE n1280_1 \
+ top^ctrl_logic_unit_op~1_FF_NODE n1989 n2218
+-1001 1
+00011 1
+01111 1
+1-001 1
+10111 1
+11-01 1
+.names n1232 n1281 n1284 n1280_1 n1282 n1986 n2219
+-00001 1
+-00111 1
+-11011 1
+-11101 1
+0-0001 1
+0-0111 1
+00-001 1
+00-111 1
+1-1011 1
+1-1101 1
+11-011 1
+11-101 1
+.names top.pipereg_w32+pipereg14^q~24_FF_NODE n2222 n2221 n1900 top^resetn \
+ n2440
+--111 1
+-1-11 1
+1--01 1
+.names n1230_1 n1290_1 n1291 n1289 n1292 n1986 n2221
+-00001 1
+-00111 1
+-11011 1
+-11101 1
+0-0001 1
+0-0111 1
+00-001 1
+00-111 1
+1-1011 1
+1-1101 1
+11-011 1
+11-101 1
+.names n1305_1 \
+ top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3193 \
+ top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE n2223 \
+ top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE n2222
+---100 1
+---111 1
+--01-- 1
+110-01 1
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~24_FF_NODE top^ctrl_logic_unit_op~0_FF_NODE \
+ n1289 top^ctrl_logic_unit_op~1_FF_NODE n1989 n2223
+--1001 1
+-00011 1
+-01111 1
+0-0011 1
+0-1111 1
+11-001 1
+110111 1
+111-01 1
+.names top.pipereg_w32+pipereg14^q~25_FF_NODE n2226 n2225_1 n1900 \
+ top^resetn n2445
+--111 1
+-1-11 1
+1--01 1
+.names n1229 n1297 n1298 n1986 n2225_1
+0001 1
+0111 1
+1011 1
+1101 1
+.names n1305_1 \
+ top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3201 \
+ top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE n2227 \
+ top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE n2226
+---100 1
+---111 1
+--01-- 1
+110-01 1
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~25_FF_NODE top^ctrl_logic_unit_op~0_FF_NODE \
+ n1297 top^ctrl_logic_unit_op~1_FF_NODE n1989 n2227
+--1001 1
+-00011 1
+-01111 1
+0-0011 1
+0-1111 1
+11-001 1
+110111 1
+111-01 1
+.names top.pipereg_w32+pipereg14^q~26_FF_NODE n2230_1 n2229 n1900 \
+ top^resetn n2450
+--111 1
+-1-11 1
+1--01 1
+.names n1229 n1297 n1298 n1296 n1299 n1986 n2229
+-00001 1
+-00111 1
+-11011 1
+-11101 1
+0-0001 1
+0-0111 1
+00-001 1
+00-111 1
+1-1011 1
+1-1101 1
+11-011 1
+11-101 1
+.names n1305_1 \
+ top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3209 \
+ top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE n2231 \
+ top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE n2230_1
+---100 1
+---111 1
+--01-- 1
+110-01 1
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~26_FF_NODE top^ctrl_logic_unit_op~0_FF_NODE \
+ n1296 top^ctrl_logic_unit_op~1_FF_NODE n1989 n2231
+--1001 1
+-00011 1
+-01111 1
+0-0011 1
+0-1111 1
+11-001 1
+110111 1
+111-01 1
+.names top.pipereg_w32+pipereg14^q~27_FF_NODE n2235_1 n2233 n1900 \
+ top^resetn n2455
+--111 1
+-1-11 1
+1--01 1
+.names n2234 n1294 n1295_1 n1986 n2233
+0001 1
+0111 1
+1011 1
+1101 1
+.names n1229 n1296 n1299 n1297 n1298 n2234
+--111 1
+-1-11 1
+-11-- 1
+1-1-1 1
+1-11- 1
+11--1 1
+11-1- 1
+.names n1305_1 \
+ top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3217 \
+ top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE n2236 \
+ top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE n2235_1
+---100 1
+---111 1
+--01-- 1
+110-01 1
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~27_FF_NODE top^ctrl_logic_unit_op~0_FF_NODE \
+ n1294 top^ctrl_logic_unit_op~1_FF_NODE n1989 n2236
+--1001 1
+-00011 1
+-01111 1
+0-0011 1
+0-1111 1
+11-001 1
+110111 1
+111-01 1
+.names top.pipereg_w32+pipereg14^q~28_FF_NODE n2239 n2238 n1900 top^resetn \
+ n2460
+--111 1
+-1-11 1
+1--01 1
+.names n1228 n1300_1 n1302 n1304 n1986 n2238
+-1001 1
+-1111 1
+00011 1
+00101 1
+1-001 1
+1-111 1
+.names n1305_1 \
+ top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3225 \
+ top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE n2240_1 \
+ top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE n2239
+---100 1
+---111 1
+--01-- 1
+110-01 1
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~28_FF_NODE top^ctrl_logic_unit_op~0_FF_NODE \
+ n1302 top^ctrl_logic_unit_op~1_FF_NODE n1989 n2240_1
+--1001 1
+-00011 1
+-01111 1
+0-0011 1
+0-1111 1
+11-001 1
+110111 1
+111-01 1
+.names top.pipereg_w32+pipereg14^q~29_FF_NODE n2244 n2242 n1900 top^resetn \
+ n2465
+--111 1
+-1-11 1
+1--01 1
+.names n2243 n1303 n1986 n2242
+011 1
+101 1
+.names n1228 n1300_1 n1302 n1304 n1301 n2243
+--000 1
+--111 1
+-1-00 1
+-10-0 1
+00-11 1
+001-1 1
+1--00 1
+1-0-0 1
+.names n1305_1 \
+ top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3233 \
+ top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE n2245_1 \
+ top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE n2244
+---100 1
+---111 1
+--01-- 1
+110-01 1
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~29_FF_NODE top^ctrl_logic_unit_op~0_FF_NODE \
+ n1301 top^ctrl_logic_unit_op~1_FF_NODE n1989 n2245_1
+--1001 1
+-00011 1
+-01111 1
+0-0011 1
+0-1111 1
+11-001 1
+110111 1
+111-01 1
+.names n1323 n1986 top.pipereg_w32+pipereg14^q~3_FF_NODE n2247 n1900 \
+ top^resetn n2470
+---111 1
+--1-01 1
+11--11 1
+.names n2249 n2248 top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE n2250_1 n2247
+--0010 1
+-0-000 1
+-00-00 1
+-01110 1
+1---00 1
+1-11-0 1
+.names top.lo_reg+lo_reg^q~3_FF_NODE top.hi_reg+hi_reg^q~3_FF_NODE \
+ top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3025 n1305_1 \
+ n2185_1 n2186 n2248
+--11-1 0
+-1--10 0
+1---00 0
+.names top.mul+mul.dummy_mult+fake_mult_one^result~3_FF_NODE \
+ top.mul+mul.dummy_mult+fake_mult_one^result~11_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE n2188 \
+ top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE n2249
+-10111 1
+1-0011 1
+.names n1240_1 n1159 top^ctrl_logic_unit_op~0_FF_NODE \
+ top^ctrl_logic_unit_op~1_FF_NODE n1989 n2250_1
+-0001 1
+-1111 1
+0-111 1
+01-11 1
+1-001 1
+10-01 1
+100-1 1
+.names top.pipereg_w32+pipereg14^q~30_FF_NODE n2253 n2252 n1900 top^resetn \
+ n2475
+--111 1
+-1-11 1
+1--01 1
+.names n1227 n1329 n1330 n1986 n2252
+0001 1
+0111 1
+1011 1
+1101 1
+.names n1305_1 \
+ top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3241 \
+ top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE n2254 \
+ top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE n2253
+---100 1
+---111 1
+--01-- 1
+110-01 1
+.names n1331 top^ctrl_logic_unit_op~0_FF_NODE n1329 \
+ top^ctrl_logic_unit_op~1_FF_NODE n1989 n2254
+-1001 1
+00011 1
+01111 1
+1-001 1
+10111 1
+11-01 1
+.names n1986 n1322 top.pipereg_w32+pipereg14^q~4_FF_NODE n2256 n1900 \
+ top^resetn n2480
+---111 1
+--1-01 1
+11--11 1
+.names n2258 n2257 top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE n2259 n2256
+--0010 1
+-0-000 1
+-00-00 1
+-01110 1
+1---00 1
+1-11-0 1
+.names top.lo_reg+lo_reg^q~4_FF_NODE top.hi_reg+hi_reg^q~4_FF_NODE \
+ top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3033 n1305_1 \
+ n2185_1 n2186 n2257
+--11-1 0
+-1--10 0
+1---00 0
+.names top.mul+mul.dummy_mult+fake_mult_one^result~4_FF_NODE \
+ top.mul+mul.dummy_mult+fake_mult_one^result~12_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE n2188 \
+ top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE n2258
+-10111 1
+1-0011 1
+.names n1247 n1160_1 top^ctrl_logic_unit_op~0_FF_NODE \
+ top^ctrl_logic_unit_op~1_FF_NODE n1989 n2259
+-0001 1
+-1111 1
+0-111 1
+01-11 1
+1-001 1
+10-01 1
+100-1 1
+.names n1986 n1321 top.pipereg_w32+pipereg14^q~5_FF_NODE n2261 n1900 \
+ top^resetn n2485
+---111 1
+--1-01 1
+11--11 1
+.names n2263 n2262 top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE n2264 n2261
+--0010 1
+-0-000 1
+-00-00 1
+-01110 1
+1---00 1
+1-11-0 1
+.names top.lo_reg+lo_reg^q~5_FF_NODE top.hi_reg+hi_reg^q~5_FF_NODE \
+ top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3041 n1305_1 \
+ n2185_1 n2186 n2262
+--11-1 0
+-1--10 0
+1---00 0
+.names top.mul+mul.dummy_mult+fake_mult_one^result~5_FF_NODE \
+ top.mul+mul.dummy_mult+fake_mult_one^result~13_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE n2188 \
+ top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE n2263
+-10111 1
+1-0011 1
+.names n1989 top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~5_FF_NODE top^ctrl_logic_unit_op~0_FF_NODE \
+ n1249 top^ctrl_logic_unit_op~1_FF_NODE n2264
+---100 0
+--0001 0
+--0111 0
+-0-001 0
+-0-111 0
+-11-00 0
+-11011 0
+-111-0 0
+0----- 0
+.names n1986 n1320 top.pipereg_w32+pipereg14^q~6_FF_NODE n2266 n1900 \
+ top^resetn n2490
+---111 1
+--1-01 1
+11--11 1
+.names n2268 n2267 top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE n2269 n2266
+--0010 1
+-0-000 1
+-00-00 1
+-01110 1
+1---00 1
+1-11-0 1
+.names top.lo_reg+lo_reg^q~6_FF_NODE top.hi_reg+hi_reg^q~6_FF_NODE \
+ top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3049 n1305_1 \
+ n2185_1 n2186 n2267
+--11-1 0
+-1--10 0
+1---00 0
+.names top.mul+mul.dummy_mult+fake_mult_one^result~6_FF_NODE \
+ top.mul+mul.dummy_mult+fake_mult_one^result~14_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE n2188 \
+ top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE n2268
+-10111 1
+1-0011 1
+.names n1203 n1253 top^ctrl_logic_unit_op~0_FF_NODE \
+ top^ctrl_logic_unit_op~1_FF_NODE n1989 n2269
+-0111 1
+-1001 1
+0-001 1
+01-01 1
+010-1 1
+1-111 1
+10-11 1
+.names n1986 n1319 top.pipereg_w32+pipereg14^q~7_FF_NODE n2271 n1900 \
+ top^resetn n2495
+---111 1
+--1-01 1
+11--11 1
+.names n2273 n2272 top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE n2274 n2271
+--0010 1
+-0-000 1
+-00-00 1
+-01110 1
+1---00 1
+1-11-0 1
+.names top.lo_reg+lo_reg^q~7_FF_NODE top.hi_reg+hi_reg^q~7_FF_NODE \
+ top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3057 n1305_1 \
+ n2185_1 n2186 n2272
+--11-1 0
+-1--10 0
+1---00 0
+.names top.mul+mul.dummy_mult+fake_mult_one^result~7_FF_NODE \
+ top.mul+mul.dummy_mult+fake_mult_one^result~15_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE n2188 \
+ top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE n2273
+-10111 1
+1-0011 1
+.names n1989 top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~7_FF_NODE top^ctrl_logic_unit_op~0_FF_NODE \
+ n1251 top^ctrl_logic_unit_op~1_FF_NODE n2274
+---100 0
+--0001 0
+--0111 0
+-0-001 0
+-0-111 0
+-11-00 0
+-11011 0
+-111-0 0
+0----- 0
+.names n1986 n1317 top.pipereg_w32+pipereg14^q~8_FF_NODE n2276 n1900 \
+ top^resetn n2500
+---111 1
+--1-01 1
+11--11 1
+.names n1305_1 \
+ top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3065 \
+ top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE n2277 \
+ top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE n2276
+---100 1
+---111 1
+--01-- 1
+110-01 1
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~8_FF_NODE top^ctrl_logic_unit_op~0_FF_NODE \
+ n1256 top^ctrl_logic_unit_op~1_FF_NODE n1989 n2277
+--1001 1
+-00011 1
+-01111 1
+0-0011 1
+0-1111 1
+11-001 1
+110111 1
+111-01 1
+.names n1986 n1316 top.pipereg_w32+pipereg14^q~9_FF_NODE n2279 n1900 \
+ top^resetn n2505
+---111 1
+--1-01 1
+11--11 1
+.names n1305_1 \
+ top.data_mem+data_mem.dual_port_ram+dmem_replace^FF_NODE~3073 \
+ top^ctrl_mux7to1_nop10_d_sel~2_FF_NODE n2280 \
+ top^ctrl_mux7to1_nop10_d_sel~0_FF_NODE \
+ top^ctrl_mux7to1_nop10_d_sel~1_FF_NODE n2279
+---100 1
+---111 1
+--01-- 1
+110-01 1
+.names top.pipereg_w1+pipereg15^q_FF_NODE \
+ top.pipereg_w32+pipereg14^q~9_FF_NODE top^ctrl_logic_unit_op~0_FF_NODE \
+ n1255_1 top^ctrl_logic_unit_op~1_FF_NODE n1989 n2280
+--1001 1
+-00011 1
+-01111 1
+0-0011 1
+0-1111 1
+11-001 1
+110111 1
+111-01 1
+.end
