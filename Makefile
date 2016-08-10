@@ -41,6 +41,7 @@ clean:
 	@ cd libarchfpga && make clean
 	@ cd libsdc_parse && make clean
 	@ cd liblog && make clean
+	@ cd alanmi-abc-5ae4b975c49c && make clean
 
 clean_vpr:
 	@ cd vpr && make clean

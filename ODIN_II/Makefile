@@ -10,22 +10,36 @@ OBJ_DIR = OBJ
 
 EXEO = odin_II.exe
 
+all: CTAGS ABCLIB $(EXEO)
+
 DEBUG_FLAGS = -g -DYYERROR_VERBOSE
 
-ABC_DIR = ../abc_with_bb_support
+#New ABC initialization
+ABC_DIR = ../alanmi-abc-5ae4b975c49c
 ABC_AR  = $(ABC_DIR)/libabc.a
-ABC_INC = -I $(ABC_DIR)/src/bdd/cudd -I $(ABC_DIR)/src/bdd/epd -I $(ABC_DIR)/src/bdd/mtr -I $(ABC_DIR)/src/misc/st
+ABC_INC = -I $(ABC_DIR)/src
+
+
+ARCHFLAGS_EXE ?= ./arch_flags
+
+$(ARCHFLAGS_EXE) : $(ABC_DIR)/arch_flags.c
+	$(CC) $(ABC_DIR)/arch_flags.c -o $(ARCHFLAGS_EXE)
+
+INCLUDES += -Isrc
+
+ARCHFLAGS ?= $(shell $(CC) $(ABC_DIR)/arch_flags.c -o $(ARCHFLAGS_EXE) && $(ARCHFLAGS_EXE))
+ARCHFLAGS := $(ARCHFLAGS)
 
 #OPT_FLAGS = -O2 
 # Use this value of OPT_FLAGS to simulate in parallel (requires GCC >= 4.2)
 #OPT_FLAGS = -O2 -fopenmp 
 
 INC_FLAGS =  -I../libarchfpga/include -I../libcommon_c++/SRC/TIO_InputOutputHandlers $(ABC_INC)
-LIB = -L../libarchfpga -larchfpga -lm -ldl
+LIB = -L../libarchfpga -larchfpga -lm -ldl -rdynamic -lreadline -ltermcap -lpthread 
 C_DIRECTIVE = -DVPR6 -DUSING_BISON
 
 FLAGS = $(DEBUG_FLAGS) $(WARN_FLAGS) $(OPT_FLAGS) $(INC_FLAGS)
-C_FLAGS = $(C_DIRECTIVE)
+C_FLAGS = $(C_DIRECTIVE) $(ARCHFLAGS)
 
 YFILES = $(SRC_DIR)/verilog_bison.y
 LFILES = $(SRC_DIR)/verilog_flex.l
@@ -85,11 +99,13 @@ OBJ = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o, \
 
 DEP = $(OBJ:.o=.d)
 
-all: CTAGS $(EXEO)
 
 $(EXEO): $(OBJ)
 	$(CC) $(C_FLAGS) $(FLAGS) $(OBJ) -o $(EXEO) $(LIB) $(ABC_AR)
 
+ABCLIB:
+	@ cd $(ABC_DIR) && make libabc.a
+	
 CTAGS :
 	@ cd SRC && ctags *.[ch]
 

@@ -23,9 +23,11 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
-#include "cudd.h"
+#include "misc/util/abc_global.h"
+#include "bdd/cudd/cuddInt.h"
+#include "bdd/cudd/cudd.h"
 #include "ace.h"
-#include "st.h"
+#include "misc/st/st.h"
 
 #define ACE_P0TO1(P1,PS)		((P1)==0.0)?0.0:(((P1)==1.0)?1.0:0.5*PS/(1.0-(P1)))
 #define ACE_P1TO0(P1,PS)		((P1)==0.0)?1.0:(((P1)==0.0)?0.0:0.5*PS/(P1))
@@ -87,7 +89,7 @@ ace_cube_t * ace_cube_new_dc(int num_literals);
 void ace_cube_free(ace_cube_t * cube);
 DdNode * build_bdd_for_node ( DdManager * dd, nnode_t *node );
 void ace_bdd_count_paths(DdManager * mgr, DdNode * bdd, int * num_one_paths, int * num_zero_paths);
-double calc_cube_switch_prob_recur(DdManager * mgr, DdNode * bdd, ace_cube_t * cube, nnode_t *node , st_table *visited, int phase );
+double calc_cube_switch_prob_recur(DdManager * mgr, DdNode * bdd, ace_cube_t * cube, nnode_t *node , st__table *visited, int phase );
 double calc_cube_switch_prob(DdManager * mgr, DdNode * bdd, ace_cube_t * cube, nnode_t *node, int phase );
 double calc_switch_prob_recur(DdManager * mgr, DdNode * bdd_next, DdNode * bdd, ace_cube_t * cube, nnode_t *node, double P1, int phase );
 
@@ -590,7 +592,7 @@ void ace_bdd_count_paths(DdManager * mgr, DdNode * bdd, int * num_one_paths, int
  * (function: calc_cube_switch_prob_recur )
  *
  *-------------------------------------------------------------------------------------------*/
-double calc_cube_switch_prob_recur(DdManager * mgr, DdNode * bdd, ace_cube_t * cube, nnode_t *node , st_table *visited, int phase ) {
+double calc_cube_switch_prob_recur(DdManager * mgr, DdNode * bdd, ace_cube_t * cube, nnode_t *node , st__table *visited, int phase ) {
     double * current_prob;
     short i;
     DdNode * bdd_if1, *bdd_if0;
@@ -609,7 +611,7 @@ double calc_cube_switch_prob_recur(DdManager * mgr, DdNode * bdd, ace_cube_t * c
 	    return (0.0);
     }
 
-    if (st_lookup(visited, (char *) bdd, (char **) &current_prob)) {
+    if (st__lookup(visited, (char *) bdd, (char **) &current_prob)) {
 	return (*current_prob);
     }
 
@@ -646,7 +648,7 @@ double calc_cube_switch_prob_recur(DdManager * mgr, DdNode * bdd, ace_cube_t * c
     default:
 	fail("Bad literal.");
     }
-    st_insert(visited, (char *) bdd, (char *) current_prob);
+    st__insert(visited, (char *) bdd, (char *) current_prob);
 
     return (*current_prob);
 }
@@ -658,13 +660,13 @@ double calc_cube_switch_prob_recur(DdManager * mgr, DdNode * bdd, ace_cube_t * c
  *-------------------------------------------------------------------------------------------*/
 double calc_cube_switch_prob(DdManager * mgr, DdNode * bdd, ace_cube_t * cube, nnode_t *node, int phase ) {
     double sp;
-    st_table * visited;
+    st__table * visited;
 
-    visited = (st_table * ) st_init_table( (ST_PFI ) st_ptrcmp, (ST_PFI) st_ptrhash);
+    visited = (st__table * ) st__init_table( st__ptrcmp, st__ptrhash);
 
     sp = calc_cube_switch_prob_recur(mgr, bdd, cube, node,visited, phase );
 
-    st_free_table(visited);
+    st__free_table(visited);
 
     return (sp);
 }
