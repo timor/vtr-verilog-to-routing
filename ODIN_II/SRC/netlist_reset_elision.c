@@ -166,7 +166,7 @@ void check_latch_driver(nnode_t *node, nnode_t *latch_node){
 				//CASE 1: Either all lines contain the same bit
 				if (is_0 == node->bit_map_line_count || is_1 == node->bit_map_line_count){
 					//Potential reset
-					mark_input_as_reset(driver_node, (node->bit_map[0][i] == '1'));
+					mark_input_as_reset(driver_node, (node->bit_map[0][i] == '0'));
 
 					if(node->is_on_gate){
 						latch_node->derived_initial_value = 0;
@@ -180,7 +180,7 @@ void check_latch_driver(nnode_t *node, nnode_t *latch_node){
 				}
 
 				//CASE 2: One line contains one bit and all other drivers are -
-				//        also, all other lines the opposite bit
+				//        also, all other lines the opposite bit or dash
 				int case2reset0 = 0;
 				if (is_0 == 1){
 					case2reset0 = 1;
@@ -242,25 +242,6 @@ void check_latch_driver(nnode_t *node, nnode_t *latch_node){
 void mark_input_as_reset(nnode_t *input_node, int is_positive_reset){
 
 	if(is_positive_reset){
-		if(input_node->potential_reset_value == 1){
-			//Reset values collision
-			//Not a reset
-			if(input_node->reset_candidate == 1){
-				reset_candidate_count--;
-			}
-			input_node->reset_candidate = -1;
-			printf("%s not a reset!\n", input_node->name);
-		} else {
-			if(input_node->reset_candidate == 0){
-				reset_candidate_count++;
-			}
-			input_node->reset_candidate = 1;
-			printf("%s may be a reset!\n", input_node->name);
-
-			input_node->potential_reset_value = 0;
-			reset_candidate_node = input_node;
-		}
-	} else {
 		if(input_node->potential_reset_value == 0){
 			//Reset values collision
 			//Not a reset
@@ -268,14 +249,33 @@ void mark_input_as_reset(nnode_t *input_node, int is_positive_reset){
 				reset_candidate_count--;
 			}
 			input_node->reset_candidate = -1;
-			printf("%s not a reset!\n", input_node->name);
+			printf("%s not a reset (found negative previously)!\n", input_node->name);
 		} else {
 			if(input_node->reset_candidate == 0){
 				reset_candidate_count++;
 			}
 			input_node->reset_candidate = 1;
+			printf("%s may be a positive reset!\n", input_node->name);
+
 			input_node->potential_reset_value = 1;
-			printf("%s may be a reset!\n", input_node->name);
+			reset_candidate_node = input_node;
+		}
+	} else {
+		if(input_node->potential_reset_value == 1){
+			//Reset values collision
+			//Not a reset
+			if(input_node->reset_candidate == 1){
+				reset_candidate_count--;
+			}
+			input_node->reset_candidate = -1;
+			printf("%s not a reset (found positive previously)!\n", input_node->name);
+		} else {
+			if(input_node->reset_candidate == 0){
+				reset_candidate_count++;
+			}
+			input_node->reset_candidate = 1;
+			input_node->potential_reset_value = 0;
+			printf("%s may be a negative reset!\n", input_node->name);
 
 			reset_candidate_node = input_node;
 		}
