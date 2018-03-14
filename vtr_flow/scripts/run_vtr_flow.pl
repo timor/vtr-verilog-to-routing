@@ -340,11 +340,11 @@ if (    $stage_idx_odin >= $starting_stage
 my $abc_path;
 my $abc_rc_path;
 if ( $stage_idx_abc >= $starting_stage and $stage_idx_abc <= $ending_stage ) {
-	$abc_path = "$vtr_flow_path/../abc_with_bb_support/abc";
+	$abc_path = "$vtr_flow_path/../abc/abc";
 	( -e $abc_path or -e "${abc_path}.exe" )
 	  or die "Cannot find ABC executable ($abc_path)";
 
-	$abc_rc_path = "$vtr_flow_path/../abc_with_bb_support/abc.rc";
+	$abc_rc_path = "$vtr_flow_path/../abc/abc.rc";
 	( -e $abc_rc_path ) or die "Cannot find ABC RC file ($abc_rc_path)";
 
 	copy( $abc_rc_path, $temp_dir );
@@ -396,6 +396,9 @@ my $abc_output_file_name = "$benchmark_name" . file_ext_for_stage($stage_idx_abc
 my $abc_output_file_path = "$temp_dir$abc_output_file_name";
 
 my $ace_output_blif_name = "$benchmark_name" . file_ext_for_stage($stage_idx_ace, $circuit_suffix);
+
+my $addMissingLatchInfoScript_path = "$vtr_flow_path/../ODIN_II/SRC/scripts/restore_multi_clock_latch_information.pl";
+
 my $ace_output_blif_path = "$temp_dir$ace_output_blif_name";
 
 my $ace_output_act_name = "$benchmark_name" . ".act";
@@ -428,7 +431,6 @@ my $q         = "not_run";
 #################################################################################
 ################################## ODIN #########################################
 #################################################################################
-
 if ( $starting_stage <= $stage_idx_odin and !$error_code ) {
 
 	#system "sed 's/XXX/$benchmark_name.v/g' < $odin2_base_config > temp1.xml";
@@ -468,7 +470,16 @@ if (    $starting_stage <= $stage_idx_abc
 	and $ending_stage >= $stage_idx_abc
 	and !$error_code )
 {
-    my $abc_commands="read $odin_output_file_name; time; resyn; resyn2; if -K $lut_size; time; scleanup; time; scleanup; time; scleanup; time; scleanup; time; scleanup; time; scleanup; time; scleanup; time; scleanup; time; scleanup; time; write_hie $odin_output_file_name $abc_output_file_name; print_stats";
+    my $abc_commands="read $odin_output_file_name; time; resyn; resyn2; time; strash; scleanup; time; scleanup; time; scleanup; time; scleanup; time; scleanup; time; scleanup; time; scleanup; time; scleanup; time; scleanup; time; if -K $lut_size; write_hie $odin_output_file_name $abc_output_file_name; print_stats";
+	# Strash:
+	# We had to add the strash command to near the beginning because the first scleanup command would fail with “Only works for structurally hashed networks”.
+	# From ABC’s Documentation (https://people.eecs.berkeley.edu/~alanmi/abc/abc.htm):
+	# strash – Transforms the current network into an AIG by one-level structural hashing. The resulting AIG is a logic network composed of two-input AND gates and inverters represented as complemented attributes on the edges. Structural hashing is a purely combinational transformation, which does not modify the number and positions of latches.
+
+	# if –K #:
+	# We had to move the if –K <#-LUT> command to the end as the new ABC doesn’t persist that you want it for packing with #-LUTs (e.g. 6-LUTs). This caused ABC to believe you wanted everything as only two-input and greatly increased the number of logic blocks (CLB’s, blocks, nets, etc.). So we have to tell it at the end before we ask for the output and It will give us what we want.
+	# From ABC’s Documentation (https://people.eecs.berkeley.edu/~alanmi/abc/abc.htm):
+	# if – An all-new integrated FPGA mapper based on the notion of priority cuts. Some of the underlying ideas used in this mapper are described in the recent technical report. The command line switches are similar to those of command fpga.
 
     if ($abc_quote_addition) {$abc_commands = "'" . $abc_commands . "'";}
     
@@ -486,7 +497,10 @@ if (    $starting_stage <= $stage_idx_abc
 
 	if ( -e $abc_output_file_path and $q eq "success") {
 
-		#system "rm -f abc.out";
+		# Restore Multi-Clock Latch Information from ODIN II That was Striped out by ABC.
+		system("$addMissingLatchInfoScript_path ${temp_dir}$odin_output_file_name ${temp_dir}$abc_output_file_name > ${temp_dir}LatchInfo");
+		system("mv ${temp_dir}LatchInfo ${temp_dir}$abc_output_file_name");
+
 		if ( !$keep_intermediate_files ) {
 			system "rm -f $odin_output_file_path";
 			system "rm -f ${temp_dir}*.rc";
@@ -833,18 +847,15 @@ if ( $ending_stage >= $stage_idx_vpr and !$error_code ) {
 	if ($q eq "success") {
 		if($check_equivalent eq "on") {
 			if($abc_path eq "") {
-				$abc_path = "$vtr_flow_path/../abc_with_bb_support/abc";
+				$abc_path = "$vtr_flow_path/../abc/abc";
 			}
 			
 			find(\&find_postsynthesis_netlist, ".");
 
             #Pick the netlist to verify against
-            #
             #We pick the 'earliest' netlist of the stages that where run
             my $reference_netlist = "";
-            if($starting_stage <= $stage_idx_odin) {
-                $reference_netlist = $odin_output_file_name;
-            } elsif ($starting_stage <= $stage_idx_abc) {
+            if($starting_stage <= $stage_idx_abc) {
                 $reference_netlist = $abc_output_file_name;
             } else {
                 #VPR's input
@@ -852,13 +863,16 @@ if ( $ending_stage >= $stage_idx_vpr and !$error_code ) {
             }
 
 
-            #First try ABC's Sequential Equivalence Check (SEC)
+            #First try ABC's Unbounded Sequential Equivalence Check (DSEC)
+            # We’ve changed ABC’s formal verification command from the old deprecated SEC (Sequential Equivalence Check) to their new DSEC (Unbounded Sequential Equivalence Check):
+			# DSEC checks equivalence of two networks before and after sequential synthesis.
+			# Compare VPR's output to that of ODIN II/ABC’s.
 			$q = &system_with_timeout($abc_path, 
 							"abc.sec.out",
 							$timeout,
 							$temp_dir,
 							"-c", 
-							"sec $reference_netlist $vpr_postsynthesis_netlist"
+							"dsec $reference_netlist $vpr_postsynthesis_netlist"
 			);
 
             # Parse ABC verification output
@@ -898,7 +912,7 @@ if ( $ending_stage >= $stage_idx_vpr and !$error_code ) {
                     $error_code = 1;
                 }
             } else {
-                print("failed: no SEC output");
+                print("failed: no DSEC output");
                 $error_code = 1;
             }
         }
