@@ -24,6 +24,10 @@ vtr_flow/tasks/**/run[0-9]*
 vtr_flow/tasks/**/qor_geomean.txt
 vtr_flow/tasks/**/task_summary/
 quick_test/*
+vtr_flow/tasks/arithmetic_tasks/soft_adder/verilog
+vtr_flow/tasks/arithmetic_tasks/soft_adder/run*
+vtr_flow/tasks/arithmetic_tasks/soft_adder/track_completed
+
 
 #
 # Titan benchmarks
