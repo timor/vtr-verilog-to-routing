@@ -603,6 +603,125 @@ void instantiate_bitwise_logic(nnode_t *node, operation_list op, short mark, net
 	}
 }
 
+/***
+ * get and prep the IO for the adder
+ */
+npin_t ***get_and_prep_adder_io(int *width, netlist_t *netlist, nnode_t *node, short subtraction, short mark);
+npin_t *get_pin_a(int *width, int current_pin, netlist_t *netlist, nnode_t *node);
+npin_t *get_pin_b(int *width, int current_pin, netlist_t *netlist, nnode_t *node, short subtraction, short mark);
+npin_t *get_pin_out(int *width, int current_pin, nnode_t *node, short subtraction);
+void cleanout_pin(npin_t *pin);
+
+void cleanout_pin(npin_t *pin)
+{
+	if(!pin)
+		return;
+		
+	switch(pin->type)
+	{
+		case INPUT:		
+			pin->node->input_pins[pin->pin_node_idx] = NULL;
+			break;
+			
+		case OUTPUT:	
+			pin->node->output_pins[pin->pin_node_idx] = NULL;
+			break;
+			
+		default:
+			//TODO print relevant warnings
+			break;
+	}
+}
+
+npin_t *get_pin_a(int *width, int current_pin, netlist_t *netlist, nnode_t *node)
+{
+	if (current_pin >= width[1])
+		return get_zero_pin(netlist);
+
+	npin_t *pin_a = node->input_pins[current_pin];
+	cleanout_pin(pin_a);
+	return pin_a;
+}
+
+npin_t *get_pin_b(int *width, int current_pin, netlist_t *netlist, nnode_t *node, short subtraction, short mark)
+{
+	//connect input b	
+	if(current_pin >= width[2])
+		return (subtraction)? get_one_pin(netlist): get_zero_pin(netlist);
+
+	//pin a is neighbor to pin b
+	npin_t *pin_b = node->input_pins[current_pin+width[1]];
+	if(!subtraction)
+	{
+		cleanout_pin(pin_b);
+		return pin_b;
+	}
+
+	if(pin_b->net->driver_pin->node->type == GND_NODE)
+	{
+		remove_fanout_pins_from_net(pin_b->net, pin_b, pin_b->pin_net_idx);
+		return get_one_pin(netlist);
+	}
+	else if(pin_b->net->driver_pin->node->type == VCC_NODE)
+	{
+		remove_fanout_pins_from_net(pin_b->net, pin_b, pin_b->pin_net_idx);
+		return get_zero_pin(netlist);
+	}
+	else
+	{
+	    nnode_t *new_not_cells = make_not_gate(node, mark);
+		remap_pin_to_new_node(pin_b, new_not_cells, 0);
+
+		npin_t *new_in_pin = allocate_npin();
+		nnet_t *new_net = allocate_nnet();
+
+		add_output_pin_to_node(new_not_cells, allocate_npin(), 0);
+		add_fanout_pin_to_net(new_net, new_in_pin);
+		add_driver_pin_to_net(new_net, new_not_cells->output_pins[0]);
+		return new_in_pin;
+	}
+}
+
+/*---------------------------------------------------------------------------------------------
+ * get output pin for an adder
+ *-------------------------------------------------------------------------------------------*/
+npin_t *get_pin_out(int *width, int current_pin, nnode_t *node, short subtraction)
+{
+	npin_t *out_pin = NULL;
+	// output
+	if(!subtraction)
+		current_pin = (node->num_input_port_sizes == 2)? current_pin : (current_pin < width[0]-1)? current_pin+1 : 0;
+			
+	if(subtraction || node->output_pins[current_pin]->type != NO_ID || (node->num_input_port_sizes == 2))
+	{
+		out_pin = node->output_pins[current_pin];
+		cleanout_pin(node->output_pins[current_pin]);
+	}
+	else
+	{
+		out_pin = allocate_npin();
+		out_pin->name = append_string("", "adder~dummy_output~%d", 0);
+	}
+	
+	return out_pin;
+}
+
+npin_t ***get_and_prep_adder_io(int *width, netlist_t *netlist, nnode_t *node, short subtraction, short mark)
+{
+	npin_t ***pins = (npin_t ***)vtr::calloc(3,sizeof(npin_t**));
+	for(int i=0 ; i<3 ; i++)
+		pins[i] = (npin_t **)vtr::calloc(width[0],sizeof(npin_t*));
+		
+	/* get the ios */
+	for(int i = 0; i < width[0]; i++)
+	{	
+		pins[0][i] = get_pin_a(width, i, netlist, node);
+		pins[1][i] = get_pin_b(width, i, netlist, node, subtraction, mark);
+		pins[2][i] = get_pin_out(width, i, node, subtraction);
+	}
+	return pins;
+}
+
 /*--------------------------------------------------------------------------
  * (function: instantiate_add_w_carry )
  * 	This is for soft addition in output formats that don't handle 
@@ -615,8 +734,6 @@ void instantiate_add_w_carry(nnode_t *node, short mark, netlist_t *netlist)
 	const int out = 0, input_a = 1, input_b = 2, pinout_count = 3;
 
 	oassert(node->num_input_pins > 0);
-
-	nnode_t *carry_node_in = netlist->gnd_node;
 	
 	int *width = (int*)vtr::malloc(pinout_count * sizeof(int));
 	
@@ -627,9 +744,10 @@ void instantiate_add_w_carry(nnode_t *node, short mark, netlist_t *netlist)
 		
 	width[input_a] = node->input_port_sizes[0];
 	width[input_b] = node->input_port_sizes[1];
-
-	instantiate_add_w_carry_block(width, node, carry_node_in, 0, mark, netlist, 1, 0);
-
+	
+	npin_t ***pins = get_and_prep_adder_io(width, netlist, node, 0, mark);
+	instantiate_add_w_carry_block(width[0], pins, node, netlist->gnd_node, 0, mark, netlist, 1, 0);
+	vtr::free(pins);
 	vtr::free(width);
 }
 
@@ -645,8 +763,6 @@ void instantiate_sub_w_carry(nnode_t *node, short mark, netlist_t *netlist)
 
 	oassert(node->num_input_pins > 0);
 
-	nnode_t *carry_node_in = netlist->vcc_node;
-	
 	int *width = (int*)vtr::malloc(pinout_count * sizeof(int));
 	width[out] = node->output_port_sizes[0];
 	
@@ -661,8 +777,9 @@ void instantiate_sub_w_carry(nnode_t *node, short mark, netlist_t *netlist)
 		width[input_b] = node->input_port_sizes[1];
 	}
 	
-	instantiate_add_w_carry_block(width, node, carry_node_in, 0, mark, netlist, 1, 1);
-
+	npin_t ***pins = get_and_prep_adder_io(width, netlist, node, 1, mark);
+	instantiate_add_w_carry_block(width[0], pins, node, netlist->vcc_node, 0, mark, netlist, 1, 1);
+	vtr::free(pins);
 	vtr::free(width);
 }
 
