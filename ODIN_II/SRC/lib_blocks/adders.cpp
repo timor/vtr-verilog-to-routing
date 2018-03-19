@@ -1353,25 +1353,20 @@ int fetch_blk_size(int full_width, int start_pin, int current_counter)
  *-------------------------------------------------------------------------------------------*/
 nnode_t *make_mux_2to1(nnode_t *select, nnode_t *port_a, nnode_t *port_b, nnode_t *node, short mark)
 {
-	nnode_t *AandNS = make_1port_logic_gate(LOGICAL_AND, 2, node, mark);
-	nnode_t *BandS = make_1port_logic_gate(LOGICAL_AND, 2, node, mark);
-	nnode_t *AorB = make_1port_logic_gate(LOGICAL_OR, 2, node, mark);
+	nnode_t *mux_2 = make_2port_gate(MUX_2, 2, 2, 1, node, mark);
 	
 	//driver
-	nnode_t *Nselect = make_not_gate(node,mark);
-	connect_nodes(select,0,Nselect,0);
+	nnode_t *notted_gate = make_not_gate(node,mark);
+	connect_nodes(select,0,notted_gate,0);
 	
-	connect_nodes(port_a,0,AandNS,0);
-	connect_nodes(Nselect,0,AandNS,1);
 	
-	connect_nodes(select,0,BandS,0);
-	connect_nodes(port_b,0,BandS,1);
-	
-	connect_nodes(AandNS,0,AorB,0);
-	connect_nodes(BandS,0,AorB,0);
+	connect_nodes(select,0,mux_2,0);
+	connect_nodes(notted_gate,0,mux_2,1);
 	
 	//connect carry skip to mux
-	return AorB;
+	connect_nodes(port_a,0,mux_2,2);
+	connect_nodes(port_b,0,mux_2,3);
+	return mux_2;
 }
 
 /*---------------------------------------------------------------------------------------------
