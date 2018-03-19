@@ -3,7 +3,7 @@
 #
 *.exe
 ODIN_II/odin_II
-abc_with_bb_support/abc
+abc/abc
 ace2/ace
 vpr/vpr
 
@@ -24,6 +24,10 @@ vtr_flow/tasks/**/run[0-9]*
 vtr_flow/tasks/**/qor_geomean.txt
 vtr_flow/tasks/**/task_summary/
 quick_test/*
+vtr_flow/tasks/arithmetic_tasks/soft_adder/verilog
+vtr_flow/tasks/arithmetic_tasks/soft_adder/run*
+vtr_flow/tasks/arithmetic_tasks/soft_adder/track_completed
+
 
 #
 # Titan benchmarks
