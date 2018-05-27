@@ -776,8 +776,7 @@ void vpr_create_rr_graph(t_vpr_setup& vpr_setup, const t_arch& arch, int chan_wi
 			router_opts.trim_obs_channels,
 			arch.Directs, arch.num_directs,
 			&device_ctx.num_rr_switches,
-			&warnings,
-            router_opts.route_clock);
+			&warnings);
 
     //Initialize drawing, now that we have an RR graph
     init_draw_coords(chan_width);
@@ -1032,7 +1031,7 @@ void vpr_analysis(t_vpr_setup& vpr_setup, const t_arch& Arch) {
     if (vpr_setup.TimingEnabled) {
         //Load the net delays
         net_delay = alloc_net_delay(&net_delay_ch);
-        load_net_delay_from_routing(net_delay, vpr_setup.RouterOpts.route_clock);
+        load_net_delay_from_routing(net_delay);
 
 #ifdef ENABLE_CLASSIC_VPR_STA
         slacks = alloc_and_load_timing_graph(vpr_setup.Timing);
@@ -1047,8 +1046,7 @@ void vpr_analysis(t_vpr_setup& vpr_setup, const t_arch& Arch) {
             Arch.grid_logic_tile_area,
             vpr_setup.RoutingArch.directionality,
             vpr_setup.RoutingArch.wire_to_rr_ipin_switch,
-            vpr_setup.TimingEnabled, net_delay,
-            vpr_setup.RouterOpts.route_clock
+            vpr_setup.TimingEnabled, net_delay
 #ifdef ENABLE_CLASSIC_VPR_STA
             , slacks, vpr_setup.Timing
 #endif
