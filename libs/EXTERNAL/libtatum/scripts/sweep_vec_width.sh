@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 TIME_VEC_WIDTHS=(1 2 4 8 16 32)
 #TIME_VEC_WIDTHS=(1)

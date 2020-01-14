@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/usr/bin/env bash
 # Copyright (c) 2016 Sandstorm Development Group, Inc. and contributors
 # Licensed under the MIT License:
 #

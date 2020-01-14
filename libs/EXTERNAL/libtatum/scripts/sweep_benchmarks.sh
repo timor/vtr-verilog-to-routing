@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 for benchmark in $(ls -hSr /project/work/timing_analysis/skew/*/vpr_timing_graph.echo) 
 do
